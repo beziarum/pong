@@ -9,16 +9,16 @@ public class Ball extends PongItem {
     
     protected static final int INIT_SPEED = 4;
     
+    protected final Image im;
     
     public Ball()
     {
-	
 	ImageIcon icon;
 	im = Toolkit.getDefaultToolkit().createImage(
-	    ClassLoader.getSystemRessource("image/ball.png"));
+	    ClassLoader.getSystemResource("image/ball.png"));
 	icon = new ImageIcon(im);
 	width = icon.getIconWidth();
-	height = icon.getIconHeigth();
+	height = icon.getIconHeight();
 
 	speed = new Point(INIT_SPEED,INIT_SPEED);
     }

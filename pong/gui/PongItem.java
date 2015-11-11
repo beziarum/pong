@@ -10,7 +10,7 @@ import javax.swing.ImageIcon;
 abstract public class PongItem extends JPanel {
     private static final long serialVerisonUID = 1L;
 
-    protected final Image im;
+    //protected final Image im;
 
     protected int width;
     
@@ -18,7 +18,7 @@ abstract public class PongItem extends JPanel {
     
     protected Point position;
 
-    protected static final int INIT_SPEED;
+    //abstract protected static final int INIT_SPEED;
     
     protected Point speed;
 
