@@ -29,7 +29,7 @@ abstract public class PongItem extends JPanel {
     protected void load(String s){
     	ImageIcon icon;
     	im = Toolkit.getDefaultToolkit().createImage(
-    	    ClassLoader.getSystemResource("image/ball.png"));
+    	    ClassLoader.getSystemResource(s));
     	icon = new ImageIcon(im);
     	width = icon.getIconWidth();
     	height = icon.getIconHeight();
