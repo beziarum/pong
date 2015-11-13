@@ -21,8 +21,6 @@ abstract public class PongItem extends JPanel {
     //abstract protected static final int INIT_SPEED;
     
     protected Point speed;
-
-    abstract public void animate();
     
     protected Image im;
     
@@ -33,6 +31,10 @@ abstract public class PongItem extends JPanel {
     	icon = new ImageIcon(im);
     	width = icon.getIconWidth();
     	height = icon.getIconHeight();
+    }
+
+    protected void animate(){
+	position.translate(speed.x,speed.y);
     }
 
     

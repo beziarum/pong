@@ -16,5 +16,5 @@ public class Ball extends PongItem {
 	speed = new Point(INIT_SPEED,INIT_SPEED);
     }
 
-    public void animate(){}
+    
 }
