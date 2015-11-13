@@ -28,7 +28,7 @@ abstract public class PongItem extends JPanel {
     
     protected Image im;
     
-    abstract public void rebondir(Direction d);
+    abstract public void rebondir(Direction d,int window_width,int window_height);
     
     protected void load(String s){
     	ImageIcon icon;
