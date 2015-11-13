@@ -2,9 +2,13 @@
 package pong.gui;
 
 import javax.swing.JPanel;
+
 import java.awt.*;
+
 import javax.swing.JPanel;
 import javax.swing.ImageIcon;
+
+import pong.util.Direction;
 
 
 abstract public class PongItem extends JPanel {
@@ -24,6 +28,8 @@ abstract public class PongItem extends JPanel {
     
     protected Image im;
     
+    abstract public void rebondir(Direction d);
+    
     protected void load(String s){
     	ImageIcon icon;
     	im = Toolkit.getDefaultToolkit().createImage(
@@ -36,6 +42,18 @@ abstract public class PongItem extends JPanel {
     protected void animate(){
 	position.translate(speed.x,speed.y);
     }
+    
+    public int getHeight(){
+		return height;
+	}
+    
+	public int getWidth(){
+		return width;
+	}
+	
+	public Point getPosition(){
+		return position;
+	}
 
     
 }
