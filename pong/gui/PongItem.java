@@ -55,5 +55,7 @@ abstract public class PongItem extends JPanel {
 		return position;
 	}
 
-    
+    public void setSpeed(Point s){
+    	speed = (Point) s.clone();
+    }
 }
