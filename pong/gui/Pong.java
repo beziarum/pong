@@ -148,8 +148,8 @@ public class Pong extends JPanel implements KeyListener {
 
 		/* Update racket position */
 		racket_position.y += racket_speed;
-		if (racket_position.y < 0)
-			racket_position.y = 0;
+		if (racket_position.y < 0 )
+			racket_position.y = 0 ;
 		if (racket_position.y > SIZE_PONG_Y - racket_height/2)
 			racket_position.y = SIZE_PONG_Y - racket_height/2;
 

@@ -1,5 +1,6 @@
 package game;
 
+import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
@@ -16,6 +17,16 @@ public class Game {
 	
 	private ArrayList<PongItem> a;
 	
+	private Racket r;
+	
+	Game()
+	{
+		r= new Racket();
+		a.add(r);
+		a.add(new Ball());
+	}
+	
+	
 	private void limit(PongItem i){
 		if (i.getPosition().y < 0)
 			i.rebondir(Direction.haut,SIZE_PONG_X,SIZE_PONG_Y);
@@ -31,11 +42,11 @@ public class Game {
 		switch (e.getKeyCode()) {
 			case KeyEvent.VK_UP:
 			case KeyEvent.VK_KP_UP:
-				speed.y = -RACKET_SPEED;
+				r.setSpeed(new Point(0,-Racket.RACKET_SPEED));
 				break;
 			case KeyEvent.VK_DOWN:
 			case KeyEvent.VK_KP_DOWN:
-				speed.y = RACKET_SPEED;
+				r.setSpeed(new Point(0,Racket.RACKET_SPEED));
 				break;
 			default:
 				System.out.println("got press "+e);
@@ -45,23 +56,18 @@ public class Game {
 		switch (e.getKeyCode()) {
 			case KeyEvent.VK_UP:
 			case KeyEvent.VK_KP_UP:
-				speed.y = 0;
+				r.setSpeed(new Point(0,0));
 				break;
 			case KeyEvent.VK_DOWN:
 			case KeyEvent.VK_KP_DOWN:
-				speed.y = 0;
+			r.setSpeed(new Point(0,0));
 				break;
 			default:
 				System.out.println("got release "+e);
 				
 		}
 	}
-	Game()
-	{
-		a.add(new Racket());
-		a.add(new Ball());
-	}
-	
+
 	public void run()
 	{
 		while(true)
