@@ -39,7 +39,7 @@ abstract public class PongItem extends JPanel {
     	height = icon.getIconHeight();
     }
 
-    protected void animate(){
+    public void animate(){
 	position.translate(speed.x,speed.y);
     }
     

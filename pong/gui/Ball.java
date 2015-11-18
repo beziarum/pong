@@ -9,7 +9,9 @@ import pong.util.Direction;
 
 public class Ball extends PongItem {
     
-    protected static final int INIT_SPEED = 4;
+	private static final long serialVersionUID = 1L;
+	
+	protected static final int INIT_SPEED = 4;
     
     
     public Ball()

@@ -1,5 +1,9 @@
 package game;
 
+import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+
+import pong.gui.Ball;
 import pong.gui.PongItem;
 import pong.gui.Racket;
 import pong.util.Direction;
@@ -9,9 +13,10 @@ public class Game {
 	int SIZE_PONG_X = 480;
 	int SIZE_PONG_Y = 480;
 	
-	public PongItem i;
 	
-	public void limit(){
+	private ArrayList<PongItem> a;
+	
+	private void limit(PongItem i){
 		if (i.getPosition().y < 0)
 			i.rebondir(Direction.haut,SIZE_PONG_X,SIZE_PONG_Y);
 		if(i.getPosition().y > SIZE_PONG_Y - i.getHeight()/2)
@@ -48,6 +53,23 @@ public class Game {
 				break;
 			default:
 				System.out.println("got release "+e);
+				
+		}
+	}
+	Game()
+	{
+		a.add(new Racket());
+		a.add(new Ball());
+	}
+	
+	public void run()
+	{
+		while(true)
+		{
+			for (PongItem e : a) {
+				limit(e);
+				e.animate();
+			}
 		}
 	}
 }
