@@ -1,5 +1,6 @@
 package pong;
 
+import game.Game;
 import pong.gui.Window;
 import pong.gui.Pong;
 
@@ -8,8 +9,7 @@ import pong.gui.Pong;
  */
 public class Main  {
 	public static void main(String[] args) {
-		Pong pong = new Pong();
-		Window window = new Window(pong);
-		window.displayOnscreen();
+		Game game= new Game();
+		game.run();
 	}
 }
