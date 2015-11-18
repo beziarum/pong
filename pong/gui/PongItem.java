@@ -58,4 +58,10 @@ abstract public class PongItem extends JPanel {
     public void setSpeed(Point point){
     	speed = (Point) point.clone();
     }
+    
+    public void paint(Graphics GContext)
+    {
+    	GContext.drawImage(im, position.x, position.y,
+    			width, height, null);
+    }
 }

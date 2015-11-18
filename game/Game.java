@@ -1,29 +1,44 @@
 package game;
 
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+
+import javax.swing.JPanel;
 
 import pong.gui.Ball;
 import pong.gui.PongItem;
 import pong.gui.Racket;
 import pong.util.Direction;
 
-public class Game {
+public class Game extends JPanel{
 	
-	int SIZE_PONG_X = 480;
-	int SIZE_PONG_Y = 480;
+	int SIZE_PONG_X = 800;
+	int SIZE_PONG_Y = 600;
 	
 	
 	private ArrayList<PongItem> a;
 	
 	private Racket r;
 	
-	Game()
+	protected Image buffer;
+	protected Graphics gContext;
+	
+	private static final Color backgroundColor = new Color(0xFF, 0x40, 0);
+	
+	public Game()
 	{
+		buffer=createImage(SIZE_PONG_X,SIZE_PONG_Y);
+		if (buffer == null)
+			throw new RuntimeException("Could not instanciate graphics");
+		gContext = buffer.getGraphics();
 		r= new Racket();
 		a.add(r);
 		a.add(new Ball());
+		
 	}
 	
 	
@@ -72,9 +87,12 @@ public class Game {
 	{
 		while(true)
 		{
+			gContext.setColor(backgroundColor);
+			gContext.fillRect(0, 0, SIZE_PONG_X, SIZE_PONG_Y);
 			for (PongItem e : a) {
 				limit(e);
 				e.animate();
+				e.paint(gContext);
 			}
 		}
 	}
