@@ -21,4 +21,33 @@ public class Game {
 		if(i.getPosition().x < 0)
 			i.rebondir(Direction.droite,SIZE_PONG_X,SIZE_PONG_Y);
 	}
+	
+	public void keyPressed(KeyEvent e) {
+		switch (e.getKeyCode()) {
+			case KeyEvent.VK_UP:
+			case KeyEvent.VK_KP_UP:
+				speed.y = -RACKET_SPEED;
+				break;
+			case KeyEvent.VK_DOWN:
+			case KeyEvent.VK_KP_DOWN:
+				speed.y = RACKET_SPEED;
+				break;
+			default:
+				System.out.println("got press "+e);
+		}
+	}
+	public void keyReleased(KeyEvent e) {
+		switch (e.getKeyCode()) {
+			case KeyEvent.VK_UP:
+			case KeyEvent.VK_KP_UP:
+				speed.y = 0;
+				break;
+			case KeyEvent.VK_DOWN:
+			case KeyEvent.VK_KP_DOWN:
+				speed.y = 0;
+				break;
+			default:
+				System.out.println("got release "+e);
+		}
+	}
 }
