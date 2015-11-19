@@ -12,12 +12,15 @@ public class Ball extends PongItem {
 	private static final long serialVersionUID = 1L;
 	
 	protected static final int INIT_SPEED = 4;
+	
+	protected static Point INIT_POSITION = new Point (50,50);
     
     
     public Ball()
     {
     load("image/ball.png");
 	speed = new Point(INIT_SPEED,INIT_SPEED);
+	position = INIT_POSITION;
     }
 
     public void rebondir(Direction d,int window_width,int window_height)

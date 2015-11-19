@@ -21,6 +21,7 @@ abstract public class PongItem extends JPanel {
     protected int height;
     
     protected Point position;
+    
 
     //abstract protected static final int INIT_SPEED;
     
@@ -30,10 +31,6 @@ abstract public class PongItem extends JPanel {
     
     abstract public void rebondir(Direction d,int window_width,int window_height);
     
-    public PongItem()
-    {
-    	position=new Point(0,0);
-    }
     
     protected void load(String s){
     	ImageIcon icon;
@@ -68,5 +65,13 @@ abstract public class PongItem extends JPanel {
     {
     	GContext.drawImage(im, position.x, position.y,
     			width, height, null);
+    }
+    
+    public boolean collision(PongItem i){ //tentative de créer collision (fonction provisoire)
+    	if(i.getPosition().y < position.y && position.y < i.getPosition().y + i.getHeight() && position.x <= i.getPosition().x + i.getWidth()){
+    		System.out.println("collision");
+    		return true;
+    	}
+    	return false;
     }
 }

@@ -27,6 +27,7 @@ public class Game extends JFrame implements KeyListener{
 	private ArrayList<PongItem> a;
 	
 	private Racket r;
+	private Ball b;
 	
 	protected Image buffer;
 	protected Graphics gContext;
@@ -45,8 +46,9 @@ public class Game extends JFrame implements KeyListener{
 		gContext = buffer.getGraphics();
 		a=new ArrayList<PongItem>();
 		r= new Racket();
+		b= new Ball();
 		a.add(r);
-		a.add(new Ball());
+		a.add(b);
 		this.addKeyListener(this);
 	}
 	
@@ -54,9 +56,9 @@ public class Game extends JFrame implements KeyListener{
 	private void limit(PongItem i){
 		if (i.getPosition().y < 0)
 			i.rebondir(Direction.haut,SIZE_PONG_X,SIZE_PONG_Y);
-		if(i.getPosition().y > SIZE_PONG_Y - i.getHeight()/2)
+		if(i.getPosition().y > SIZE_PONG_Y - i.getHeight())
 			i.rebondir(Direction.bas,SIZE_PONG_X,SIZE_PONG_Y);
-		if(i.getPosition().x > SIZE_PONG_X - i.getWidth()/2)
+		if(i.getPosition().x > SIZE_PONG_X - i.getWidth())
 			i.rebondir(Direction.gauche,SIZE_PONG_X,SIZE_PONG_Y);
 		if(i.getPosition().x < 0)
 			i.rebondir(Direction.droite,SIZE_PONG_X,SIZE_PONG_Y);
@@ -104,6 +106,8 @@ public class Game extends JFrame implements KeyListener{
 				if(e==null)
 					System.out.println("ceci este ");
 				limit(e);
+				/*if(b.collision(r))
+					b.rebondir(Direction.droite,SIZE_PONG_X,SIZE_PONG_Y);*/  //tentative de rajouter le rebond sur la racket
 				e.animate();
 				e.paint(gContext);
 			}
