@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
@@ -16,7 +17,7 @@ import pong.gui.PongItem;
 import pong.gui.Racket;
 import pong.util.Direction;
 
-public class Game extends JFrame{
+public class Game extends JFrame implements KeyListener{
 	
 	int SIZE_PONG_X = 800;
 	int SIZE_PONG_Y = 600;
@@ -46,7 +47,7 @@ public class Game extends JFrame{
 		r= new Racket();
 		a.add(r);
 		a.add(new Ball());
-		
+		this.addKeyListener(this);
 	}
 	
 	
@@ -90,6 +91,8 @@ public class Game extends JFrame{
 				
 		}
 	}
+	public void keyTyped(KeyEvent e) { }
+	
 
 	public void run()
 	{

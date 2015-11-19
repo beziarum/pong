@@ -15,7 +15,6 @@ public class Racket extends PongItem {
 		speed = new Point (INIT_SPEED,INIT_SPEED);
 	}
 	
-	public void animate(){}
 	
 	public void rebondir(Direction d,int window_width,int window_height){
 		if (d == Direction.haut)
