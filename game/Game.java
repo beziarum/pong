@@ -1,12 +1,14 @@
 package game;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import pong.gui.Ball;
@@ -14,11 +16,12 @@ import pong.gui.PongItem;
 import pong.gui.Racket;
 import pong.util.Direction;
 
-public class Game extends JPanel{
+public class Game extends JFrame{
 	
 	int SIZE_PONG_X = 800;
 	int SIZE_PONG_Y = 600;
 	
+	public static final int timestep = 10;
 	
 	private ArrayList<PongItem> a;
 	
@@ -31,10 +34,15 @@ public class Game extends JPanel{
 	
 	public Game()
 	{
+		setPreferredSize(new Dimension(SIZE_PONG_X, SIZE_PONG_Y));
+		pack();
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setVisible(true);
 		buffer=createImage(SIZE_PONG_X,SIZE_PONG_Y);
 		if (buffer == null)
 			throw new RuntimeException("Could not instanciate graphics");
 		gContext = buffer.getGraphics();
+		a=new ArrayList<PongItem>();
 		r= new Racket();
 		a.add(r);
 		a.add(new Ball());
@@ -90,10 +98,24 @@ public class Game extends JPanel{
 			gContext.setColor(backgroundColor);
 			gContext.fillRect(0, 0, SIZE_PONG_X, SIZE_PONG_Y);
 			for (PongItem e : a) {
+				if(e==null)
+					System.out.println("ceci este ");
 				limit(e);
 				e.animate();
 				e.paint(gContext);
 			}
+			repaint();
+			try {
+				Thread.sleep(timestep);
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
+	}
+	
+	public void paint(Graphics g)
+	{
+		g.drawImage(buffer, 0, 0, this);
 	}
 }

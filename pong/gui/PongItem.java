@@ -30,6 +30,11 @@ abstract public class PongItem extends JPanel {
     
     abstract public void rebondir(Direction d,int window_width,int window_height);
     
+    public PongItem()
+    {
+    	position=new Point(0,0);
+    }
+    
     protected void load(String s){
     	ImageIcon icon;
     	im = Toolkit.getDefaultToolkit().createImage(
