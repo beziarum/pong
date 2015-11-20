@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.ImageIcon;
 
 import pong.util.Direction;
+import pong.util.Hitbox;
 
 
 abstract public class PongItem extends JPanel {
@@ -22,6 +23,7 @@ abstract public class PongItem extends JPanel {
     
     protected Point position;
     
+    protected Hitbox hitbox;
 
     //abstract protected static final int INIT_SPEED;
     
@@ -30,6 +32,13 @@ abstract public class PongItem extends JPanel {
     protected Image im;
     
     abstract public void rebondir(Direction d,int window_width,int window_height);
+    
+    protected PongItem(String s , Point position, Point speed){
+    	load(s);
+    	this.position = (Point) position.clone();
+    	this.speed = (Point) speed.clone();
+    	hitbox = new Hitbox(this);
+    }
     
     
     protected void load(String s){
