@@ -16,5 +16,21 @@ public class Hitbox {
 	public void translate(Point pos){
 		hitbox.translate(pos.x, pos.y);
 	}
-	
+
+	public Direction colision(Hitbox h)
+	{
+		Rectangle inter=hitbox.intersection(h.hitbox);
+		if(inter.isEmpty())
+			return Direction.aucune;
+		else if(inter.height>inter.width)
+			if(inter.x>hitbox.x)
+				return Direction.gauche;
+			else
+				return Direction.droite;
+		else
+			if(inter.y<hitbox.y)
+				return Direction.haut;
+			else
+				return Direction.bas;
+	}
 }
