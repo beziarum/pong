@@ -12,9 +12,7 @@ public class Racket extends PongItem {
 	protected static Point INIT_POSITION = new Point (4,100);
 	
 	public Racket(){
-		load("image/racket.png");
-		speed = new Point (INIT_SPEED,INIT_SPEED);
-		position = INIT_POSITION;
+		super("image/racket.png", INIT_POSITION, new Point (INIT_SPEED,INIT_SPEED));
 	}
 	
 	

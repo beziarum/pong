@@ -18,9 +18,7 @@ public class Ball extends PongItem {
     
     public Ball()
     {
-    load("image/ball.png");
-	speed = new Point(INIT_SPEED,INIT_SPEED);
-	position = INIT_POSITION;
+    	super("image/ball.png", INIT_POSITION, new Point(INIT_SPEED,INIT_SPEED));
     }
 
     public void rebondir(Direction d,int window_width,int window_height)
