@@ -55,9 +55,9 @@ public class Game extends JFrame implements KeyListener{
 	
 	private void limit(PongItem i){
 		if (i.getPosition().y < 0)
-			i.rebondir(Direction.haut,SIZE_PONG_X,SIZE_PONG_Y);
-		if(i.getPosition().y > SIZE_PONG_Y - i.getHeight())
 			i.rebondir(Direction.bas,SIZE_PONG_X,SIZE_PONG_Y);
+		if(i.getPosition().y > SIZE_PONG_Y - i.getHeight())
+			i.rebondir(Direction.haut,SIZE_PONG_X,SIZE_PONG_Y);
 		if(i.getPosition().x > SIZE_PONG_X - i.getWidth())
 			i.rebondir(Direction.gauche,SIZE_PONG_X,SIZE_PONG_Y);
 		if(i.getPosition().x < 0)
@@ -106,8 +106,10 @@ public class Game extends JFrame implements KeyListener{
 				if(e==null)
 					System.out.println("ceci este ");
 				limit(e);
-				/*if(b.collision(r))
-					b.rebondir(Direction.droite,SIZE_PONG_X,SIZE_PONG_Y);*/  //tentative de rajouter le rebond sur la racket
+				if(b.collision(r)){
+					b.rebondir(Direction.droite,SIZE_PONG_X,SIZE_PONG_Y);
+					System.out.println(b.getPosition());
+				}
 				e.animate();
 				e.paint(gContext);
 			}

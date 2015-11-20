@@ -25,10 +25,14 @@ public class Ball extends PongItem {
 
     public void rebondir(Direction d,int window_width,int window_height)
     {
-    	if(d==Direction.haut || d==Direction.bas)
-    		speed.y=0-speed.y;
-    	else if(d==Direction.droite || d==Direction.gauche)
-    		speed.x=0-speed.x;
+    	if(d==Direction.haut)
+    		speed.y=-Math.abs(speed.y);
+    	else if(d==Direction.bas)
+    		speed.y=Math.abs(speed.y);
+    	else if(d==Direction.gauche)
+    		speed.x=-Math.abs(speed.x);
+    	else if(d==Direction.droite)
+    		speed.x=Math.abs(speed.x);
     	
     }
 }
