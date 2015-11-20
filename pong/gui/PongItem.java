@@ -68,10 +68,8 @@ abstract public class PongItem extends JPanel {
     }
     
     public boolean collision(PongItem i){ //tentative de créer collision (fonction provisoire)
-    	if(i.getPosition().y < position.y && position.y < i.getPosition().y + i.getHeight() && position.x <= i.getPosition().x + i.getWidth()){
-    		System.out.println("collision");
+    	if(i.getPosition().y < position.y && position.y < i.getPosition().y + i.getHeight() && position.x <= i.getPosition().x + i.getWidth())
     		return true;
-    	}
     	return false;
     }
 }
