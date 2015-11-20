@@ -38,6 +38,8 @@ public class Game extends JFrame implements KeyListener{
 	{
 		setPreferredSize(new Dimension(SIZE_PONG_X, SIZE_PONG_Y));
 		pack();
+		setTitle("Pong");
+		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
 		buffer=createImage(SIZE_PONG_X,SIZE_PONG_Y);
