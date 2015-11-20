@@ -108,11 +108,11 @@ public class Game extends JFrame implements KeyListener{
 				if(e==null)
 					System.out.println("ceci este ");
 				limit(e);
-				if(b.collision(r))
-					b.rebondir(Direction.droite,SIZE_PONG_X,SIZE_PONG_Y);
 				e.animate();
 				e.paint(gContext);
 			}
+			if(b.collision(r)!=Direction.aucune)
+				b.rebondir(Direction.droite,SIZE_PONG_X,SIZE_PONG_Y);
 			repaint();
 			try {
 				Thread.sleep(timestep);

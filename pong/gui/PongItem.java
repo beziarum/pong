@@ -52,7 +52,7 @@ abstract public class PongItem extends JPanel {
 
     public void animate(){
 	position.translate(speed.x,speed.y);
-	hitbox.translate(position);
+	hitbox.translate(speed);
     }
     
     public int getHeight(){
@@ -77,9 +77,7 @@ abstract public class PongItem extends JPanel {
     			width, height, null);
     }
     
-    public boolean collision(PongItem i){ //tentative de créer collision (fonction provisoire)
-    	if(i.getPosition().y < position.y && position.y < i.getPosition().y + i.getHeight() && position.x <= i.getPosition().x + i.getWidth())
-    		return true;
-    	return false;
+    public Direction collision(PongItem i){
+    	return hitbox.colision(i.hitbox);
     }
 }
