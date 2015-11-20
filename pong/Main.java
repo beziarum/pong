@@ -1,6 +1,6 @@
 package pong;
 
-import game.Game;
+import pong.game.Game;
 import pong.gui.Window;
 import pong.gui.Pong;
 

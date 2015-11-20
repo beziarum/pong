@@ -1,4 +1,4 @@
-package game;
+package pong.game;
 
 import java.awt.Color;
 import java.awt.Dimension;
