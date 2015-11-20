@@ -33,4 +33,15 @@ public class Hitbox {
 			else
 				return Direction.bas;
 	}
+	
+	public Point getPos(){
+		return hitbox.getLocation();
+	}
+	
+	public int getWidth(){
+		return hitbox.width;
+	}
+	public int getHeight(){
+		return hitbox.height;
+	}
 }

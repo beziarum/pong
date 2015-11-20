@@ -31,6 +31,7 @@ public class Game extends JFrame implements KeyListener{
 	
 	protected Image buffer;
 	protected Graphics gContext;
+	//protected Graphics box;
 	
 	private static final Color backgroundColor = new Color(0xFF, 0x40, 0);
 	
@@ -46,6 +47,7 @@ public class Game extends JFrame implements KeyListener{
 		if (buffer == null)
 			throw new RuntimeException("Could not instanciate graphics");
 		gContext = buffer.getGraphics();
+		//box = buffer.getGraphics();
 		a=new ArrayList<PongItem>();
 		r= new Racket();
 		b= new Ball();
@@ -104,6 +106,9 @@ public class Game extends JFrame implements KeyListener{
 		{
 			gContext.setColor(backgroundColor);
 			gContext.fillRect(0, 0, SIZE_PONG_X, SIZE_PONG_Y);
+			/*box.setColor(backgroundColor.black);
+			box.drawRect(b.getHitbox().getPos().x-2, b.getHitbox().getPos().y-2, b.getHitbox().getWidth()+2, b.getHitbox().getHeight()+2);
+			box.drawRect(r.getHitbox().getPos().x-2, r.getHitbox().getPos().y-2, r.getHitbox().getWidth()+2, r.getHitbox().getHeight()+2);*/
 			for (PongItem e : a) {
 				if(e==null)
 					System.out.println("ceci este ");
@@ -113,6 +118,7 @@ public class Game extends JFrame implements KeyListener{
 			}
 			if(b.collision(r)!=Direction.aucune)
 				b.rebondir(Direction.droite,SIZE_PONG_X,SIZE_PONG_Y);
+			//paint(box);
 			repaint();
 			try {
 				Thread.sleep(timestep);
