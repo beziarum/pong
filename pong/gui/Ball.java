@@ -31,6 +31,7 @@ public class Ball extends PongItem {
     		speed.x=-Math.abs(speed.x);
     	else if(d==Direction.droite)
     		speed.x=Math.abs(speed.x);
+    	hitbox.setPos(this.getPosition());
     	
     }
 }

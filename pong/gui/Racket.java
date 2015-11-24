@@ -17,10 +17,11 @@ public class Racket extends PongItem {
 	
 	
 	public void rebondir(Direction d,int window_width,int window_height){
-		if (d == Direction.haut)
-			this.position.y=0;
 		if (d == Direction.bas)
+			this.position.y=0;
+		else if (d == Direction.haut)
 			this.position.y= window_height - this.height;
+		hitbox.setPos(this.getPosition());
 	}
 	
 	

@@ -16,7 +16,7 @@ public class Hitbox {
 	public void translate(Point pos){
 		hitbox.translate(pos.x, pos.y);
 	}
-
+	
 	public Direction colision(Hitbox h)
 	{
 		Rectangle inter=hitbox.intersection(h.hitbox);
@@ -36,6 +36,10 @@ public class Hitbox {
 	
 	public Point getPos(){
 		return hitbox.getLocation();
+	}
+	
+	public void setPos(Point pos){
+		hitbox.setLocation(pos);
 	}
 	
 	public int getWidth(){

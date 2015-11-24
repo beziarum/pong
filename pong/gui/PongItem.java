@@ -52,7 +52,7 @@ abstract public class PongItem extends JPanel {
 
     public void animate(){
 	position.translate(speed.x,speed.y);
-	hitbox.translate(speed);
+	hitbox.setPos(position);
     }
     
     public int getHeight(){
