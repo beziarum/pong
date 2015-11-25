@@ -23,12 +23,12 @@ public class Hitbox {
 		if(inter.isEmpty())
 			return Direction.aucune;
 		else if(inter.height>inter.width)
-			if(inter.x>hitbox.x)
+			if(inter.getCenterX()>hitbox.getCenterX())
 				return Direction.gauche;
 			else
 				return Direction.droite;
 		else
-			if(inter.y<hitbox.y)
+			if(inter.getCenterY()>hitbox.getCenterY())
 				return Direction.haut;
 			else
 				return Direction.bas;
