@@ -36,6 +36,8 @@ public class Game extends JFrame implements KeyListener{
 	private Racket r;
 	private Ball b;
 	
+	private boolean keyIsPressed=false;
+	
 	protected Image buffer;
 	protected Graphics gContext;
 	
@@ -79,6 +81,8 @@ public class Game extends JFrame implements KeyListener{
 	}
 	
 	public void keyPressed(KeyEvent e) {
+		if(keyIsPressed)
+			return;
 		switch (e.getKeyCode()) {
 			case KeyEvent.VK_UP:
 			case KeyEvent.VK_KP_UP:
@@ -91,6 +95,7 @@ public class Game extends JFrame implements KeyListener{
 			default:
 				System.out.println("got press "+e);
 		}
+		keyIsPressed=true;
 	}
 	public void keyReleased(KeyEvent e) {
 		switch (e.getKeyCode()) {
@@ -106,6 +111,7 @@ public class Game extends JFrame implements KeyListener{
 				System.out.println("got release "+e);
 				
 		}
+		keyIsPressed=false;
 	}
 	public void keyTyped(KeyEvent e) { }
 	
@@ -120,6 +126,22 @@ public class Game extends JFrame implements KeyListener{
 			for (PongItem e :a){
 				e.animate();
 				e.paint(gContext);
+				if(e==b || e==r)
+				{
+					for(PongItem e2 : a)
+					{
+						if(e==e2)
+							continue;
+						Direction d=e.collision(e2);
+						if(d!=Direction.aucune)
+						{
+							if(e2==bg)
+								gameOver();
+							else
+								e.rebondir(d, SIZE_PONG_X, SIZE_PONG_Y);
+						}
+					}
+				}/*
 				if (e == b)
 					continue;
 				Direction d = b.collision(e);
@@ -127,7 +149,7 @@ public class Game extends JFrame implements KeyListener{
 					gameOver();
 				if(d != Direction.aucune){
 					b.rebondir(d,SIZE_PONG_X,SIZE_PONG_Y);
-				}
+				}*/
 			}
 			repaint();
 			try {
