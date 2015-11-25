@@ -11,7 +11,6 @@ import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 import pong.gui.Ball;
 import pong.gui.Bordure;
@@ -21,6 +20,7 @@ import pong.util.Direction;
 
 public class Game extends JFrame implements KeyListener{
 	
+	private static final long serialVersionUID = 1L;
 	int SIZE_PONG_X = 800;
 	int SIZE_PONG_Y = 600;
 	
@@ -28,11 +28,8 @@ public class Game extends JFrame implements KeyListener{
 	
 	private ArrayList<PongItem> a;
 	
-	private Bordure bh;
-	private Bordure bg;
-	private Bordure bd;
-	private Bordure bb;
 	
+	private Bordure bg;
 	private Racket r;
 	private Ball b;
 	
@@ -61,24 +58,12 @@ public class Game extends JFrame implements KeyListener{
 		a.add(r);
 		a.add(b);
 		a.add(bg=new Bordure(Direction.gauche,SIZE_PONG_X,SIZE_PONG_Y));
-		a.add(bd=new Bordure(Direction.droite,SIZE_PONG_X,SIZE_PONG_Y));
-		a.add(bh=new Bordure(Direction.haut,SIZE_PONG_X,SIZE_PONG_Y));
-		a.add(bb=new Bordure(Direction.bas,SIZE_PONG_X,SIZE_PONG_Y));
+		a.add(new Bordure(Direction.droite,SIZE_PONG_X,SIZE_PONG_Y));
+		a.add(new Bordure(Direction.haut,SIZE_PONG_X,SIZE_PONG_Y));
+		a.add(new Bordure(Direction.bas,SIZE_PONG_X,SIZE_PONG_Y));
 		this.addKeyListener(this);
 	}
 	
-	
-	private boolean limit(PongItem i){
-		if (i.getPosition().y < 0 )
-			return true;
-		if(i.getPosition().y > SIZE_PONG_Y - i.getHeight())
-			return true;
-		if(i.getPosition().x > SIZE_PONG_X - i.getWidth())
-			return true;
-		if(i.getPosition().x < 0)
-			return true;
-		return false;
-	}
 	
 	public void keyPressed(KeyEvent e) {
 		if(keyIsPressed)
@@ -141,15 +126,7 @@ public class Game extends JFrame implements KeyListener{
 								e.rebondir(d, SIZE_PONG_X, SIZE_PONG_Y);
 						}
 					}
-				}/*
-				if (e == b)
-					continue;
-				Direction d = b.collision(e);
-				if (d==Direction.droite && e==bg)
-					gameOver();
-				if(d != Direction.aucune){
-					b.rebondir(d,SIZE_PONG_X,SIZE_PONG_Y);
-				}*/
+				}
 			}
 			repaint();
 			try {

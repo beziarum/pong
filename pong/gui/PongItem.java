@@ -14,9 +14,8 @@ import pong.util.Hitbox;
 
 
 abstract public class PongItem extends JPanel {
+	
     private static final long serialVersionUID = 1L;
-
-    //protected final Image im;
 
     protected int width;
     
@@ -25,8 +24,6 @@ abstract public class PongItem extends JPanel {
     protected Point position;
     
     protected Hitbox hitbox;
-
-    //abstract protected static final int INIT_SPEED;
     
     protected Point speed;
     

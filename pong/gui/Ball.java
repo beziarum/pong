@@ -1,8 +1,6 @@
 
 package pong.gui;
 
-
-
 import java.awt.Point;
 
 import pong.util.Direction;

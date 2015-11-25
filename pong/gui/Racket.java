@@ -1,6 +1,7 @@
 package pong.gui;
 
-import java.awt.*;
+import java.awt.Point;
+
 import pong.util.Direction;
 
 public class Racket extends PongItem {
@@ -8,7 +9,9 @@ public class Racket extends PongItem {
 	private static final long serialVersionUID = 1L;
 	
 	protected static final int INIT_SPEED = 0;
+	
 	public static final int RACKET_SPEED = 4;
+	
 	protected static Point INIT_POSITION = new Point (4,100);
 	
 	public Racket(){
