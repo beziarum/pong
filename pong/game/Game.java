@@ -13,6 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import pong.gui.Ball;
+import pong.gui.Bordure;
 import pong.gui.PongItem;
 import pong.gui.Racket;
 import pong.util.Direction;
@@ -26,12 +27,17 @@ public class Game extends JFrame implements KeyListener{
 	
 	private ArrayList<PongItem> a;
 	
+	private Bordure bh;
+	private Bordure bg;
+	private Bordure bd;
+	private Bordure bb;
+	
 	private Racket r;
 	private Ball b;
 	
 	protected Image buffer;
 	protected Graphics gContext;
-	//protected Graphics box;
+	protected Graphics box;
 	
 	private static final Color backgroundColor = new Color(0xFF, 0x40, 0);
 	
@@ -47,18 +53,22 @@ public class Game extends JFrame implements KeyListener{
 		if (buffer == null)
 			throw new RuntimeException("Could not instanciate graphics");
 		gContext = buffer.getGraphics();
-		//box = buffer.getGraphics();
+		box = buffer.getGraphics();
 		a=new ArrayList<PongItem>();
 		r= new Racket();
 		b= new Ball();
 		a.add(r);
 		a.add(b);
+		a.add(bg=new Bordure(Direction.gauche,SIZE_PONG_X,SIZE_PONG_Y));
+		a.add(bd=new Bordure(Direction.droite,SIZE_PONG_X,SIZE_PONG_Y));
+		a.add(bh=new Bordure(Direction.haut,SIZE_PONG_X,SIZE_PONG_Y));
+		a.add(bb=new Bordure(Direction.bas,SIZE_PONG_X,SIZE_PONG_Y));
 		this.addKeyListener(this);
 	}
 	
 	
-	private void limit(PongItem i){
-		if (i.getPosition().y < 0)
+	/*private void limit(PongItem i){
+		if (i.getPosition().y < 0 )
 			i.rebondir(Direction.bas,SIZE_PONG_X,SIZE_PONG_Y);
 		if(i.getPosition().y > SIZE_PONG_Y - i.getHeight())
 			i.rebondir(Direction.haut,SIZE_PONG_X,SIZE_PONG_Y);
@@ -66,7 +76,7 @@ public class Game extends JFrame implements KeyListener{
 			i.rebondir(Direction.gauche,SIZE_PONG_X,SIZE_PONG_Y);
 		if(i.getPosition().x < 0)
 			i.rebondir(Direction.droite,SIZE_PONG_X,SIZE_PONG_Y);
-	}
+	}*/
 	
 	public void keyPressed(KeyEvent e) {
 		switch (e.getKeyCode()) {
@@ -106,20 +116,32 @@ public class Game extends JFrame implements KeyListener{
 		{
 			gContext.setColor(backgroundColor);
 			gContext.fillRect(0, 0, SIZE_PONG_X, SIZE_PONG_Y);
-			/*box.setColor(backgroundColor.black);
-			box.drawRect(b.getHitbox().getPos().x-2, b.getHitbox().getPos().y-2, b.getHitbox().getWidth()+2, b.getHitbox().getHeight()+2);
-			box.drawRect(r.getHitbox().getPos().x-2, r.getHitbox().getPos().y-2, r.getHitbox().getWidth()+2, r.getHitbox().getHeight()+2);*/
-			for (PongItem e : a) {
+			//box.setColor(backgroundColor.red);
+			//box.drawString("Game Over !", 50, 50);
+			//box.drawRect(b.getHitbox().getPos().x-2, b.getHitbox().getPos().y-2, b.getHitbox().getWidth()+2, b.getHitbox().getHeight()+2);
+			//box.drawRect(r.getHitbox().getPos().x-2, r.getHitbox().getPos().y-2, r.getHitbox().getWidth()+2, r.getHitbox().getHeight()+2);*/
+			/*for (PongItem e : a) {
 				if(e==null)
 					System.out.println("ceci este ");
 				limit(e);
 				e.animate();
 				e.paint(gContext);
+			}*/
+			for (PongItem e :a){
+				e.animate();
+				e.paint(gContext);
+				if (e == b)
+					continue;
+				Direction d = b.collision(e);
+				if(d != Direction.aucune){
+					System.out.println("caca"+d);
+					b.rebondir(d,SIZE_PONG_X,SIZE_PONG_Y);
+				}
 			}
-			if(b.collision(r)!=Direction.aucune)
-				b.rebondir(Direction.droite,SIZE_PONG_X,SIZE_PONG_Y);
 			//paint(box);
 			repaint();
+			/*if (limite(b))
+				gameOver();*/
 			try {
 				Thread.sleep(timestep);
 			} catch (InterruptedException e1) {
@@ -132,5 +154,13 @@ public class Game extends JFrame implements KeyListener{
 	public void paint(Graphics g)
 	{
 		g.drawImage(buffer, 0, 0, this);
+	}
+	
+	public void gameOver(){
+		boolean replay=false;
+		while(!replay){
+			box.setColor(backgroundColor.red);
+			box.drawString("Game Over !", 50, 50);
+		}
 	}
 }
