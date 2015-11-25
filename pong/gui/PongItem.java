@@ -35,11 +35,16 @@ abstract public class PongItem extends JPanel {
     
     protected PongItem(String s , Point position, Point speed){
     	load(s);
+    	init(position, speed);
+    }
+    
+    protected PongItem(){};
+    
+    protected void init(Point position, Point speed){
     	this.position = (Point) position.clone();
     	this.speed = (Point) speed.clone();
     	hitbox = new Hitbox(this);
     }
-    
     
     protected void load(String s){
     	ImageIcon icon;
