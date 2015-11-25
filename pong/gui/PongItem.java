@@ -1,9 +1,10 @@
 
 package pong.gui;
 
-import javax.swing.JPanel;
-
-import java.awt.*;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Point;
+import java.awt.Toolkit;
 
 import javax.swing.JPanel;
 import javax.swing.ImageIcon;
@@ -13,7 +14,7 @@ import pong.util.Hitbox;
 
 
 abstract public class PongItem extends JPanel {
-    private static final long serialVerisonUID = 1L;
+    private static final long serialVersionUID = 1L;
 
     //protected final Image im;
 

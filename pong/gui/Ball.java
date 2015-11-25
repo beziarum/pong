@@ -1,9 +1,9 @@
 
 package pong.gui;
 
-import java.awt.*;
-import javax.swing.JPanel;
-import javax.swing.ImageIcon;
+
+
+import java.awt.Point;
 
 import pong.util.Direction;
 
