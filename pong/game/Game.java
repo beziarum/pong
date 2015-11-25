@@ -2,6 +2,7 @@ package pong.game;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
@@ -37,7 +38,6 @@ public class Game extends JFrame implements KeyListener{
 	
 	protected Image buffer;
 	protected Graphics gContext;
-	protected Graphics box;
 	
 	private static final Color backgroundColor = new Color(0xFF, 0x40, 0);
 	
@@ -53,7 +53,6 @@ public class Game extends JFrame implements KeyListener{
 		if (buffer == null)
 			throw new RuntimeException("Could not instanciate graphics");
 		gContext = buffer.getGraphics();
-		box = buffer.getGraphics();
 		a=new ArrayList<PongItem>();
 		r= new Racket();
 		b= new Ball();
@@ -67,16 +66,17 @@ public class Game extends JFrame implements KeyListener{
 	}
 	
 	
-	/*private void limit(PongItem i){
+	private boolean limit(PongItem i){
 		if (i.getPosition().y < 0 )
-			i.rebondir(Direction.bas,SIZE_PONG_X,SIZE_PONG_Y);
+			return true;
 		if(i.getPosition().y > SIZE_PONG_Y - i.getHeight())
-			i.rebondir(Direction.haut,SIZE_PONG_X,SIZE_PONG_Y);
+			return true;
 		if(i.getPosition().x > SIZE_PONG_X - i.getWidth())
-			i.rebondir(Direction.gauche,SIZE_PONG_X,SIZE_PONG_Y);
+			return true;
 		if(i.getPosition().x < 0)
-			i.rebondir(Direction.droite,SIZE_PONG_X,SIZE_PONG_Y);
-	}*/
+			return true;
+		return false;
+	}
 	
 	public void keyPressed(KeyEvent e) {
 		switch (e.getKeyCode()) {
@@ -116,32 +116,20 @@ public class Game extends JFrame implements KeyListener{
 		{
 			gContext.setColor(backgroundColor);
 			gContext.fillRect(0, 0, SIZE_PONG_X, SIZE_PONG_Y);
-			//box.setColor(backgroundColor.red);
-			//box.drawString("Game Over !", 50, 50);
-			//box.drawRect(b.getHitbox().getPos().x-2, b.getHitbox().getPos().y-2, b.getHitbox().getWidth()+2, b.getHitbox().getHeight()+2);
-			//box.drawRect(r.getHitbox().getPos().x-2, r.getHitbox().getPos().y-2, r.getHitbox().getWidth()+2, r.getHitbox().getHeight()+2);*/
-			/*for (PongItem e : a) {
-				if(e==null)
-					System.out.println("ceci este ");
-				limit(e);
-				e.animate();
-				e.paint(gContext);
-			}*/
+			
 			for (PongItem e :a){
 				e.animate();
 				e.paint(gContext);
 				if (e == b)
 					continue;
 				Direction d = b.collision(e);
+				if (d==Direction.droite && e==bg)
+					gameOver();
 				if(d != Direction.aucune){
-					System.out.println("caca"+d);
 					b.rebondir(d,SIZE_PONG_X,SIZE_PONG_Y);
 				}
 			}
-			//paint(box);
 			repaint();
-			/*if (limite(b))
-				gameOver();*/
 			try {
 				Thread.sleep(timestep);
 			} catch (InterruptedException e1) {
@@ -159,8 +147,16 @@ public class Game extends JFrame implements KeyListener{
 	public void gameOver(){
 		boolean replay=false;
 		while(!replay){
-			box.setColor(backgroundColor.red);
-			box.drawString("Game Over !", 50, 50);
+			gContext.setColor(Color.blue);
+			gContext.setFont(new Font("Courier", Font.BOLD, 30));
+			gContext.drawString("Game Over !", 300, 250);
+			repaint();
+			try {
+				Thread.sleep(timestep);
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 	}
 }
