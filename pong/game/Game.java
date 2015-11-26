@@ -1,30 +1,23 @@
 package pong.game;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Image;
+
 import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
-import javax.swing.JFrame;
-
 import pong.gui.Ball;
 import pong.gui.Bordure;
 import pong.gui.PongItem;
 import pong.gui.Racket;
+import pong.gui.Window;
 import pong.util.Direction;
 
-public class Game extends JFrame implements KeyListener{
-	
-	private static final long serialVersionUID = 1L;
-	int SIZE_PONG_X = 800;
-	int SIZE_PONG_Y = 600;
-	
+public class Game implements KeyListener{
+		
 	public static final int timestep = 10;
+	
+	private Window window;
 	
 	private ArrayList<PongItem> a;
 	
@@ -35,33 +28,26 @@ public class Game extends JFrame implements KeyListener{
 	
 	private boolean keyIsPressed=false;
 	
-	protected Image buffer;
-	protected Graphics gContext;
-	
-	private static final Color backgroundColor = new Color(0xFF, 0x40, 0);
 	
 	public Game()
-	{
-		setPreferredSize(new Dimension(SIZE_PONG_X, SIZE_PONG_Y));
-		pack();
-		setTitle("Pong");
-		setLocationRelativeTo(null);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setVisible(true);
-		buffer=createImage(SIZE_PONG_X,SIZE_PONG_Y);
-		if (buffer == null)
-			throw new RuntimeException("Could not instanciate graphics");
-		gContext = buffer.getGraphics();
+	{	
 		a=new ArrayList<PongItem>();
+		
+		window=new Window(a);
+		
+		int windowSizeX=window.getSize().width;
+		int windowSizeY=window.getSize().height;
+		
 		r= new Racket();
 		b= new Ball();
 		a.add(r);
 		a.add(b);
-		a.add(bg=new Bordure(Direction.gauche,SIZE_PONG_X,SIZE_PONG_Y));
-		a.add(new Bordure(Direction.droite,SIZE_PONG_X,SIZE_PONG_Y));
-		a.add(new Bordure(Direction.haut,SIZE_PONG_X,SIZE_PONG_Y));
-		a.add(new Bordure(Direction.bas,SIZE_PONG_X,SIZE_PONG_Y));
-		this.addKeyListener(this);
+		a.add(bg=new Bordure(Direction.gauche,windowSizeX,windowSizeY));
+		a.add(new Bordure(Direction.droite,windowSizeX,windowSizeY));
+		a.add(new Bordure(Direction.haut,windowSizeX,windowSizeY));
+		a.add(new Bordure(Direction.bas,windowSizeX,windowSizeY));
+		
+		window.addKeyListener(this);
 	}
 	
 	
@@ -104,13 +90,9 @@ public class Game extends JFrame implements KeyListener{
 	public void run()
 	{
 		while(true)
-		{
-			gContext.setColor(backgroundColor);
-			gContext.fillRect(0, 0, SIZE_PONG_X, SIZE_PONG_Y);
-			
+		{			
 			for (PongItem e :a){
 				e.animate();
-				e.paint(gContext);
 				if(e==b || e==r)
 				{
 					for(PongItem e2 : a)
@@ -121,41 +103,15 @@ public class Game extends JFrame implements KeyListener{
 						if(d!=Direction.aucune)
 						{
 							if(e2==bg)
-								gameOver();
+								window.gameOver();
 							else
-								e.rebondir(d, SIZE_PONG_X, SIZE_PONG_Y);
+								e.rebondir(d, window.getSize().width, window.getSize().height);
 						}
 					}
 				}
 			}
-			repaint();
-			try {
-				Thread.sleep(timestep);
-			} catch (InterruptedException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-		}
-	}
-	
-	public void paint(Graphics g)
-	{
-		g.drawImage(buffer, 0, 0, this);
-	}
-	
-	public void gameOver(){
-		boolean replay=false;
-		while(!replay){
-			gContext.setColor(Color.blue);
-			gContext.setFont(new Font("Courier", Font.BOLD, 30));
-			gContext.drawString("Game Over !", 300, 250);
-			repaint();
-			try {
-				Thread.sleep(timestep);
-			} catch (InterruptedException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+			window.paint();
+			window.sleep();
 		}
 	}
 }

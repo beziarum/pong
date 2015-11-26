@@ -2,6 +2,7 @@ package pong.gui;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 
@@ -31,7 +32,7 @@ public class Window extends JFrame {
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
-		buffer=createImage(WINDOW_SIZE.height,WINDOW_SIZE.width);
+		buffer=createImage(WINDOW_SIZE.width,WINDOW_SIZE.height);
 		if (buffer == null)
 			throw new RuntimeException("Could not instanciate graphics");
 		gContext = buffer.getGraphics();
@@ -43,11 +44,17 @@ public class Window extends JFrame {
 		return (Dimension)WINDOW_SIZE.clone();
 	}
 	
-	public void paint(Graphics g){
+	public void paint(){
 		gContext.setColor(backgroundColor);
-		gContext.fillRect(0, 0, WINDOW_SIZE.height, WINDOW_SIZE.width);
+		gContext.fillRect(0, 0, WINDOW_SIZE.width, WINDOW_SIZE.height);
 		for(PongItem e : a)
 			e.paint(gContext);
+		//gContext.drawImage(buffer, 0, 0, this);
+		repaint();
+	}
+	
+	public void paint(Graphics g)
+	{
 		g.drawImage(buffer, 0, 0, this);
 	}
 	
@@ -57,6 +64,22 @@ public class Window extends JFrame {
 		} catch (InterruptedException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
+		}
+	}
+	
+	public void gameOver(){
+		boolean replay=false;
+		while(!replay){
+			gContext.setColor(Color.blue);
+			gContext.setFont(new Font("Courier", Font.BOLD, 30));
+			gContext.drawString("Game Over !", 300, 250);
+			repaint();
+			try {
+				Thread.sleep(timestep);
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 	}
 }
