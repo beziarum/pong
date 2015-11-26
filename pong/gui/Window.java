@@ -27,7 +27,6 @@ public class Window extends JFrame {
 	
 	public Window(ArrayList<PongItem> a){
 		setPreferredSize(WINDOW_SIZE);
-		pack();
 		setTitle("Pong");
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -36,7 +35,6 @@ public class Window extends JFrame {
 		if (buffer == null)
 			throw new RuntimeException("Could not instanciate graphics");
 		gContext = buffer.getGraphics();
-		
 		this.a=a;
 	}
 
@@ -49,13 +47,13 @@ public class Window extends JFrame {
 		gContext.fillRect(0, 0, WINDOW_SIZE.width, WINDOW_SIZE.height);
 		for(PongItem e : a)
 			e.paint(gContext);
-		//gContext.drawImage(buffer, 0, 0, this);
 		repaint();
 	}
 	
 	public void paint(Graphics g)
 	{
 		g.drawImage(buffer, 0, 0, this);
+		pack();
 	}
 	
 	public void sleep(){
