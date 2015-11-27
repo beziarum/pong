@@ -26,8 +26,7 @@ public class Game implements KeyListener{
 	private Racket r;
 	private Ball b;
 	
-	private boolean keyIsPressed=false;
-	
+	private boolean gameOver=false;
 	
 	public Game()
 	{	
@@ -52,7 +51,7 @@ public class Game implements KeyListener{
 	
 	
 	public void keyPressed(KeyEvent e) {
-		if(keyIsPressed)
+		if(gameOver)
 			return;
 		switch (e.getKeyCode()) {
 			case KeyEvent.VK_UP:
@@ -66,9 +65,10 @@ public class Game implements KeyListener{
 			default:
 				System.out.println("got press "+e);
 		}
-		keyIsPressed=true;
 	}
 	public void keyReleased(KeyEvent e) {
+		if(gameOver)
+			return;
 		switch (e.getKeyCode()) {
 			case KeyEvent.VK_UP:
 			case KeyEvent.VK_KP_UP:
@@ -82,7 +82,6 @@ public class Game implements KeyListener{
 				System.out.println("got release "+e);
 				
 		}
-		keyIsPressed=false;
 	}
 	public void keyTyped(KeyEvent e) { }
 	
@@ -90,22 +89,29 @@ public class Game implements KeyListener{
 	public void run()
 	{
 		while(true)
-		{			
-			for (PongItem e :a){
-				e.animate();
-				if(e==b || e==r)
-				{
-					for(PongItem e2 : a)
+		{		
+			if(!gameOver)
+			{
+				for (PongItem e :a){
+					e.animate();
+					if(e==b || e==r)
 					{
-						if(e==e2)
-							continue;
-						Direction d=e.collision(e2);
-						if(d!=Direction.aucune)
+						for(PongItem e2 : a)
 						{
-							if(e2==bg)
-								window.gameOver();
-							else
-								e.rebondir(d, window.getSize().width, window.getSize().height);
+							if(e==e2)
+								continue;
+							Direction d=e.collision(e2);
+							if(d!=Direction.aucune)
+							{
+								if(e2==bg)
+								{
+									
+									window.gameOver(true);
+									gameOver=true;
+								}
+								else
+									e.rebondir(d, window.getSize().width, window.getSize().height);
+							}
 						}
 					}
 				}

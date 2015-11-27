@@ -25,6 +25,8 @@ public class Window extends JFrame {
 	protected Image buffer;
 	protected Graphics gContext;
 	
+	private boolean gameOver;
+	
 	public Window(ArrayList<PongItem> a){
 		setPreferredSize(WINDOW_SIZE);
 		setTitle("Pong");
@@ -35,18 +37,30 @@ public class Window extends JFrame {
 		if (buffer == null)
 			throw new RuntimeException("Could not instanciate graphics");
 		gContext = buffer.getGraphics();
+		time=System.currentTimeMillis();
 		this.a=a;
 	}
 
 	public Dimension getSize(){
 		return (Dimension)WINDOW_SIZE.clone();
 	}
-	
+	private long time;
 	public void paint(){
+		long newtime=System.currentTimeMillis();
+		long fps=1000/(newtime-time);
+		System.out.println(fps);
+		time=newtime;
+		
 		gContext.setColor(backgroundColor);
 		gContext.fillRect(0, 0, WINDOW_SIZE.width, WINDOW_SIZE.height);
 		for(PongItem e : a)
 			e.paint(gContext);
+		if(gameOver)
+		{
+			gContext.setColor(Color.blue);
+			gContext.setFont(new Font("Courier", Font.BOLD, 30));
+			//gContext.drawString("Game Over !", 300, 250);
+		}
 		repaint();
 	}
 	
@@ -65,19 +79,8 @@ public class Window extends JFrame {
 		}
 	}
 	
-	public void gameOver(){
-		boolean replay=false;
-		while(!replay){
-			gContext.setColor(Color.blue);
-			gContext.setFont(new Font("Courier", Font.BOLD, 30));
-			gContext.drawString("Game Over !", 300, 250);
-			repaint();
-			try {
-				Thread.sleep(timestep);
-			} catch (InterruptedException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-		}
+	public void gameOver(boolean game){
+		System.out.println("etiusr");
+		gameOver=game;
 	}
 }
