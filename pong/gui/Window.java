@@ -39,6 +39,7 @@ public class Window extends JFrame {
 		gContext = buffer.getGraphics();
 		time=System.currentTimeMillis();
 		this.a=a;
+		gContext.drawString(" ", 300, 250);
 	}
 
 	public Dimension getSize(){
@@ -59,7 +60,7 @@ public class Window extends JFrame {
 		{
 			gContext.setColor(Color.blue);
 			gContext.setFont(new Font("Courier", Font.BOLD, 30));
-			//gContext.drawString("Game Over !", 300, 250);
+			gContext.drawString("Game Over !", 300, 250);
 		}
 		repaint();
 	}
