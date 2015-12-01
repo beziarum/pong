@@ -14,6 +14,8 @@ public class Window extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	
+	private static boolean printFps=false;
+	
 	private ArrayList<PongItem> a;
 	
 	private static final Dimension WINDOW_SIZE=new Dimension(800,600);
@@ -47,10 +49,13 @@ public class Window extends JFrame {
 	}
 	private long time;
 	public void paint(){
-		long newtime=System.currentTimeMillis();
-		long fps=1000/(newtime-time);
-		System.out.println(fps);
-		time=newtime;
+		if(printFps)
+		{
+			long newtime=System.currentTimeMillis();
+			long fps=1000/(newtime-time);
+			System.out.println(fps);
+			time=newtime;
+		}
 		
 		gContext.setColor(backgroundColor);
 		gContext.fillRect(0, 0, WINDOW_SIZE.width, WINDOW_SIZE.height);
@@ -81,7 +86,6 @@ public class Window extends JFrame {
 	}
 	
 	public void gameOver(boolean game){
-		System.out.println("etiusr");
 		gameOver=game;
 	}
 }
