@@ -29,6 +29,8 @@ public class Window extends JFrame {
 	
 	private boolean gameOver;
 	
+	private long time;
+	private long delay=0;
 	public Window(ArrayList<PongItem> a){
 		setPreferredSize(WINDOW_SIZE);
 		setTitle("Pong");
@@ -47,15 +49,14 @@ public class Window extends JFrame {
 	public Dimension getSize(){
 		return (Dimension)WINDOW_SIZE.clone();
 	}
-	private long time;
+	
 	public void paint(){
 		if(printFps)
 		{
-			long newtime=System.currentTimeMillis();
-			long fps=1000/(newtime-time);
+			long fps=1000/delay;
 			System.out.println(fps);
-			time=newtime;
 		}
+		
 		
 		gContext.setColor(backgroundColor);
 		gContext.fillRect(0, 0, WINDOW_SIZE.width, WINDOW_SIZE.height);
@@ -78,7 +79,12 @@ public class Window extends JFrame {
 	
 	public void sleep(){
 		try {
-			Thread.sleep(timestep);
+			long newtime=System.currentTimeMillis();
+			System.out.println(delay);
+			//delay=0;
+			Thread.sleep(timestep-delay);
+			time=System.currentTimeMillis();
+			delay=time-newtime;
 		} catch (InterruptedException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
