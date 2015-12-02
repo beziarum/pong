@@ -71,7 +71,7 @@ public class Window extends JFrame {
 	public void sleep(){
 		try {
 			long newtime=System.currentTimeMillis();
-			System.out.println(delay);
+			//System.out.println(delay);
 			delay=0;
 			Thread.sleep(timestep-delay);
 			time=System.currentTimeMillis();
