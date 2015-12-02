@@ -18,7 +18,7 @@ public class Window extends JFrame {
 	
 	private ArrayList<PongItem> a;
 	
-	private static final Dimension WINDOW_SIZE=new Dimension(800,600);
+	public static final Dimension WINDOW_SIZE=new Dimension(800,600);
 	
 	public static final int timestep = 10;
 	
