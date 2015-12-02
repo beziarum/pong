@@ -4,6 +4,7 @@ package pong.game;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.BufferedInputStream;
 import java.util.ArrayList;
 
 import pong.gui.Ball;
@@ -23,10 +24,15 @@ public class Game implements KeyListener{
 	
 	
 	private Bordure bg;
+	private Bordure bd;
 	private Racket r;
 	private Ball b;
 	
 	private boolean gameOver=false;
+	
+	private NetworkControler control; 
+	
+	private ArrayList<Player> listPlayer;
 	
 	public Game()
 	{	
@@ -42,11 +48,14 @@ public class Game implements KeyListener{
 		a.add(r);
 		a.add(b);
 		a.add(bg=new Bordure(Direction.gauche,windowSizeX,windowSizeY));
-		a.add(new Bordure(Direction.droite,windowSizeX,windowSizeY));
+		a.add(bd=new Bordure(Direction.droite,windowSizeX,windowSizeY));
 		a.add(new Bordure(Direction.haut,windowSizeX,windowSizeY));
 		a.add(new Bordure(Direction.bas,windowSizeX,windowSizeY));
 		
 		window.addKeyListener(this);
+		
+		control=new NetworkControler();
+		listPlayer=new ArrayList<Player>();
 	}
 	
 	
@@ -83,13 +92,33 @@ public class Game implements KeyListener{
 				
 		}
 	}
-	public void keyTyped(KeyEvent e) { }
+	public void keyTyped(KeyEvent e) {
+		switch(e.getKeyChar()){
+			case 'j':
+				BufferedInputStream is=new BufferedInputStream(System.in);
+				control.connect(System.console().readLine());
+		}
+	}
 	
 
 	public void run()
 	{
 		while(true)
 		{	
+			if(control.haveNewConnection())
+			{
+				Player tmp=new Player(control.getNewConnection(),bd);
+				listPlayer.add(tmp);
+				a.add(tmp.getRacket());
+			}
+			for(Player p:listPlayer)
+			{
+				p.updatePos();
+				p.sendNewPos(r);
+				if(p.isInGameOver(b));
+					gameOver=true;
+			}
+			
 			if(gameOver){
 				b.respawn();
 				gameOver=false;

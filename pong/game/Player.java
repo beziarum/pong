@@ -10,6 +10,7 @@ import java.net.Socket;
 import pong.gui.Ball;
 import pong.gui.Bordure;
 import pong.gui.Racket;
+import pong.gui.Window;
 import pong.util.Direction;
 
 public class Player {
@@ -18,7 +19,6 @@ public class Player {
 	private OutputStream os;
 	private Racket racket;
 	private Bordure bordure;
-	
 	Player(Socket s,Bordure b)
 	{
 		bordure=b;
@@ -33,6 +33,11 @@ public class Player {
 	}
 	
 	public Racket getRacket()
+	{
+		updatePos();
+		return racket;
+	}
+	public void updatePos()
 	{
 		StringBuffer s=new StringBuffer();
 		char c='\0';
@@ -49,8 +54,7 @@ public class Player {
 		String[] worlds=s.toString().split(" ");
 		if(worlds.length != 2)
 			throw new RuntimeException("Unexpected protocol");
-		racket.setPosition(new Point(Integer.valueOf(worlds[0]), Integer.valueOf(worlds[1])));
-		return racket;
+		racket.setPosition(rotate(new Point(Integer.valueOf(worlds[0]), Integer.valueOf(worlds[1]))));
 	}
 	
 	public void sendNewPos(Racket r)
@@ -67,6 +71,11 @@ public class Player {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	private static Point rotate(Point p)
+	{
+		return new Point(Window.WINDOW_SIZE.width-p.x,Window.WINDOW_SIZE.height-p.y);
 	}
 	
 	public boolean isInGameOver(Ball ball)
