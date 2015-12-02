@@ -89,8 +89,12 @@ public class Game implements KeyListener{
 	public void run()
 	{
 		while(true)
-		{		
-			if(!gameOver)
+		{	
+			if(gameOver){
+				b.respawn();
+				gameOver=false;
+			}
+			else
 			{
 				for (PongItem e :a){
 					e.animate();
@@ -106,7 +110,7 @@ public class Game implements KeyListener{
 								if(e2==bg)
 								{
 									
-									window.gameOver(true);
+									gameOver=true;
 									gameOver=true;
 								}
 								else

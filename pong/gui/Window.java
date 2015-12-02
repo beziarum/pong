@@ -2,7 +2,6 @@ package pong.gui;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 
@@ -26,8 +25,6 @@ public class Window extends JFrame {
 	
 	protected Image buffer;
 	protected Graphics gContext;
-	
-	private boolean gameOver;
 	
 	private long time;
 	private long delay=0;
@@ -62,12 +59,6 @@ public class Window extends JFrame {
 		gContext.fillRect(0, 0, WINDOW_SIZE.width, WINDOW_SIZE.height);
 		for(PongItem e : a)
 			e.paint(gContext);
-		if(gameOver)
-		{
-			gContext.setColor(Color.blue);
-			gContext.setFont(new Font("Courier", Font.BOLD, 30));
-			gContext.drawString("Game Over !", 300, 250);
-		}
 		repaint();
 	}
 	
@@ -89,9 +80,5 @@ public class Window extends JFrame {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-	}
-	
-	public void gameOver(boolean game){
-		gameOver=game;
 	}
 }
