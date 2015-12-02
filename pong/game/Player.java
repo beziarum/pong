@@ -7,19 +7,21 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 
+import pong.gui.Ball;
 import pong.gui.Bordure;
 import pong.gui.Racket;
+import pong.util.Direction;
 
 public class Player {
 	private Socket s;
 	private DataInputStream is;
 	private OutputStream os;
 	private Racket racket;
-	private Bordure b;
+	private Bordure bordure;
 	
 	Player(Socket s,Bordure b)
 	{
-		this.b=b;
+		bordure=b;
 		racket=new Racket();
 		this.s=s;
 		try {
@@ -47,12 +49,13 @@ public class Player {
 		String[] worlds=s.toString().split(" ");
 		if(worlds.length != 2)
 			throw new RuntimeException("Unexpected protocol");
-		racket.setPosition(Integer.valueOf(worlds[0]),Integer.valueOf(worlds[1]));
+		racket.setPosition(new Point(Integer.valueOf(worlds[0]), Integer.valueOf(worlds[1])));
 		return racket;
 	}
 	
-	public void sendNewPos(Point pos)
+	public void sendNewPos(Racket r)
 	{
+		Point pos=r.getPosition();
 		try {
 			StringBuffer sb=new StringBuffer();
 			sb.append(pos.x);
@@ -66,9 +69,8 @@ public class Player {
 		}
 	}
 	
-	public boolean isInGameOver()
+	public boolean isInGameOver(Ball ball)
 	{
-		
-		return false;
+		return bordure.collision(ball)==Direction.aucune;
 	}
 }
