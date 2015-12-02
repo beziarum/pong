@@ -15,8 +15,18 @@ public class Player {
 		racket=new Racket();
 	}
 	
-	Racket getRacket()
+	public Racket getRacket()
 	{
 		return racket;
+	}
+	
+	public void sendNewPos()
+	{
+		
+	}
+	
+	public boolean isInGameOver()
+	{
+		return false;
 	}
 }
