@@ -28,14 +28,21 @@ public class Player {
 	
 	public Racket getRacket()
 	{
-		String s=new String();
-		char c='b';
+		StringBuffer s=new StringBuffer();
+		char c='\0';
 		while(c!='\n')
 		{
-			c=is.readChar();
-			s.concat(c);
+			try {
+				c=is.readChar();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			s.append(c);
 		}
-		
+		String[] worlds=s.toString().split(" ");
+		if(worlds.length != 2)
+			throw new RuntimeException("Unexpected protocol");
 		return racket;
 	}
 	
