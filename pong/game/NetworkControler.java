@@ -17,6 +17,7 @@ public class NetworkControler {
 		try {
 			serv=new ServerSocket(37650);
 			serv.setSoTimeout(1);
+			serv.setReuseAddress(true);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
