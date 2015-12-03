@@ -34,7 +34,6 @@ public class Player {
 	
 	public Racket getRacket()
 	{
-		updatePos();
 		return racket;
 	}
 	public void updatePos()
