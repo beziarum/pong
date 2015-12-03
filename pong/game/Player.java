@@ -67,6 +67,7 @@ public class Player {
 			sb.append(pos.y);
 			sb.append('\n');
 			os.write(sb.toString().getBytes());
+			os.flush();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

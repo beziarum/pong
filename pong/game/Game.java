@@ -115,13 +115,12 @@ public class Game implements KeyListener{
 			{
 				Player tmp=new Player(control.getNewConnection(),bd);
 				listPlayer.add(tmp);
-				tmp.sendNewPos(r);
 				a.add(tmp.getRacket());
 			}
 			for(Player p:listPlayer)
 			{
-				p.updatePos();
 				p.sendNewPos(r);
+				p.updatePos();
 				if(p.isInGameOver(b));
 					gameOver=true;
 			}
