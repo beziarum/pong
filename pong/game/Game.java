@@ -11,6 +11,7 @@ import pong.gui.Ball;
 import pong.gui.Bordure;
 import pong.gui.PongItem;
 import pong.gui.Racket;
+import pong.gui.StringCapture;
 import pong.gui.Window;
 import pong.util.Direction;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
@@ -97,8 +98,7 @@ public class Game implements KeyListener{
 		switch(e.getKeyChar()){
 			case 'j':
 				System.out.println("j was typed\n");
-				StringCapture sc=new StringCapture();
-				control.connect(sc.getString);
+				control.connect(StringCapture.getString());
 				for(Player p:listPlayer)
 					a.remove(p.getRacket());
 				listPlayer.clear();
