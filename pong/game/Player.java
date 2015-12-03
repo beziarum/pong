@@ -43,12 +43,13 @@ public class Player {
 		while(c!='\n')
 		{
 			try {
-				c=is.readChar();
+				c=(char)is.readByte();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			s.append(c);
+			if(c!='\n')
+				s.append(c);
 		}
 		String[] worlds=s.toString().split(" ");
 		if(worlds.length != 2)
