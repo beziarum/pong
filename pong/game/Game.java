@@ -13,6 +13,7 @@ import pong.gui.PongItem;
 import pong.gui.Racket;
 import pong.gui.Window;
 import pong.util.Direction;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class Game implements KeyListener{
 		
@@ -95,8 +96,13 @@ public class Game implements KeyListener{
 	public void keyTyped(KeyEvent e) {
 		switch(e.getKeyChar()){
 			case 'j':
-				BufferedInputStream is=new BufferedInputStream(System.in);
-				control.connect(System.console().readLine());
+				System.out.println("j was typed\n");
+				StringCapture sc=new StringCapture();
+				control.connect(sc.getString);
+				for(Player p:listPlayer)
+					a.remove(p.getRacket());
+				listPlayer.clear();
+				break;
 		}
 	}
 	
