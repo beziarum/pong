@@ -115,8 +115,8 @@ public class Game implements KeyListener{
 			{
 				Player tmp=new Player(control.getNewConnection(),bd);
 				listPlayer.add(tmp);
-				a.add(tmp.getRacket());
 				tmp.sendNewPos(r);
+				a.add(tmp.getRacket());
 			}
 			for(Player p:listPlayer)
 			{
