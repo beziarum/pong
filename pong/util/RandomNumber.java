@@ -1,18 +1,23 @@
 package pong.util;
 
 import java.awt.Point;
+import java.util.Random;
 
 /**
  * Random number and point generator
  */
 public class RandomNumber {
+	private static long seed=(long)Math.random();
+	private static Random random=new Random(seed);
+	private static long nbDoubleConsume=0;
 	/**
 	 * @param min
 	 * @param max
 	 * @return a random integer value between min and max
 	 */
 	public static int randomValue(int min, int max) {
-		return ((int) (Math.random() * (max - min + 1)) + min);
+		nbDoubleConsume++;
+		return ((int) (random.nextDouble() * (max - min + 1)) + min);
 	}
 
 	/**
@@ -25,5 +30,23 @@ public class RandomNumber {
 	 */
 	public static Point randomPoint(int min_x, int max_x, int min_y, int max_y) {
 		return new Point(randomValue(min_x, max_x), randomValue(min_y, max_y));
+	}
+	
+	public static long getNumberOfDoubleConsumed(){
+		return nbDoubleConsume;
+	}
+	
+	public static void consumeNDouble(long n){
+		for(int i=0;i<n;i++)
+			random.nextDouble();
+	}
+	
+	public static long getSeed(){
+		return seed;
+	}
+	
+	public static void setSeed(long s){
+		random.setSeed(s);
+		s=seed;
 	}
 }
