@@ -35,7 +35,7 @@ public class Player {
 	}
 	public void updatePos()
 	{
-		racket.setCenter(NetworkControler.readPoint(is));
+		racket.setCenter(NetworkControler.readPos(is));
 	}
 	
 	public void sendNewPos(Racket r)

@@ -56,8 +56,11 @@ public class NetworkControler {
 				InputStream is=s.getInputStream();
 				RandomNumber.setSeed(Long.valueOf(readLine(is)));
 				RandomNumber.consumeNDouble(Long.valueOf(readLine(is)));
-				b.setCenter(readPoint(is));
-				//b.setSpeed(readPoint(is));
+				b.setCenter(readPos(is));
+				Point speed=readPoint(is);
+				speed.x=-speed.x;
+				speed.y=-speed.y;
+				b.setSpeed(speed);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -81,7 +84,7 @@ public class NetworkControler {
 			try {
 				s.getOutputStream().write(init.toString().getBytes());
 				sendPos(s.getOutputStream(), b.getCenter());
-				//sendPos(s.getOutputStream(), b.getSpeed());
+				sendPos(s.getOutputStream(), b.getSpeed());
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -138,12 +141,16 @@ public class NetworkControler {
 		return s.toString();
 	}
 	
+	public static Point readPos(InputStream is)
+	{
+		return rotate(readPoint(is));
+	}
+	
 	public static Point readPoint(InputStream is)
 	{
 		String[] worlds=readLine(is).split(" ");
-		return rotate(new Point(Integer.valueOf(worlds[0]),Integer.valueOf(worlds[1])));
+		return new Point(Integer.valueOf(worlds[0]),Integer.valueOf(worlds[1]));
 	}
-	
 	
 	private static Point rotate(Point p)
 	{
