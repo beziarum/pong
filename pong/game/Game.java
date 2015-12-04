@@ -121,7 +121,7 @@ public class Game implements KeyListener{
 			{
 				p.sendNewPos(r);
 				p.updatePos();
-				if(p.isInGameOver(b));
+				if(p.isInGameOver(b))
 					gameOver=true;
 			}
 			

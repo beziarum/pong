@@ -81,6 +81,6 @@ public class Player {
 	
 	public boolean isInGameOver(Ball ball)
 	{
-		return bordure.collision(ball)==Direction.aucune;
+		return bordure.collision(ball)!=Direction.aucune;
 	}
 }
