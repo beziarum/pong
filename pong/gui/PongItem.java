@@ -87,11 +87,11 @@ abstract public class PongItem extends JPanel {
     }
     
     public Point getCenter(){
-    	return new Point (getPosition().x+(getHeight()/2),getPosition().y+(getWidth()/2));
+    	return new Point (getPosition().x+(getWidth()/2),getPosition().y+(getHeight()/2));
     }
     
     public void setCenter(Point p){
-    	setPosition(new Point (p.x-(getHeight()/2),p.y-(getWidth()/2)));
+    	setPosition(new Point (p.x-(getWidth()/2),p.y-(getHeight()/2)));
     }
     
     public void paint(Graphics GContext)
