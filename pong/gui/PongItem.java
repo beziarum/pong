@@ -82,6 +82,14 @@ abstract public class PongItem extends JPanel {
     	speed = (Point) point.clone();
     }
     
+    public Point getCenter(){
+    	return new Point (getPosition().x+(getHeight()/2),getPosition().y+(getWidth()/2));
+    }
+    
+    public void setCenter(Point p){
+    	setPosition(new Point (p.x-(getHeight()/2),p.y-(getWidth()/2)));
+    }
+    
     public void paint(Graphics GContext)
     {
     	GContext.drawImage(im, position.x, position.y,
