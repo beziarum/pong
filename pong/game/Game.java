@@ -113,7 +113,7 @@ public class Game implements KeyListener{
 		{	
 			if(control.haveNewConnection())
 			{
-				Player tmp=new Player(control.getNewConnection(),bd);
+				Player tmp=new Player(control.getNewConnection(b),bd);
 				listPlayer.add(tmp);
 				a.add(tmp.getRacket());
 			}
@@ -121,15 +121,17 @@ public class Game implements KeyListener{
 			{
 				p.sendNewPos(r);
 				p.updatePos();
-				if(p.isInGameOver(b))
+				if(p.isInGameOver(b)){
 					gameOver=true;
+					System.out.println("go!");
+				}
 			}
 			
 			if(gameOver){
 				b.respawn();
 				gameOver=false;
 			}
-			else
+			//else
 			{
 				for (PongItem e :a){
 					e.animate();
