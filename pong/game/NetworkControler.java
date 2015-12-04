@@ -1,6 +1,7 @@
 package pong.game;
 
 import java.awt.Point;
+import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -43,7 +44,7 @@ public class NetworkControler {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return !list.isEmpty();
+		return connectWait!=null || !list.isEmpty();
 	}
 	
 	public Socket getNewConnection(Ball b)
@@ -52,7 +53,11 @@ public class NetworkControler {
 		{
 			Socket s=connectWait;
 			try {
-				b.setCenter(readPoint(s.getInputStream()));
+				InputStream is=s.getInputStream();
+				RandomNumber.setSeed(Long.valueOf(readLine(is)));
+				RandomNumber.consumeNDouble(Long.valueOf(readLine(is)));
+				b.setCenter(readPoint(is));
+				//b.setSpeed(readPoint(is));
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -68,11 +73,15 @@ public class NetworkControler {
 			init.append(0);
 			init.append(' ');
 			init.append(1);
+			init.append('\n');
 			init.append(RandomNumber.getSeed());
+			init.append('\n');
 			init.append(RandomNumber.getNumberOfDoubleConsumed());
+			init.append('\n');
 			try {
 				s.getOutputStream().write(init.toString().getBytes());
 				sendPos(s.getOutputStream(), b.getCenter());
+				//sendPos(s.getOutputStream(), b.getSpeed());
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -84,12 +93,13 @@ public class NetworkControler {
 	{
 		try {
 			Socket sock=new Socket(str,37650);
-			if (readLine(sock.getInputStream()).equals("PONG0 1\n"))
+			String s=readLine(sock.getInputStream());
+			if (s.equals("PONG0 1"))
 				connectWait=sock;
 			else
 			{
 				sock.close();
-				throw new RuntimeException("Unsuported Protocol");
+				throw new RuntimeException("Unsuported Protocol"+s);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -118,14 +128,10 @@ public class NetworkControler {
 		{
 			try {
 				c=(char)is.read();
-				System.out.println(is.read());
-				if(c==-1)
-					System.out.println("prout");
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			System.out.println(c);
 			if(c!='\n')
 				s.append(c);
 		}

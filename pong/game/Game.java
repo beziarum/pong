@@ -126,7 +126,7 @@ public class Game implements KeyListener{
 					System.out.println("go!");
 				}
 			}
-			
+			gameOver=false;
 			if(gameOver){
 				b.respawn();
 				gameOver=false;
@@ -150,7 +150,7 @@ public class Game implements KeyListener{
 									gameOver=true;
 									gameOver=true;
 								}
-								else
+								//else
 									e.rebondir(d, window.getSize().width, window.getSize().height);
 							}
 						}
