@@ -78,6 +78,7 @@ abstract public class PongItem extends JPanel {
 	
 	public void setPosition(Point pos){
 		position = (Point) pos.clone();
+		hitbox.setPos(position);
 	}
 	
 	public Hitbox getHitbox(){
