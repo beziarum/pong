@@ -4,7 +4,6 @@ package pong.game;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.io.BufferedInputStream;
 import java.util.ArrayList;
 
 import pong.gui.Ball;
@@ -14,7 +13,6 @@ import pong.gui.Racket;
 import pong.gui.StringCapture;
 import pong.gui.Window;
 import pong.util.Direction;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class Game implements KeyListener{
 		
@@ -131,28 +129,21 @@ public class Game implements KeyListener{
 				b.respawn();
 				gameOver=false;
 			}
-			//else
-			{
-				for (PongItem e :a){
-					e.animate();
-					if(e==b || e==r)
+			for (PongItem e :a){
+				e.animate();
+				if(e==b || e==r)
+				{
+					for(PongItem e2 : a)
 					{
-						for(PongItem e2 : a)
+						if(e==e2)
+							continue;
+						Direction d=e.collision(e2);
+						if(d!=Direction.aucune)
 						{
-							if(e==e2)
-								continue;
-							Direction d=e.collision(e2);
-							if(d!=Direction.aucune)
-							{
-								if(e2==bg)
-								{
-									
-									gameOver=true;
-									gameOver=true;
-								}
-								//else
-									e.rebondir(d, window.getSize().width, window.getSize().height);
-							}
+							if(e2==bg)
+								gameOver=true;
+							else
+								e.rebondir(d, window.getSize().width, window.getSize().height);
 						}
 					}
 				}
