@@ -14,15 +14,22 @@ public class Racket extends PongItem {
 	
 	protected static Point INIT_POSITION = new Point (4,100);
 	
+	private Point oldPos;
+	
 	public Racket(){
 		super("image/racket.png", INIT_POSITION, new Point (INIT_SPEED,INIT_SPEED));
 	}
 	
+	public void animate()
+	{
+		oldPos=position;
+		super.animate();
+	}
 	
 	public void rebondir(Direction d,int window_width,int window_height){
-		if (d == Direction.bas)
+		if (d == Direction.bas && this.position.y<=0)
 			this.position.y=0;
-		else if (d == Direction.haut)
+		else if (d == Direction.haut && this.position.y>=0)
 			this.position.y= window_height - this.height;
 		hitbox.setPos(this.getPosition());
 	}

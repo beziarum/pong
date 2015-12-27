@@ -34,9 +34,12 @@ abstract public class PongItem extends JPanel {
     protected PongItem(String s , Point position, Point speed){
     	load(s);
     	init(position, speed);
+    	time=System.currentTimeMillis();
     }
     
-    protected PongItem(){};
+    protected PongItem(){
+    	time=System.currentTimeMillis();
+    }
     
     protected void init(Point position, Point speed){
     	this.position = (Point) position.clone();
@@ -52,10 +55,13 @@ abstract public class PongItem extends JPanel {
     	width = icon.getIconWidth();
     	height = icon.getIconHeight();
     }
-
+    private long time;
     public void animate(){
-	position.translate(speed.x,speed.y);
-	hitbox.setPos(position);
+    	long newtime=System.currentTimeMillis();
+    	int tick=(int)(newtime-time);
+    	time=newtime;
+    	position.translate(speed.x*tick/10,speed.y*tick/10);
+    	hitbox.setPos(position);
     }
     
     public int getHeight(){
@@ -72,6 +78,7 @@ abstract public class PongItem extends JPanel {
 	
 	public void setPosition(Point pos){
 		position = (Point) pos.clone();
+		hitbox.setPos(position);
 	}
 	
 	public Hitbox getHitbox(){
