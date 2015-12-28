@@ -14,17 +14,10 @@ public class Racket extends PongItem {
 	
 	protected static Point INIT_POSITION = new Point (4,100);
 	
-	private Point oldPos;
-	
 	public Racket(){
 		super("image/racket.png", INIT_POSITION, new Point (INIT_SPEED,INIT_SPEED));
 	}
 	
-	public void animate()
-	{
-		oldPos=position;
-		super.animate();
-	}
 	
 	public void rebondir(Direction d,int window_width,int window_height){
 		if (d == Direction.bas && this.position.y<=0)

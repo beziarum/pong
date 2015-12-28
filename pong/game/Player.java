@@ -11,7 +11,6 @@ import pong.gui.Racket;
 import pong.util.Direction;
 
 public class Player {
-	private Socket s;
 	private DataInputStream is;
 	private OutputStream os;
 	private Racket racket;
@@ -20,7 +19,6 @@ public class Player {
 	{
 		bordure=b;
 		racket=new Racket();
-		this.s=s;
 		try {
 			is=new DataInputStream(s.getInputStream());
 			os=s.getOutputStream();
