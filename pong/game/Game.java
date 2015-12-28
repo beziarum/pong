@@ -124,7 +124,7 @@ public class Game implements KeyListener{
 					System.out.println("go!");
 				}
 			}
-			gameOver=false;
+			
 			if(gameOver){
 				b.respawn();
 				gameOver=false;
