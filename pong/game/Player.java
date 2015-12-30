@@ -15,8 +15,11 @@ public class Player {
 	private OutputStream os;
 	private Racket racket;
 	private Bordure bordure;
+	public int score;
+	
 	Player(Socket s,Bordure b)
 	{
+		score =0;
 		bordure=b;
 		racket=new Racket();
 		try {

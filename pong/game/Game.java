@@ -34,6 +34,7 @@ public class Game implements KeyListener{
 	
 	private ArrayList<Player> listPlayer;
 	
+	
 	public Game()
 	{	
 		a=new ArrayList<PongItem>();
@@ -41,7 +42,7 @@ public class Game implements KeyListener{
 		window=new Window(a);
 		
 		int windowSizeX=window.getSize().width;
-		int windowSizeY=window.getSize().height;
+		int windowSizeY=window.getSize().height-50;
 		
 		r= new Racket();
 		b= new Ball();
@@ -143,12 +144,13 @@ public class Game implements KeyListener{
 							if(e2==bg)
 								gameOver=true;
 							else
-								e.rebondir(d, window.getSize().width, window.getSize().height);
+								e.rebondir(d, window.getSize().width, window.getSize().height-50);
 						}
 					}
 				}
 			}
 			window.paint();
+			Window.paintScore(1,1);
 			window.sleep();
 		}
 	}

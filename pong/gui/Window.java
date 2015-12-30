@@ -24,10 +24,12 @@ public class Window extends JFrame {
 	private Color backgroundColor=new Color(0xFF, 0x40, 0);
 	
 	protected Image buffer;
-	protected Graphics gContext;
+	protected static Graphics gContext;
 	
 	private long time;
 	private long delay=0;
+	
+	
 	public Window(ArrayList<PongItem> a){
 		setPreferredSize(WINDOW_SIZE);
 		setTitle("Pong");
@@ -53,10 +55,10 @@ public class Window extends JFrame {
 			long fps=1000/delay;
 			System.out.println(fps);
 		}
-		
-		
+		gContext.setColor(Color.WHITE);
+		gContext.fillRect(0, WINDOW_SIZE.height-50, WINDOW_SIZE.width, WINDOW_SIZE.height);
 		gContext.setColor(backgroundColor);
-		gContext.fillRect(0, 0, WINDOW_SIZE.width, WINDOW_SIZE.height);
+		gContext.fillRect(0, 0, WINDOW_SIZE.width, WINDOW_SIZE.height-50);
 		for(PongItem e : a)
 			e.paint(gContext);
 		repaint();
@@ -80,5 +82,10 @@ public class Window extends JFrame {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+	}
+	
+	public static void paintScore(int s1, int s2){
+		gContext.setColor(Color.BLACK);
+		gContext.drawString("Score = " +s1+"/"+s2 , 350, 575);//a amélioré
 	}
 }
