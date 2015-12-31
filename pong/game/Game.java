@@ -113,6 +113,7 @@ public class Game implements KeyListener{
 	{
 		while(true)
 		{	
+			//System.out.println("Game =" +b.getSpeed());
 			if(control.haveNewConnection())
 			{
 				Player tmp=new Player(control.getNewConnection(b),bd);
@@ -131,6 +132,7 @@ public class Game implements KeyListener{
 			
 			if(gameOver){
 				b.respawn();
+				bs.reinit();
 				gameOver=false;
 			}
 			for (PongItem e :a){
@@ -148,7 +150,7 @@ public class Game implements KeyListener{
 							if(e2==bg)
 								gameOver=true;
 							else if (e2 == bs)
-								bs.process();
+								;
 							else
 								e.rebondir(d, window.getSize().width, window.getSize().height-50);
 						}
