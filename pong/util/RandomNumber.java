@@ -7,7 +7,7 @@ import java.util.Random;
  * Random number and point generator
  */
 public class RandomNumber {
-	private static long seed=(long)Math.random();
+	private static long seed=System.currentTimeMillis();
 	private static Random random=new Random(seed);
 	private static long nbDoubleConsume=0;
 	/**
