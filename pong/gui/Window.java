@@ -8,6 +8,7 @@ import java.awt.Image;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 public class Window extends JFrame {
 
@@ -26,20 +27,27 @@ public class Window extends JFrame {
 	protected Image buffer;
 	protected static Graphics gContext;
 	
+	protected JPanel pan;
+	
 	private long time;
 	private long delay=0;
 	
 	
 	public Window(ArrayList<PongItem> a){
+		pan=new JPanel();
+		pan.setMinimumSize(WINDOW_SIZE);
 		setPreferredSize(WINDOW_SIZE);
 		setTitle("Pong");
-		setLocationRelativeTo(null);
+		//setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		add(pan);
+		pack();
 		setVisible(true);
-		buffer=createImage(WINDOW_SIZE.width,WINDOW_SIZE.height);
-		if (buffer == null)
-			throw new RuntimeException("Could not instanciate graphics");
-		gContext = buffer.getGraphics();
+		//buffer=createImage(WINDOW_SIZE.width,WINDOW_SIZE.height);
+		//if (buffer == null)
+		//	throw new RuntimeException("Could not instanciate graphics");
+		//gContext = buffer.getGraphics();
+		gContext = pan.getGraphics();
 		time=System.currentTimeMillis();
 		this.a=a;
 		gContext.drawString(" ", 300, 250);
@@ -55,20 +63,20 @@ public class Window extends JFrame {
 			long fps=1000/delay;
 			System.out.println(fps);
 		}
-		gContext.setColor(Color.WHITE);
-		gContext.fillRect(0, WINDOW_SIZE.height-50, WINDOW_SIZE.width, WINDOW_SIZE.height);
+		//gContext.setColor(Color.WHITE);
+		//gContext.fillRect(0, WINDOW_SIZE.height-50, WINDOW_SIZE.width, WINDOW_SIZE.height);
 		gContext.setColor(backgroundColor);
 		gContext.fillRect(0, 0, WINDOW_SIZE.width, WINDOW_SIZE.height-50);
 		for(PongItem e : a)
 			e.paint(gContext);
-		repaint();
+		//repaint();
 	}
-	
+	/*
 	public void paint(Graphics g)
 	{
 		g.drawImage(buffer, 0, 0, this);
 		pack();
-	}
+	}*/
 	
 	public void sleep(){
 		try {
@@ -85,7 +93,7 @@ public class Window extends JFrame {
 	}
 	
 	public static void paintScore(int s1, int s2){
-		gContext.setColor(Color.BLACK);
-		gContext.drawString("Score = " +s1+"/"+s2 , 350, 575);//a amélioré
+		//gContext.setColor(Color.BLACK);
+		//gContext.drawString("Score = " +s1+"/"+s2 , 350, 575);//a amélioré
 	}
 }
