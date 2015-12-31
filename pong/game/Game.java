@@ -7,6 +7,7 @@ import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
 import pong.gui.Ball;
+import pong.gui.BonusSpeed;
 import pong.gui.Bordure;
 import pong.gui.PongItem;
 import pong.gui.Racket;
@@ -27,6 +28,7 @@ public class Game implements KeyListener{
 	private Bordure bd;
 	private Racket r;
 	private Ball b;
+	private BonusSpeed bs;
 	
 	private boolean gameOver=false;
 	
@@ -52,6 +54,7 @@ public class Game implements KeyListener{
 		a.add(bd=new Bordure(Direction.droite,windowSizeX,windowSizeY));
 		a.add(new Bordure(Direction.haut,windowSizeX,windowSizeY));
 		a.add(new Bordure(Direction.bas,windowSizeX,windowSizeY));
+		a.add(bs=new BonusSpeed(b));
 		
 		window.addKeyListener(this);
 		
@@ -132,6 +135,7 @@ public class Game implements KeyListener{
 			}
 			for (PongItem e :a){
 				e.animate();
+				bs.process();
 				if(e==b || e==r)
 				{
 					for(PongItem e2 : a)
@@ -143,6 +147,8 @@ public class Game implements KeyListener{
 						{
 							if(e2==bg)
 								gameOver=true;
+							else if (e2 == bs)
+								bs.process();
 							else
 								e.rebondir(d, window.getSize().width, window.getSize().height-50);
 						}

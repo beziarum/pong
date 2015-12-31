@@ -36,7 +36,7 @@ public class BonusSpeed extends PongItem{
 	}
 	
 	public boolean spawn(){
-		int x = RandomNumber.randomValue(0, 180);//a amélioré
+		int x = RandomNumber.randomValue(0, 20);//a amélioré
 		return (x<=1);	
 	}
 	
