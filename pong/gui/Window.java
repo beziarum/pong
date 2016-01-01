@@ -27,14 +27,14 @@ public class Window extends JFrame {
 	protected Image buffer;
 	protected static Graphics gContext;
 	
-	protected JPanel pan;
+	protected GamePanel pan;
 	
 	private long time;
 	private long delay=0;
 	
 	
 	public Window(ArrayList<PongItem> a){
-		pan=new JPanel();
+		pan=new GamePanel(a);
 		pan.setMinimumSize(WINDOW_SIZE);
 		setPreferredSize(WINDOW_SIZE);
 		setTitle("Pong");
@@ -47,10 +47,10 @@ public class Window extends JFrame {
 		//if (buffer == null)
 		//	throw new RuntimeException("Could not instanciate graphics");
 		//gContext = buffer.getGraphics();
-		gContext = pan.getGraphics();
+		//gContext = pan.getGraphics();
 		time=System.currentTimeMillis();
 		this.a=a;
-		gContext.drawString(" ", 300, 250);
+		//gContext.drawString(" ", 300, 250);
 	}
 
 	public Dimension getSize(){
@@ -65,11 +65,12 @@ public class Window extends JFrame {
 		}
 		//gContext.setColor(Color.WHITE);
 		//gContext.fillRect(0, WINDOW_SIZE.height-50, WINDOW_SIZE.width, WINDOW_SIZE.height);
-		gContext.setColor(backgroundColor);
+		/*gContext.setColor(backgroundColor);
 		gContext.fillRect(0, 0, WINDOW_SIZE.width, WINDOW_SIZE.height-50);
 		for(PongItem e : a)
 			e.paint(gContext);
-		//repaint();
+		//repaint();*/
+		repaint();
 	}
 	/*
 	public void paint(Graphics g)
