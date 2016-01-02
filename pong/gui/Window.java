@@ -19,7 +19,7 @@ public class Window extends JFrame {
 	private static final int SCORE_HEIGHT = 50;
 	public static final Dimension WINDOW_SIZE=new Dimension(GamePanel.WINDOW_SIZE.width, GamePanel.WINDOW_SIZE.height + SCORE_HEIGHT);
 	
-	public static final int timestep = 10;
+	private static final int timestep = 10;
 	
 	protected Image buffer;
 	protected static Graphics gContext;

@@ -121,6 +121,7 @@ public class Game implements KeyListener{
 				Player tmp=new Player(control.getNewConnection(b),bd);
 				listPlayer.add(tmp);
 				a.add(tmp.getRacket());
+				bs.reinit();
 			}
 			for(Player p:listPlayer)
 			{
@@ -146,9 +147,9 @@ public class Game implements KeyListener{
 				bs.reinit();
 				gameOver=false;
 			}
+			bs.process();
 			for (PongItem e :a){
 				e.animate();
-				bs.process();
 				if(e==b || e==r)
 				{
 					for(PongItem e2 : a)
