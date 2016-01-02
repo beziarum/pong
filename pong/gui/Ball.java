@@ -20,12 +20,12 @@ public class Ball extends PongItem {
 	/**
 	 * vitesse initial de la ball
 	 */
-	protected static final int INIT_SPEED= 4;
+	private static final int INIT_SPEED= 4;
 	
 	/**
 	 * position initial de la ball généré aléatoirement
 	 */
-	protected static Point INIT_POSITION = RandomNumber.randomPoint((Window.WINDOW_SIZE.width/2)-100,(Window.WINDOW_SIZE.width/2)+100,(Window.WINDOW_SIZE.height/2)-100,(Window.WINDOW_SIZE.height/2)+100);
+	private static Point INIT_POSITION = RandomNumber.randomPoint((Window.WINDOW_SIZE.width/2)-100,(Window.WINDOW_SIZE.width/2)+100,(Window.WINDOW_SIZE.height/2)-100,(Window.WINDOW_SIZE.height/2)+100);
 	
 	/**
 	 * génératon d'une direction aléatoire de départ pour la ball

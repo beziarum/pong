@@ -18,42 +18,47 @@ public class BonusSpeed extends PongItem{
 	/**
 	 * vitesse de bonus speed
 	 */
-	protected static final int INIT_SPEED= 0;
+	private static final int INIT_SPEED= 0;
 	
 	/**
 	 * valeur du multiplicative de l'augmentation de la vitesse
 	 */
-	protected static final double boost= 1.5;
+	private static final double boost= 1.5;
 	
 	/**
 	 * delai en miliseconde de l'application du boost
 	 */
-	protected static final int delay= 10000;
+	private static final int delay = 10000;
+	
+	/**
+	 * probabilité de faire apparaitre le bonus
+	 */
+	private static final int prob = 2000;
 	
 	/**
 	 * balle de la partie en cour
 	 */
-	protected static Ball ball;
+	private Ball ball;
 	
 	/**
 	 * chrono pour gérer le temps d'activation de l'effet
 	 */
-	protected static long timer;
+	private long timer;
 	
 	/**
 	 * boolean qui indique si l'effet est actif
 	 */
-	protected static boolean efficient;
+	private boolean efficient;
 	
 	/**
 	 * boolean qui indique si l'objet est actuellement sur le terrain
 	 */
-	protected static boolean spawner;
+	private boolean spawner;
 	
 	/**
 	 * position initial hors de l'écrans
 	 */
-	protected static Point INIT_POSITION = new Point(-100,-100);
+	private static Point INIT_POSITION = new Point(-100,-100);
 	
 	/**
 	 * constructeur du bonusSpeed
@@ -78,7 +83,7 @@ public class BonusSpeed extends PongItem{
 	 * détermine si il faut faire apparaitre l'objet
 	 */
 	public boolean spawn(){
-		int x = RandomNumber.randomValue(0, 5000);//a amélioré
+		int x = RandomNumber.randomValue(0, prob);//a amélioré
 		return (x<=1);	
 	}
 	
@@ -131,7 +136,7 @@ public class BonusSpeed extends PongItem{
 	public void activation(){
 		Point pnew = (Point) ball.getSpeed().clone();
 		System.out.println(pnew);
-		pnew.setLocation(pnew.getX()*1.5, pnew.getY()*1.5);
+		pnew.setLocation(pnew.getX()*boost, pnew.getY()*boost);
 		System.out.println(pnew);
 		ball.setSpeed(pnew);
 		efficient = true;
@@ -145,7 +150,7 @@ public class BonusSpeed extends PongItem{
 	 */
 	public void desactivation(){
 		Point pold = (Point) ball.getSpeed().clone();
-		pold.setLocation(pold.getX()/1.5, pold.getY()/1.5);
+		pold.setLocation(pold.getX()/boost, pold.getY()/boost);
 		ball.setSpeed(pold);
 		efficient = false;
 		timer=0;
