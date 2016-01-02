@@ -20,13 +20,17 @@ public class Ball extends PongItem {
 	/**
 	 * vitesse initial de la ball
 	 */
-	private static final int INIT_SPEED= 4;
+	private static final int INIT_SPEED= 1;
 	
 	/**
 	 * position initial de la ball généré aléatoirement
 	 */
 	private static Point INIT_POSITION = RandomNumber.randomPoint((Window.WINDOW_SIZE.width/2)-100,(Window.WINDOW_SIZE.width/2)+100,(Window.WINDOW_SIZE.height/2)-100,(Window.WINDOW_SIZE.height/2)+100);
 	
+	/**
+	 * indique si il faut appliquer une symétrie à la balle quand on la réinitialise.
+	 */
+	private boolean invert=false;
 	/**
 	 * génératon d'une direction aléatoire de départ pour la ball
 	 * @return Point vitesse
@@ -70,7 +74,20 @@ public class Ball extends PongItem {
      * fait réaparaitre la balle a une position aléatoire
      */
     public void respawn(){
-    	this.setSpeed(new Point(generationSpeed(),generationSpeed()));
-    	this.setPosition(RandomNumber.randomPoint((Window.WINDOW_SIZE.width/2)-100,(Window.WINDOW_SIZE.width/2)+100,(Window.WINDOW_SIZE.height/2)-100,(Window.WINDOW_SIZE.height/2)+100));
+    	Point speed=new Point(generationSpeed(),generationSpeed());
+    	Point position=RandomNumber.randomPoint((Window.WINDOW_SIZE.width/2)-100,(Window.WINDOW_SIZE.width/2)+100,
+    											(Window.WINDOW_SIZE.height/2)-100,(Window.WINDOW_SIZE.height/2)+100);
+    	if(invert)
+    	{
+    		position=GamePanel.rotate(position);
+    		speed.x=-speed.x;
+    		speed.y=-speed.y;
+    	}
+    	setSpeed(speed);
+    	setPosition(position);
+    }
+    
+    public void setInvert(boolean i){
+    	invert=i;
     }
 }

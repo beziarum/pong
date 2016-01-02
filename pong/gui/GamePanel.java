@@ -3,6 +3,7 @@ package pong.gui;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Point;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
@@ -19,7 +20,8 @@ public class GamePanel extends JPanel {
 	GamePanel(ArrayList<PongItem> a)
 	{
 		this.a=a;
-	};
+		setMinimumSize(WINDOW_SIZE);
+	}
 	
 	public void Paint(){};
 	
@@ -32,4 +34,8 @@ public class GamePanel extends JPanel {
 			e.paint(g);
 	}
 
+	public static Point rotate(Point p)
+	{
+		return new Point(Window.WINDOW_SIZE.width-p.x,GamePanel.WINDOW_SIZE.height-p.y);
+	}
 }
