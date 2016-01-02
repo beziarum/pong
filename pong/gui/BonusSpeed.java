@@ -37,12 +37,10 @@ public class BonusSpeed extends PongItem{
 	
 	public boolean spawn(){
 		int x = RandomNumber.randomValue(0, 5000);//a amélioré
-		System.out.println(x);
 		return (x<=1);	
 	}
 	
 	public void spawning(){
-		System.out.println("tamere");
 		this.position = RandomNumber.randomPoint((Window.WINDOW_SIZE.width/2)-100,(Window.WINDOW_SIZE.width/2)+100,(Window.WINDOW_SIZE.height/2)-50,(Window.WINDOW_SIZE.height/2)+100);//a vérifier*/
 		spawner = true;
 	}
