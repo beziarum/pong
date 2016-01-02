@@ -15,7 +15,7 @@ public class Racket extends PongItem {
 	/**
 	 * vitesse initial
 	 */
-	protected static final int INIT_SPEED = 0;
+	private static final int INIT_SPEED = 0;
 	
 	/**
 	 * vitesse de la racket l'or d'un déplacement
@@ -25,7 +25,7 @@ public class Racket extends PongItem {
 	/**
 	 * position de départ de la raquette
 	 */
-	protected static Point INIT_POSITION = new Point (0,100);
+	private static Point INIT_POSITION = new Point (0,100);
 	
 	/**
 	 * constructeur de la raquette
