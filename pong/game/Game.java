@@ -25,6 +25,7 @@ public class Game implements KeyListener{
 	
 	private ArrayList<PongItem> a;
 	
+	private int score1 =0,score2 =0;
 	
 	private Bordure bg;
 	private Bordure bd;
@@ -116,7 +117,6 @@ public class Game implements KeyListener{
 		mainLoop:
 		while(true)
 		{	
-			//System.out.println("Game =" +b.getSpeed());
 			if(control.haveNewConnection())
 			{
 				Player tmp=new Player(control.getNewConnection(b),bd);
@@ -125,6 +125,7 @@ public class Game implements KeyListener{
 			}
 			for(Player p:listPlayer)
 			{
+				score2=p.getScore();
 				try{
 					p.sendNewPos(r);
 					p.updatePos();
@@ -136,6 +137,7 @@ public class Game implements KeyListener{
 				
 				if(p.isInGameOver(b)){
 					gameOver=true;
+					score1++;
 					System.out.println("go!");
 				}
 			}
@@ -157,8 +159,11 @@ public class Game implements KeyListener{
 						Direction d=e.collision(e2);
 						if(d!=Direction.aucune)
 						{
-							if(e== b && e2==bg)
+							if(e== b && e2==bg){
 								gameOver=true;
+								for (Player p:listPlayer)
+									p.setScore(p.getScore()+1);
+							}
 							else if (e2 == bs)
 								;
 							else
@@ -168,7 +173,10 @@ public class Game implements KeyListener{
 				}
 			}
 			window.paint();
-			window.paintScore(1,1);
+			/*if (!listPlayer.isEmpty()){
+				System.out.println("tamere");
+				window.paintScore(score1,score2);
+			}*/
 			window.sleep();
 		}
 	}

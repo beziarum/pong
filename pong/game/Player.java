@@ -50,4 +50,12 @@ public class Player {
 	{
 		return bordure.collision(ball)!=Direction.aucune;
 	}
+	
+	public int getScore(){
+		return score;
+	}
+	
+	public void setScore(int s){
+		score = s;
+	}
 }
