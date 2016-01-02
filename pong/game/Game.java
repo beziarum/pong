@@ -173,10 +173,10 @@ public class Game implements KeyListener{
 				}
 			}
 			window.paint();
-			/*if (!listPlayer.isEmpty()){
+			if (!listPlayer.isEmpty()){
 				System.out.println("tamere");
 				window.paintScore(score1,score2);
-			}*/
+			}
 			window.sleep();
 		}
 	}
