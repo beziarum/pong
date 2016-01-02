@@ -36,14 +36,14 @@ public class BonusSpeed extends PongItem{
 	}
 	
 	public boolean spawn(){
-		int x = RandomNumber.randomValue(0, 1000);//a amélioré
+		int x = RandomNumber.randomValue(0, 5000);//a amélioré
 		System.out.println(x);
 		return (x<=1);	
 	}
 	
 	public void spawning(){
 		System.out.println("tamere");
-		this.position = RandomNumber.randomPoint((Window.WINDOW_SIZE.width/2)-100,(Window.WINDOW_SIZE.width/2)+100,(Window.WINDOW_SIZE.height/2)-100,(Window.WINDOW_SIZE.height/2)+100);//a vérifier*/
+		this.position = RandomNumber.randomPoint((Window.WINDOW_SIZE.width/2)-100,(Window.WINDOW_SIZE.width/2)+100,(Window.WINDOW_SIZE.height/2)-50,(Window.WINDOW_SIZE.height/2)+100);//a vérifier*/
 		spawner = true;
 	}
 	
@@ -58,7 +58,7 @@ public class BonusSpeed extends PongItem{
 		//System.out.println("bonusspeed = " +ball.speed);
 		if (efficient)
 		{
-			if ((System.currentTimeMillis()-timer)>=10000)
+			if ((System.currentTimeMillis()-timer)>=delay)
 			{
 				desactivation();
 			}
