@@ -135,7 +135,7 @@ public class BonusSpeed extends PongItem{
 	 */
 	public void activation(){
 		Point pnew = (Point) ball.getSpeed().clone();
-		pnew.setLocation(pnew.getX()*boost, pnew.getY()*boost);
+		pnew.setLocation(boostAxis(pnew.x), boostAxis(pnew.y));
 		ball.setSpeed(pnew);
 		efficient = true;
 		timer = System.currentTimeMillis();
@@ -148,9 +148,28 @@ public class BonusSpeed extends PongItem{
 	 */
 	public void desactivation(){
 		Point pold = (Point) ball.getSpeed().clone();
-		pold.setLocation(pold.getX()/boost, pold.getY()/boost);
+		pold.setLocation(unboostAxis(pold.x), unboostAxis(pold.y));
 		ball.setSpeed(pold);
 		efficient = false;
 		timer=0;
+	}
+	
+	private int boostAxis(int value){
+		boolean isNegative=value<0;
+		value=Math.abs(value);
+		value*=boost;
+		if (isNegative)
+			value=-value;
+		return value;
+	}
+	
+	private int unboostAxis(int value)
+	{
+		boolean isNegative=value<0;
+		value=Math.abs(value);
+		value/=boost;
+		if (isNegative)
+			value=-value;
+		return value;
 	}
 }
