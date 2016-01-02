@@ -1,14 +1,18 @@
-/**
- * classe de l'item ball
- */
 
 package pong.gui;
 
 import java.awt.Point;
 
+
 import pong.util.Direction;
 import pong.util.RandomNumber;
 
+
+/**
+ *  classe de l'item ball
+ * @author paul et antoine
+ *
+ */
 public class Ball extends PongItem {
     
 	private static final long serialVersionUID = 1L;

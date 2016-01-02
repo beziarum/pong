@@ -1,3 +1,4 @@
+
 package pong.gui;
 
 import java.awt.Graphics;
@@ -5,11 +6,22 @@ import java.awt.Point;
 
 import pong.util.Direction;
 
+/**
+ * @author paul et antoine
+ * 
+ * classe de l'item bordure qui délimite le jeux
+ */
 public class Bordure extends PongItem {
 
 
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * 
+	 * @param d direction a retourner en cas de collision
+	 * @param window_width largeur fenetre
+	 * @param window_height hauteur fenetre
+	 */
 	public Bordure(Direction d,int window_width, int window_height)
 	{
 		if(d==Direction.haut)
@@ -38,7 +50,13 @@ public class Bordure extends PongItem {
 		}
 	}
 	
+	/**
+	 * fonction hérité de ponItem mais qui ne sera pas appelé
+	 */
 	public void rebondir(Direction d, int window_width, int window_height) {}
 		
+	/**
+	 * fonction hérité de ponItem mais qui ne sera pas appelé
+	 */
 	public void paint(Graphics GContext){};
 }

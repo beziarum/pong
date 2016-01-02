@@ -4,6 +4,10 @@ import java.awt.Point;
 
 import pong.util.Direction;
 
+/**
+ * @author paul et antoine
+ *	classe de l'item racket
+ */
 public class Racket extends PongItem {
 
 	private static final long serialVersionUID = 1L;

@@ -1,7 +1,3 @@
-/**
- * PongItem est la classe mère de tous les item présent dans le jeux
- * 
- */
 
 package pong.gui;
 
@@ -16,7 +12,10 @@ import javax.swing.ImageIcon;
 import pong.util.Direction;
 import pong.util.Hitbox;
 
-
+/**
+ * @author paul et antoine
+ * PongItem est la classe mère de tous les item présent dans le jeux
+ */
 abstract public class PongItem extends JPanel {
 	
     private static final long serialVersionUID = 1L;
