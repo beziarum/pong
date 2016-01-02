@@ -12,7 +12,7 @@ public class BonusSpeed extends PongItem{
 	protected static final int INIT_SPEED= 0;
 	
 	protected static final double boost= 1.5;
-	protected static final int delay= 2000;
+	protected static final int delay= 10000;
 	protected static Ball ball;
 	protected static long timer;
 	protected static boolean efficient;
