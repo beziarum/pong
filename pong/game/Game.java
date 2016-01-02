@@ -147,7 +147,7 @@ public class Game implements KeyListener{
 						Direction d=e.collision(e2);
 						if(d!=Direction.aucune)
 						{
-							if(e2==bg)
+							if(e== b && e2==bg)
 								gameOver=true;
 							else if (e2 == bs)
 								;
