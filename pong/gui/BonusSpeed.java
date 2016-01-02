@@ -165,10 +165,10 @@ public class BonusSpeed extends PongItem{
 	
 	private int unboostAxis(int value)
 	{
-		boolean isNegative=value<0;
-		value=Math.abs(value);
+		boolean isPositive=value>0;
+		value=-Math.abs(value);
 		value/=boost;
-		if (isNegative)
+		if (isPositive)
 			value=-value;
 		return value;
 	}
