@@ -1,5 +1,6 @@
 package pong.gui;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -7,8 +8,11 @@ import java.awt.Image;
 
 import java.util.ArrayList;
 
+import javax.swing.BoxLayout;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 public class Window extends JFrame {
 
@@ -28,19 +32,24 @@ public class Window extends JFrame {
 	protected static Graphics gContext;
 	
 	protected GamePanel pan;
-	
+	protected JPanel mainPanel;
+	protected JLabel scorePanel;
 	private long time;
 	private long delay=0;
 	
 	
 	public Window(ArrayList<PongItem> a){
 		pan=new GamePanel(a);
+		mainPanel=new JPanel();
+		scorePanel=new JLabel("Score = 0/0",SwingConstants.CENTER);
 		pan.setMinimumSize(WINDOW_SIZE);
 		setPreferredSize(WINDOW_SIZE);
 		setTitle("Pong");
 		//setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		add(pan);
+		getContentPane().add(pan);
+		getContentPane().add(scorePanel,BorderLayout.PAGE_END);
+		//add(mainPanel);
 		pack();
 		setVisible(true);
 		//buffer=createImage(WINDOW_SIZE.width,WINDOW_SIZE.height);
@@ -60,7 +69,11 @@ public class Window extends JFrame {
 	public void paint(){
 		if(printFps)
 		{
-			long fps=1000/delay;
+			long fps;
+			if(delay!=0)
+				fps=1000/delay;
+			else
+				fps=-1;
 			System.out.println(fps);
 		}
 		//gContext.setColor(Color.WHITE);
@@ -93,8 +106,9 @@ public class Window extends JFrame {
 		}
 	}
 	
-	public static void paintScore(int s1, int s2){
+	public void paintScore(int s1, int s2){
 		//gContext.setColor(Color.BLACK);
+		scorePanel.setText("Score = " +s1+"/"+s2);
 		//gContext.drawString("Score = " +s1+"/"+s2 , 350, 575);//a amélioré
 	}
 }

@@ -158,7 +158,7 @@ public class Game implements KeyListener{
 				}
 			}
 			window.paint();
-			Window.paintScore(1,1);
+			window.paintScore(1,1);
 			window.sleep();
 		}
 	}
