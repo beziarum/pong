@@ -84,7 +84,7 @@ public class Ball extends PongItem {
     		speed.y=-speed.y;
     	}
     	setSpeed(speed);
-    	setPosition(position);
+    	setCenter(position);
     }
     
     public void setInvert(boolean i){
