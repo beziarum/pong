@@ -33,7 +33,7 @@ public class BonusSpeed extends PongItem{
 	/**
 	 * probabilité de faire apparaitre le bonus
 	 */
-	private static final int prob = 2000;
+	private static final int prob = 500;
 	
 	/**
 	 * balle de la partie en cour
@@ -91,7 +91,7 @@ public class BonusSpeed extends PongItem{
 	 * fait apparaitre le bonus a une position aléatoire
 	 */
 	public void spawning(){
-		this.position = RandomNumber.randomPoint((Window.WINDOW_SIZE.width/2)-100,(Window.WINDOW_SIZE.width/2)+100,(Window.WINDOW_SIZE.height/2)-50,(Window.WINDOW_SIZE.height/2)+100);//a vérifier*/
+		this.setCenter(RandomNumber.randomPoint((Window.WINDOW_SIZE.width/2)-100,(Window.WINDOW_SIZE.width/2)+100,(Window.WINDOW_SIZE.height/2)-50,(Window.WINDOW_SIZE.height/2)+100));//a vérifier*/
 		spawner = true;
 	}
 	
