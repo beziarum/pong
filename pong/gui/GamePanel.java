@@ -7,11 +7,13 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
+/**
+ * 
+ * @author paul et antoine
+ *
+ */
 public class GamePanel extends JPanel {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	public static final Dimension WINDOW_SIZE=new Dimension(800,600);
 	private Color backgroundColor=new Color(0xFF, 0x40, 0);
