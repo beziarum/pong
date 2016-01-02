@@ -19,8 +19,6 @@ import pong.gui.Window;
 import pong.util.Direction;
 
 public class Game implements KeyListener{
-		
-	public static final int timestep = 10;
 	
 	private Window window;
 	
