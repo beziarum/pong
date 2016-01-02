@@ -171,9 +171,10 @@ public class Game implements KeyListener{
 				}
 			}
 			window.paint();
-			if (!listPlayer.isEmpty()){
-				window.actualiseScore(score1,score2);
-			}
+			if (!listPlayer.isEmpty())
+				window.updateScore(score1,score2);
+			else
+				window.updateScore(score1);
 			window.sleep();
 		}
 	}

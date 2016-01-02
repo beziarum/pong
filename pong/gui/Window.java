@@ -2,8 +2,6 @@ package pong.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Image;
 
 import java.util.ArrayList;
 
@@ -21,11 +19,8 @@ public class Window extends JFrame {
 	
 	private static final int timestep = 10;
 	
-	protected Image buffer;
-	protected static Graphics gContext;
-	
-	protected GamePanel pan;
-	protected JLabel scorePanel;
+	private GamePanel pan;
+	private JLabel scorePanel;
 	
 	private long time;
 	private long delay=0;
@@ -79,7 +74,16 @@ public class Window extends JFrame {
 		}
 	}
 	
-	public void actualiseScore(int s1, int s2){
-		scorePanel.setText("Score = " +s1+"/"+s2);
+	public void updateScore(int s1, int s2){
+		StringBuffer text=new StringBuffer();
+		text.append("Score = ");
+		text.append(s1);
+		text.append('/');
+		text.append(s2);
+		scorePanel.setText(text.toString());
+	}
+	
+	public void updateScore(int s){
+		scorePanel.setText("Echecs : "+s);
 	}
 }
