@@ -22,6 +22,7 @@ public class NetworkControler {
 	private LinkedList<Socket> list;
 	private Socket connectWait=null;
 	private ServerSocket serv;
+	
 	public NetworkControler()
 	{
 		try {
