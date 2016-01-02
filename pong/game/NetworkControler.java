@@ -12,6 +12,7 @@ import java.net.SocketTimeoutException;
 import java.util.LinkedList;
 
 import pong.gui.Ball;
+import pong.gui.GamePanel;
 import pong.gui.Window;
 import pong.util.RandomNumber;
 
@@ -161,6 +162,6 @@ public class NetworkControler {
 	
 	private static Point rotate(Point p)
 	{
-		return new Point(Window.WINDOW_SIZE.width-p.x,Window.WINDOW_SIZE.height-p.y);
+		return new Point(Window.WINDOW_SIZE.width-p.x,GamePanel.WINDOW_SIZE.height-p.y);
 	}
 }
