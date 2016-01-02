@@ -78,7 +78,7 @@ public class BonusSpeed extends PongItem{
 	 * détermine si il faut faire apparaitre l'objet
 	 */
 	public boolean spawn(){
-		int x = RandomNumber.randomValue(0, 200);//a amélioré
+		int x = RandomNumber.randomValue(0, 2000);//a amélioré
 		return (x<=1);	
 	}
 	
