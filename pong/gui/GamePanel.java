@@ -27,7 +27,7 @@ public class GamePanel extends JPanel {
 	{
 		super.paintComponent(g);
 		g.setColor(backgroundColor);
-		g.fillRect(0, 0, WINDOW_SIZE.width, WINDOW_SIZE.height-50);
+		g.fillRect(0, 0, WINDOW_SIZE.width, WINDOW_SIZE.height);
 		for(PongItem e : a)
 			e.paint(g);
 	}
