@@ -22,6 +22,11 @@ public class NetworkControler {
 	private Socket connectWait=null;
 	private ServerSocket serv;
 	
+	/**
+	 * indique si il faut appliquer une symétrie à la balle quand on la réinitialise.
+	 */
+	public static boolean invertAleaPoint=false;
+	
 	public NetworkControler()
 	{
 		try {
@@ -68,7 +73,7 @@ public class NetworkControler {
 				e.printStackTrace();
 			}
 			connectWait=null;
-			b.setInvert(true);
+			invertAleaPoint=true;
 			return s;
 		}
 		else

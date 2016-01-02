@@ -4,6 +4,7 @@ package pong.gui;
 import java.awt.Point;
 
 
+import pong.game.NetworkControler;
 import pong.util.Direction;
 import pong.util.RandomNumber;
 
@@ -27,10 +28,6 @@ public class Ball extends PongItem {
 	 */
 	private static Point INIT_POSITION = RandomNumber.randomPoint((Window.WINDOW_SIZE.width/2)-100,(Window.WINDOW_SIZE.width/2)+100,(Window.WINDOW_SIZE.height/2)-100,(Window.WINDOW_SIZE.height/2)+100);
 	
-	/**
-	 * indique si il faut appliquer une symétrie à la balle quand on la réinitialise.
-	 */
-	private boolean invert=false;
 	/**
 	 * génératon d'une direction aléatoire de départ pour la ball
 	 * @return Point vitesse
@@ -77,9 +74,8 @@ public class Ball extends PongItem {
     	Point speed=new Point(generationSpeed(),generationSpeed());
     	Point position=RandomNumber.randomPoint((Window.WINDOW_SIZE.width/2)-100,(Window.WINDOW_SIZE.width/2)+100,
     											(Window.WINDOW_SIZE.height/2)-100,(Window.WINDOW_SIZE.height/2)+100);
-    	if(invert)
+    	if(NetworkControler.invertAleaPoint)
     	{
-    		position=GamePanel.rotate(position);
     		speed.x=-speed.x;
     		speed.y=-speed.y;
     	}
@@ -87,7 +83,4 @@ public class Ball extends PongItem {
     	setCenter(position);
     }
     
-    public void setInvert(boolean i){
-    	invert=i;
-    }
 }
