@@ -1,11 +1,13 @@
 package pong.game;
 
 import java.awt.Point;
+import java.io.EOFException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketException;
 import java.net.SocketTimeoutException;
 import java.util.LinkedList;
 
@@ -108,7 +110,7 @@ public class NetworkControler {
 		}
 	}
 	
-	public static void sendPos(OutputStream os,Point pos){
+	public static void sendPos(OutputStream os,Point pos) throws SocketException{
 		try {
 			StringBuffer sb=new StringBuffer();
 			sb.append(pos.x);
@@ -117,35 +119,41 @@ public class NetworkControler {
 			sb.append('\n');
 			os.write(sb.toString().getBytes());
 			os.flush();
+		} catch (SocketException e){
+			throw e;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
-	public static String readLine(InputStream is){
+	public static String readLine(InputStream is) throws EOFException, SocketException{
 		StringBuffer s=new StringBuffer();
 		char c='\0';
-		while(c!='\n')
+		while(c!='\n' && c!=-1)
 		{
 			try {
 				c=(char)is.read();
-			} catch (IOException e) {
+			} catch(SocketException e){
+				throw e;
+			}catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			if(c!='\n')
 				s.append(c);
 		}
+		if(c==-1)
+			throw new EOFException();
 		return s.toString();
 	}
 	
-	public static Point readPos(InputStream is)
+	public static Point readPos(InputStream is) throws EOFException, SocketException
 	{
 		return rotate(readPoint(is));
 	}
 	
-	public static Point readPoint(InputStream is)
+	public static Point readPoint(InputStream is) throws EOFException, SocketException
 	{
 		String[] worlds=readLine(is).split(" ");
 		return new Point(Integer.valueOf(worlds[0]),Integer.valueOf(worlds[1]));

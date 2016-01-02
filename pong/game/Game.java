@@ -4,6 +4,8 @@ package pong.game;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.EOFException;
+import java.net.SocketException;
 import java.util.ArrayList;
 
 import pong.gui.Ball;
@@ -111,6 +113,7 @@ public class Game implements KeyListener{
 
 	public void run()
 	{
+		mainLoop:
 		while(true)
 		{	
 			//System.out.println("Game =" +b.getSpeed());
@@ -122,8 +125,15 @@ public class Game implements KeyListener{
 			}
 			for(Player p:listPlayer)
 			{
-				p.sendNewPos(r);
-				p.updatePos();
+				try{
+					p.sendNewPos(r);
+					p.updatePos();
+				}catch(SocketException | EOFException  e){
+					a.remove(p.getRacket());
+					listPlayer.remove(p);
+					continue mainLoop;
+				}
+				
 				if(p.isInGameOver(b)){
 					gameOver=true;
 					System.out.println("go!");

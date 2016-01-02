@@ -1,9 +1,11 @@
 package pong.game;
 
 import java.io.DataInputStream;
+import java.io.EOFException;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.Socket;
+import java.net.SocketException;
 
 import pong.gui.Ball;
 import pong.gui.Bordure;
@@ -34,12 +36,12 @@ public class Player {
 	{
 		return racket;
 	}
-	public void updatePos()
+	public void updatePos() throws EOFException, SocketException
 	{
 		racket.setCenter(NetworkControler.readPos(is));
 	}
 	
-	public void sendNewPos(Racket r)
+	public void sendNewPos(Racket r) throws SocketException
 	{
 		NetworkControler.sendPos(os, r.getCenter());
 	}
