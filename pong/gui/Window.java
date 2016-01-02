@@ -79,7 +79,7 @@ public class Window extends JFrame {
 		}
 	}
 	
-	public void paintScore(int s1, int s2){
+	public void actualiseScore(int s1, int s2){
 		scorePanel.setText("Score = " +s1+"/"+s2);
 	}
 }

@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import pong.gui.Ball;
 import pong.gui.BonusSpeed;
 import pong.gui.Bordure;
+import pong.gui.GamePanel;
 import pong.gui.PongItem;
 import pong.gui.Racket;
 import pong.gui.StringCapture;
@@ -46,8 +47,8 @@ public class Game implements KeyListener{
 		
 		window=new Window(a);
 		
-		int windowSizeX=window.getSize().width;
-		int windowSizeY=window.getSize().height-50;
+		int windowSizeX=GamePanel.WINDOW_SIZE.width;
+		int windowSizeY=GamePanel.WINDOW_SIZE.height;
 		
 		r= new Racket();
 		b= new Ball();
@@ -79,7 +80,6 @@ public class Game implements KeyListener{
 				r.setSpeed(new Point(0,Racket.RACKET_SPEED));
 				break;
 			default:
-				System.out.println("got press "+e);
 		}
 	}
 	public void keyReleased(KeyEvent e) {
@@ -95,7 +95,6 @@ public class Game implements KeyListener{
 			r.setSpeed(new Point(0,0));
 				break;
 			default:
-				System.out.println("got release "+e);
 				
 		}
 	}
@@ -174,8 +173,7 @@ public class Game implements KeyListener{
 			}
 			window.paint();
 			if (!listPlayer.isEmpty()){
-				System.out.println("tamere");
-				window.paintScore(score1,score2);
+				window.actualiseScore(score1,score2);
 			}
 			window.sleep();
 		}

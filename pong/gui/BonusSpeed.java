@@ -130,9 +130,7 @@ public class BonusSpeed extends PongItem{
 	 */
 	public void activation(){
 		Point pnew = (Point) ball.getSpeed().clone();
-		System.out.println(pnew);
 		pnew.setLocation(pnew.getX()*1.5, pnew.getY()*1.5);
-		System.out.println(pnew);
 		ball.setSpeed(pnew);
 		efficient = true;
 		timer = System.currentTimeMillis();
