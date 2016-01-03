@@ -149,7 +149,7 @@ public class NetworkControler {
 		}
 		if(c==-1)
 			throw new EOFException();
-		System.out.println(s.toString());
+		//System.out.println(s.toString());
 		return s.toString();
 	}
 	
