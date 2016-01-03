@@ -23,7 +23,7 @@ public class BonusSpeed extends PongItem{
 	/**
 	 * valeur du multiplicative de l'augmentation de la vitesse
 	 */
-	private static final double boost= 1.5;
+	private static final double boost= Ball.INIT_SPEED/2;
 	
 	/**
 	 * delai en miliseconde de l'application du boost
@@ -156,20 +156,20 @@ public class BonusSpeed extends PongItem{
 	
 	private int boostAxis(int value){
 		boolean isNegative=value<0;
-		value=Math.abs(value);
-		value*=boost;
 		if (isNegative)
-			value=-value;
+			value-=boost;
+		else
+			value+=boost;
 		return value;
 	}
 	
 	private int unboostAxis(int value)
 	{
 		boolean isPositive=value>0;
-		value=-Math.abs(value);
-		value/=boost;
 		if (isPositive)
-			value=-value;
+			value-=boost;
+		else
+			value+=boost;
 		return value;
 	}
 }

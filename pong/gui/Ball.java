@@ -21,7 +21,7 @@ public class Ball extends PongItem {
 	/**
 	 * vitesse initial de la ball
 	 */
-	private static final int INIT_SPEED= 1;
+	public static final int INIT_SPEED= 1;
 	
 	/**
 	 * position initial de la ball généré aléatoirement
