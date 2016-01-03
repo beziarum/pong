@@ -48,7 +48,7 @@ public class Player {
 	
 	public boolean isInGameOver(Ball ball)
 	{
-		return bordure.collision(ball)!=Direction.aucune;
+		return ball.collision(bordure)!=Direction.aucune || (ball.collision(racket)==Direction.bas || ball.collision(racket)==Direction.haut);
 	}
 	
 	public int getScore(){
