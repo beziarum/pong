@@ -23,7 +23,7 @@ public class BonusSpeed extends PongItem{
 	/**
 	 * valeur du multiplicative de l'augmentation de la vitesse
 	 */
-	private static final double boost= Ball.INIT_SPEED/2;
+	private static final int boost= Ball.INIT_SPEED/2;
 	
 	/**
 	 * delai en miliseconde de l'application du boost
