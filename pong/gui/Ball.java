@@ -26,7 +26,7 @@ public class Ball extends PongItem {
 	/**
 	 * position initial de la ball généré aléatoirement
 	 */
-	private static Point INIT_POSITION = RandomNumber.randomPoint((GamePanel.WINDOW_SIZE.width/2)-100,(GamePanel.WINDOW_SIZE.width/2)+100,(GamePanel.WINDOW_SIZE.height/2)-100,(GamePanel.WINDOW_SIZE.height/2)+100);
+	private static Point INIT_POSITION = RandomNumber.randomPoint((Window.WINDOW_SIZE.width/2)-100,(Window.WINDOW_SIZE.width/2)+100,(Window.WINDOW_SIZE.height/2)-100,(Window.WINDOW_SIZE.height/2)+100);
 	
 	/**
 	 * génératon d'une direction aléatoire de départ pour la ball
@@ -72,8 +72,8 @@ public class Ball extends PongItem {
      */
     public void respawn(){
     	Point speed=new Point(generationSpeed(),generationSpeed());
-    	Point position=RandomNumber.randomPoint((GamePanel.WINDOW_SIZE.width/2)-100,(GamePanel.WINDOW_SIZE.width/2)+100,
-    											(GamePanel.WINDOW_SIZE.height/2)-100,(GamePanel.WINDOW_SIZE.height/2)+100);
+    	Point position=RandomNumber.randomPoint((Window.WINDOW_SIZE.width/2)-100,(Window.WINDOW_SIZE.width/2)+100,
+    											(Window.WINDOW_SIZE.height/2)-100,(Window.WINDOW_SIZE.height/2)+100);
     	if(NetworkControler.invertAleaPoint)
     	{
     		speed.x=-speed.x;
