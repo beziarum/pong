@@ -91,7 +91,7 @@ public class BonusSpeed extends PongItem{
 	 * fait apparaitre le bonus a une position aléatoire
 	 */
 	public void spawning(){
-		this.setCenter(RandomNumber.randomPoint((Window.WINDOW_SIZE.width/2)-100,(Window.WINDOW_SIZE.width/2)+100,(Window.WINDOW_SIZE.height/2)-50,(Window.WINDOW_SIZE.height/2)+100));//a vérifier*/
+		this.setCenter(RandomNumber.randomPoint((GamePanel.WINDOW_SIZE.width/2)-100,(GamePanel.WINDOW_SIZE.width/2)+100,(GamePanel.WINDOW_SIZE.height/2)-50,(GamePanel.WINDOW_SIZE.height/2)+100));//a vérifier*/
 		spawner = true;
 	}
 	
