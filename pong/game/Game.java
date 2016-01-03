@@ -162,7 +162,8 @@ public class Game implements KeyListener{
 								gameOver=true;
 								score2++;
 							}
-							else if (e2 == bs);
+							else if (e2 == bs)
+								;
 							else
 								e.rebondir(d, window.getSize().width, window.getSize().height-50);
 						}
