@@ -23,7 +23,7 @@ public class BonusSpeed extends PongItem{
 	/**
 	 * valeur du multiplicative de l'augmentation de la vitesse
 	 */
-	private static final double boost= 1.5;
+	private static final int boost= Ball.INIT_SPEED/2;
 	
 	/**
 	 * delai en miliseconde de l'application du boost
@@ -33,7 +33,7 @@ public class BonusSpeed extends PongItem{
 	/**
 	 * probabilité de faire apparaitre le bonus
 	 */
-	private static final int prob = 2000;
+	private static final int prob = 500;
 	
 	/**
 	 * balle de la partie en cour
@@ -91,7 +91,7 @@ public class BonusSpeed extends PongItem{
 	 * fait apparaitre le bonus a une position aléatoire
 	 */
 	public void spawning(){
-		this.position = RandomNumber.randomPoint((Window.WINDOW_SIZE.width/2)-100,(Window.WINDOW_SIZE.width/2)+100,(Window.WINDOW_SIZE.height/2)-50,(Window.WINDOW_SIZE.height/2)+100);//a vérifier*/
+		this.setCenter(RandomNumber.randomPoint((Window.WINDOW_SIZE.width/2)-100,(Window.WINDOW_SIZE.width/2)+100,(Window.WINDOW_SIZE.height/2)-50,(Window.WINDOW_SIZE.height/2)+100));//a vérifier*/
 		spawner = true;
 	}
 	
@@ -135,7 +135,7 @@ public class BonusSpeed extends PongItem{
 	 */
 	public void activation(){
 		Point pnew = (Point) ball.getSpeed().clone();
-		pnew.setLocation(pnew.getX()*boost, pnew.getY()*boost);
+		pnew.setLocation(boostAxis(pnew.x), boostAxis(pnew.y));
 		ball.setSpeed(pnew);
 		efficient = true;
 		timer = System.currentTimeMillis();
@@ -148,9 +148,28 @@ public class BonusSpeed extends PongItem{
 	 */
 	public void desactivation(){
 		Point pold = (Point) ball.getSpeed().clone();
-		pold.setLocation(pold.getX()/boost, pold.getY()/boost);
+		pold.setLocation(unboostAxis(pold.x), unboostAxis(pold.y));
 		ball.setSpeed(pold);
 		efficient = false;
 		timer=0;
+	}
+	
+	private int boostAxis(int value){
+		boolean isNegative=value<0;
+		if (isNegative)
+			value-=boost;
+		else
+			value+=boost;
+		return value;
+	}
+	
+	private int unboostAxis(int value)
+	{
+		boolean isPositive=value>0;
+		if (isPositive)
+			value-=boost;
+		else
+			value+=boost;
+		return value;
 	}
 }

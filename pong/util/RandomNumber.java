@@ -3,6 +3,9 @@ package pong.util;
 import java.awt.Point;
 import java.util.Random;
 
+import pong.game.NetworkControler;
+import pong.gui.GamePanel;
+
 /**
  * Random number and point generator
  */
@@ -29,7 +32,10 @@ public class RandomNumber {
 	 *         max_y
 	 */
 	public static Point randomPoint(int min_x, int max_x, int min_y, int max_y) {
-		return new Point(randomValue(min_x, max_x), randomValue(min_y, max_y));
+		Point p=new Point(randomValue(min_x, max_x), randomValue(min_y, max_y));
+		if(NetworkControler.invertAleaPoint)
+			p=GamePanel.rotate(p);
+		return p;
 	}
 	
 	public static long getNumberOfDoubleConsumed(){

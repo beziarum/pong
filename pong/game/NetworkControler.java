@@ -13,7 +13,6 @@ import java.util.LinkedList;
 
 import pong.gui.Ball;
 import pong.gui.GamePanel;
-import pong.gui.Window;
 import pong.util.RandomNumber;
 
 
@@ -22,6 +21,11 @@ public class NetworkControler {
 	private LinkedList<Socket> list;
 	private Socket connectWait=null;
 	private ServerSocket serv;
+	
+	/**
+	 * indique si il faut appliquer une symétrie à la balle quand on la réinitialise.
+	 */
+	public static boolean invertAleaPoint=false;
 	
 	public NetworkControler()
 	{
@@ -69,6 +73,7 @@ public class NetworkControler {
 				e.printStackTrace();
 			}
 			connectWait=null;
+			invertAleaPoint=true;
 			return s;
 		}
 		else
@@ -152,7 +157,7 @@ public class NetworkControler {
 	
 	public static Point readPos(InputStream is) throws EOFException, SocketException
 	{
-		return rotate(readPoint(is));
+		return GamePanel.rotate(readPoint(is));
 	}
 	
 	public static Point readPoint(InputStream is) throws EOFException, SocketException
@@ -161,8 +166,4 @@ public class NetworkControler {
 		return new Point(Integer.valueOf(worlds[0]),Integer.valueOf(worlds[1]));
 	}
 	
-	private static Point rotate(Point p)
-	{
-		return new Point(Window.WINDOW_SIZE.width-p.x,GamePanel.WINDOW_SIZE.height-p.y);
-	}
 }

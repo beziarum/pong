@@ -4,6 +4,7 @@ package pong.gui;
 import java.awt.Point;
 
 
+import pong.game.NetworkControler;
 import pong.util.Direction;
 import pong.util.RandomNumber;
 
@@ -20,7 +21,7 @@ public class Ball extends PongItem {
 	/**
 	 * vitesse initial de la ball
 	 */
-	private static final int INIT_SPEED= 4;
+	public static final int INIT_SPEED= 4;
 	
 	/**
 	 * position initial de la ball généré aléatoirement
@@ -70,7 +71,16 @@ public class Ball extends PongItem {
      * fait réaparaitre la balle a une position aléatoire
      */
     public void respawn(){
-    	this.setSpeed(new Point(generationSpeed(),generationSpeed()));
-    	this.setPosition(RandomNumber.randomPoint((Window.WINDOW_SIZE.width/2)-100,(Window.WINDOW_SIZE.width/2)+100,(Window.WINDOW_SIZE.height/2)-100,(Window.WINDOW_SIZE.height/2)+100));
+    	Point speed=new Point(generationSpeed(),generationSpeed());
+    	Point position=RandomNumber.randomPoint((Window.WINDOW_SIZE.width/2)-100,(Window.WINDOW_SIZE.width/2)+100,
+    											(Window.WINDOW_SIZE.height/2)-100,(Window.WINDOW_SIZE.height/2)+100);
+    	if(NetworkControler.invertAleaPoint)
+    	{
+    		speed.x=-speed.x;
+    		speed.y=-speed.y;
+    	}
+    	setSpeed(speed);
+    	setCenter(position);
     }
+    
 }
