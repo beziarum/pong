@@ -31,7 +31,7 @@ public class Player {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		controlBall=control;
+		controlBall=!control;
 	}
 	
 	public Racket getRacket()

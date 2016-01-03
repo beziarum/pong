@@ -208,7 +208,7 @@ public class NetworkControler {
 		StringBuffer ret=new StringBuffer();
 		try{
 		for(int i=0; i<4; i++)
-			ret.append(is.read());
+			ret.append((char)is.read());
 		} catch(SocketException e){
 			throw e;
 		} catch(IOException e){
