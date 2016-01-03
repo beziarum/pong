@@ -83,4 +83,21 @@ public class Ball extends PongItem {
     	setCenter(position);
     }
     
+    public static boolean test(){
+    	boolean success=true;
+    	Ball b = new Ball();
+    	Point pos = b.getPosition();
+    	Point center = b.getCenter();
+    	b.animate();
+    	if (b.getPosition().getX() != pos.getX()+b.speed.getX())
+    		success=false;
+    	if (b.getPosition().getY() != pos.getY()+b.speed.getY())
+    		success=false;
+    	if (b.getCenter().getX() != center.getX()+b.speed.getX())
+    		success=false;
+    	if (b.getCenter().getX() != center.getY()+b.speed.getY())
+    		success=false;
+    	return success;
+    }
+    
 }
