@@ -18,8 +18,9 @@ public class Player {
 	private Racket racket;
 	private Bordure bordure;
 	private int score;
+	private boolean controlBall;
 	
-	Player(Socket s,Bordure b)
+	Player(Socket s,Bordure b,boolean control)
 	{
 		score=0;
 		bordure=b;
@@ -30,11 +31,28 @@ public class Player {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		controlBall=control;
 	}
 	
 	public Racket getRacket()
 	{
 		return racket;
+	}
+	
+	public void update(Racket r, Ball b) throws SocketException, EOFException{
+		
+		if(controlBall)
+		{
+			NetworkControler.sendRacket(os, racket);
+			NetworkControler.sendBall(os, b);
+			NetworkControler.readRacket(is, racket);
+		}
+		else
+		{
+			NetworkControler.sendRacket(os, racket);
+			NetworkControler.readRacket(is, r);
+			NetworkControler.readBall(is, b);
+		}
 	}
 	public void updatePos() throws EOFException, SocketException
 	{
