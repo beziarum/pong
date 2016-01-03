@@ -122,9 +122,6 @@ public class Game implements KeyListener{
 				bs.reinit();
 				score1=score2=0;
 			}
-			
-			for (PongItem e :a)
-				e.animate();
 			for(Player p:listPlayer)
 			{
 				try{
@@ -140,6 +137,7 @@ public class Game implements KeyListener{
 				if(p.isInGameOver(b)){
 					gameOver=true;
 					score1++;
+					System.out.println("go!");
 				}
 			}
 			
@@ -150,6 +148,7 @@ public class Game implements KeyListener{
 			}
 			bs.process();
 			for (PongItem e :a){
+				e.animate();
 				if(e==b || e==r)
 				{
 					for(PongItem e2 : a)
