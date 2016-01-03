@@ -120,16 +120,17 @@ public class Game implements KeyListener{
 				listPlayer.add(tmp);
 				a.add(tmp.getRacket());
 				bs.reinit();
+				score1=score2=0;
 			}
 			for(Player p:listPlayer)
 			{
-				score2=p.getScore();
 				try{
 					p.sendNewPos(r);
 					p.updatePos();
 				}catch(SocketException | EOFException  e){
 					a.remove(p.getRacket());
 					listPlayer.remove(p);
+					score1=score2=0;
 					continue mainLoop;
 				}
 				
@@ -159,8 +160,7 @@ public class Game implements KeyListener{
 						{
 							if(e== b && e2==bg){
 								gameOver=true;
-								for (Player p:listPlayer)
-									p.setScore(p.getScore()+1);
+								score2++;
 							}
 							else if (e2 == bs)
 								;
@@ -174,7 +174,7 @@ public class Game implements KeyListener{
 			if (!listPlayer.isEmpty())
 				window.updateScore(score1,score2);
 			else
-				window.updateScore(score1);
+				window.updateScore(score2);
 			window.sleep();
 		}
 	}
