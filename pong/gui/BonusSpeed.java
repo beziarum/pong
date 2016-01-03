@@ -28,7 +28,7 @@ public class BonusSpeed extends PongItem{
 	/**
 	 * delai en miliseconde de l'application du boost
 	 */
-	private static final int delay = 10000;
+	//private static final int delay = 10000;
 	
 	/**
 	 * probabilité de faire apparaitre le bonus
@@ -43,7 +43,7 @@ public class BonusSpeed extends PongItem{
 	/**
 	 * chrono pour gérer le temps d'activation de l'effet
 	 */
-	private long timer;
+	//private long timer;
 	
 	/**
 	 * boolean qui indique si l'effet est actif
@@ -68,7 +68,7 @@ public class BonusSpeed extends PongItem{
     {	
     	super("image/boostSpeed.png", INIT_POSITION,new Point(INIT_SPEED ,INIT_SPEED));
     	ball = b;
-    	timer = 0;
+    	//timer = 0;
     	efficient = false;
     	spawner = false;
     }
@@ -83,7 +83,7 @@ public class BonusSpeed extends PongItem{
 	 * détermine si il faut faire apparaitre l'objet
 	 */
 	public boolean spawn(){
-		int x = RandomNumber.randomValue(0, prob);//a amélioré
+		int x = RandomNumber.randomValue(0, prob);
 		return (x<=1);	
 	}
 	
@@ -99,7 +99,7 @@ public class BonusSpeed extends PongItem{
 	 * réinitialise les valeur de la classe en cas de point marqué
 	 */
 	public void reinit(){
-		timer = 0;
+		//timer = 0;
     	efficient = false;
     	spawner = false;
     	this.position = INIT_POSITION;
@@ -109,10 +109,9 @@ public class BonusSpeed extends PongItem{
 	 * fonction principale de la classe qui gére son comportement en fonction de ou en est le jeux
 	 */
 	public void process(){
-		//System.out.println("bonusspeed = " +ball.speed);
 		if (efficient)
 		{
-			if ((System.currentTimeMillis()-timer)>=delay)
+			if (despawn())
 			{
 				desactivation();
 			}
@@ -130,6 +129,11 @@ public class BonusSpeed extends PongItem{
 		}
 	}
 	
+	public boolean despawn(){
+		int x = RandomNumber.randomValue(0, prob);//a amélioré
+		return (x<=1);	
+	}
+	
 	/**
 	 * augmente la vitesse de la balle
 	 */
@@ -138,7 +142,7 @@ public class BonusSpeed extends PongItem{
 		pnew.setLocation(boostAxis(pnew.x), boostAxis(pnew.y));
 		ball.setSpeed(pnew);
 		efficient = true;
-		timer = System.currentTimeMillis();
+	//	timer = System.currentTimeMillis();
 		this.position= INIT_POSITION;
 		spawner = false;
 	}
@@ -151,7 +155,7 @@ public class BonusSpeed extends PongItem{
 		pold.setLocation(unboostAxis(pold.x), unboostAxis(pold.y));
 		ball.setSpeed(pold);
 		efficient = false;
-		timer=0;
+		//timer=0;
 	}
 	
 	private int boostAxis(int value){
