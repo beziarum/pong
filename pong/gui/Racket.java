@@ -5,8 +5,10 @@ import java.awt.Point;
 import pong.util.Direction;
 
 /**
+ * 
+ * classe de l'item racket
  * @author paul et antoine
- *	classe de l'item racket
+ *
  */
 public class Racket extends PongItem {
 
@@ -20,7 +22,7 @@ public class Racket extends PongItem {
 	/**
 	 * vitesse de la racket l'or d'un déplacement
 	 */
-	public static final int RACKET_SPEED = 4;
+	public static final int RACKET_SPEED = 6;
 	
 	/**
 	 * position de départ de la raquette

@@ -7,9 +7,9 @@ import java.awt.Point;
 import pong.util.Direction;
 
 /**
- * @author paul et antoine
  * 
- * classe de l'item bordure qui délimite le jeux
+ * lasse de l'item bordure qui délimite le jeux
+ * @author paul et antoine
  */
 public class Bordure extends PongItem {
 
@@ -17,6 +17,7 @@ public class Bordure extends PongItem {
 	private static final long serialVersionUID = 1L;
 
 	/**
+	 * Créer une bordure en fonction d'une position
 	 * 
 	 * @param d direction a retourner en cas de collision
 	 * @param window_width largeur fenetre
