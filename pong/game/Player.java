@@ -83,14 +83,14 @@ public class Player {
 	{
 		Point oldPos=racket.getCenter();
 		racket.setCenter(NetworkControler.readPos(is));
-		if(isInit && Math.abs(oldPos.y-racket.getCenter().y)>4)
-			throw new ProtocolException();
+		if(isInit && Math.abs(oldPos.y-racket.getCenter().y)>4)//si la raquette va plus vite qu'elle ne peut le faire normalement
+			throw new ProtocolException();//alors il y a un problème dans le protocole
 		else
 			isInit=true;
 	}
 	
 	/**
-	 * envoi au jouer la position de notre raquette
+	 * envoi au joueur la position de notre raquette
 	 * @param r notre raquette
 	 * @throws SocketException
 	 */
