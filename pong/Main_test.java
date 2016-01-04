@@ -6,8 +6,6 @@ import pong.gui.Ball;
 import pong.gui.BonusSpeed;
 import pong.gui.Bordure;
 import pong.gui.GamePanel;
-import pong.gui.Racket;
-import pong.gui.Window;
 import pong.util.Direction;
 /**
  * 
