@@ -16,3 +16,6 @@ III) Particularité
 La raquette est toujours située à gauche de l'écran, celle de l'adversaire
 sera donc à droite. Il est à noter que pour celà une symétrie centrale par
 rapport au centre de l'écran est effectuée.
+
+IV)Javadoc
+Pour générer la javadoc onglet Project -> GenerateJavadoc
