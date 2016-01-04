@@ -57,14 +57,25 @@ public class BonusSpeed extends PongItem{
 	private static Point INIT_POSITION = new Point(-100,-100);
 	
 	/**
-	 * coordonée minimale, en x ou en y pour le spawn du bonus
+	 * coordonée minimale, en x, pour le spawn du bonus
 	 */
-	private int zoneSpawnMin=(GamePanel.WINDOW_SIZE.width/2)-100;
+	private int xZoneSpawnMin=(GamePanel.WINDOW_SIZE.width/2)-100;
 	
 	/**
-	 * coordonée maximale, en x ou en y pour le spawn du bonus
+	 * coordonée maximale, en x, pour le spawn du bonus
 	 */
-	private int zoneSpawnMax=(GamePanel.WINDOW_SIZE.width/2)+100;
+	private int xZoneSpawnMax=(GamePanel.WINDOW_SIZE.width/2)+100;
+	
+	/**
+	 * coordonée minimale, en x, pour le spawn du bonus
+	 */
+	private int yZoneSpawnMin=(GamePanel.WINDOW_SIZE.width/2)-250;
+	
+	/**
+	 * coordonée maximale, en x, pour le spawn du bonus
+	 */
+	private int yZoneSpawnMax=(GamePanel.WINDOW_SIZE.width/2)+250;
+	
 	/**
 	 * constructeur du bonusSpeed
 	 * @param Balle du jeu en cours
@@ -95,7 +106,7 @@ public class BonusSpeed extends PongItem{
 	 * fait apparaitre le bonus a une position aléatoire
 	 */
 	public void spawning(){
-		this.setCenter(RandomNumber.randomPoint(zoneSpawnMin,zoneSpawnMax,zoneSpawnMin,zoneSpawnMax));
+		this.setCenter(RandomNumber.randomPoint(xZoneSpawnMin,xZoneSpawnMax,yZoneSpawnMin,yZoneSpawnMax));
 		spawner = true;
 	}
 	

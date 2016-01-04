@@ -24,20 +24,19 @@ public class Ball extends PongItem {
 	public static final int INIT_SPEED= 4;
 	
 	/**
-	 * position initiale de la balle générée aléatoirement
-	 */
-	private static Point INIT_POSITION = RandomNumber.randomPoint((Window.WINDOW_SIZE.width/2)-100,(Window.WINDOW_SIZE.width/2)+100,(Window.WINDOW_SIZE.height/2)-100,(Window.WINDOW_SIZE.height/2)+100);
-	
-
-	/**
 	 * coordonée minimale, en x ou en y pour le spawn de la balle
 	 */
-	private int zoneSpawnMin=(GamePanel.WINDOW_SIZE.width/2)-200;
+	private static int zoneSpawnMin=(GamePanel.WINDOW_SIZE.width/2)-200;
 	
 	/**
 	 * coordonée maximale, en x ou en y pour le spawn de la balle
 	 */
-	private int zoneSpawnMax=(GamePanel.WINDOW_SIZE.width/2)+200;
+	private static int zoneSpawnMax=(GamePanel.WINDOW_SIZE.width/2)+200;
+	
+	/**
+	 * position initiale de la balle générée aléatoirement
+	 */
+	private static Point INIT_POSITION = RandomNumber.randomPoint(zoneSpawnMin,zoneSpawnMax,zoneSpawnMin,zoneSpawnMax);
 	
 	/**
 	 * génératon d'une direction aléatoire de départ pour la balle
