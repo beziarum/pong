@@ -18,6 +18,13 @@ import pong.gui.StringCapture;
 import pong.gui.Window;
 import pong.util.Direction;
 
+/**
+ * Classe game. Cette classe constitue le centre du jeu c'est ici que tout
+ * les items sont instancié et que la boucle principale est implémenté
+ * 
+ * @author paul et antoine
+ *
+ */
 public class Game implements KeyListener{
 	
 	private Window window;
@@ -38,7 +45,9 @@ public class Game implements KeyListener{
 	
 	private ArrayList<Player> listPlayer;
 	
-	
+	/**
+	 * Constructeur il initialise toute les donné nescessaire au jeu
+	 */
 	public Game()
 	{	
 		a=new ArrayList<PongItem>();
@@ -64,14 +73,17 @@ public class Game implements KeyListener{
 		listPlayer=new ArrayList<Player>();
 	}
 	
-	
+	/**
+	 * Fonction qui capture les pressions de touche du clavier et agit en conséquence
+	 * @param KeyEvent e
+	 */
 	public void keyPressed(KeyEvent e) {
 		if(gameOver)
 			return;
 		switch (e.getKeyCode()) {
 			case KeyEvent.VK_UP:
 			case KeyEvent.VK_KP_UP:
-				r.setSpeed(new Point(0,-Racket.RACKET_SPEED));
+				r.setSpeed(new Point(0,-Racket.RACKET_SPEED)); //modifie la vitesse de la raquette
 				break;
 			case KeyEvent.VK_DOWN:
 			case KeyEvent.VK_KP_DOWN:
@@ -80,13 +92,18 @@ public class Game implements KeyListener{
 			default:
 		}
 	}
+	
+	/**
+	 * Fonction qui capture les relachements de touche du clavier et agit en conséquence
+	 * @param KeyEvent e
+	 */
 	public void keyReleased(KeyEvent e) {
 		if(gameOver)
 			return;
 		switch (e.getKeyCode()) {
 			case KeyEvent.VK_UP:
 			case KeyEvent.VK_KP_UP:
-				r.setSpeed(new Point(0,0));
+				r.setSpeed(new Point(0,0));//remet la vitesse de la raquette a 0
 				break;
 			case KeyEvent.VK_DOWN:
 			case KeyEvent.VK_KP_DOWN:
@@ -96,10 +113,15 @@ public class Game implements KeyListener{
 				
 		}
 	}
+	
+	/**
+	 * Fonction qui fait appelle la classe StringCapture si on appuie sur la touche "j"
+	 * Ceci sert a rentré l'adresse de connexion
+	 * @param KeyEvent e
+	 */
 	public void keyTyped(KeyEvent e) {
 		switch(e.getKeyChar()){
 			case 'j':
-				System.out.println("j was typed\n");
 				control.connect(StringCapture.getString());
 				for(Player p:listPlayer)
 					a.remove(p.getRacket());
@@ -109,46 +131,53 @@ public class Game implements KeyListener{
 	}
 	
 
+	/**
+	 * Boucle de jeux principale
+	 */
 	public void run()
 	{
 		mainLoop:
 		while(true)
 		{	
-			if(control.haveNewConnection())
+			if(control.haveNewConnection()) // verifie si un joueur tente de se connecter
 			{
-				Player tmp=new Player(control.getNewConnection(b),bd);
+				Player tmp=new Player(control.getNewConnection(b),bd); //ajoute le joueur sur la bordure droite
 				listPlayer.add(tmp);
 				a.add(tmp.getRacket());
-				bs.reinit();
-				score1=score2=0;
+				bs.reinit();					//reinitialise le bonus pour évité des bug
+				score1=score2=0;			//reinitialise les scores
 			}
+			
+			
+			for (PongItem e :a)				// effectue les déplacement des items
+				e.animate();
+				
 			for(Player p:listPlayer)
 			{
 				try{
-					p.sendNewPos(r);
+					p.sendNewPos(r);				//envoi et reception nouvelle position des raquette
 					p.updatePos();
 				}catch(SocketException | EOFException  e){
-					a.remove(p.getRacket());
-					listPlayer.remove(p);
+					a.remove(p.getRacket());		//cas en cas de déconexion
+					listPlayer.remove(p);			//enleve le joueur et reinitialise le score
 					score1=score2=0;
 					continue mainLoop;
 				}
 				
-				if(p.isInGameOver(b)){
+				if(p.isInGameOver(b)){				// vérifie si l'autre joueur est en game over
 					gameOver=true;
 					score1++;
 					System.out.println("go!");
 				}
 			}
 			
-			if(gameOver){
+			if(gameOver){						//vérifie si le joueur 1 est en game over
 				b.respawn();
 				bs.reinit();
 				gameOver=false;
 			}
 			bs.process();
 			for (PongItem e :a){
-				e.animate();
 				if(e==b || e==r)
 				{
 					for(PongItem e2 : a)
@@ -156,15 +185,14 @@ public class Game implements KeyListener{
 						if(e==e2)
 							continue;
 						Direction d=e.collision(e2);
-						if(d!=Direction.aucune)
+						if(d!=Direction.aucune)			// verifie si la balle ou la raquette sont en collision avec un item
 						{
-							if(e== b && e2==bg){
+							if(e== b && e2==bg){		//si c'est la bordure gauche alors le joueur a perdu
 								gameOver=true;
 								score2++;
 							}
-							else if (e2 == bs)
-								;
-							else
+							else if (e2 == bs);       // si c'est un bonus alors on ne fait rien
+							else					// sinon on rebondit
 								e.rebondir(d, window.getSize().width, window.getSize().height-50);
 						}
 					}
