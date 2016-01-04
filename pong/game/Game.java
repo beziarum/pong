@@ -61,8 +61,8 @@ public class Game implements KeyListener{
 		
 		r= new Racket();
 		b= new Ball();
-		a.add(r);
 		a.add(b);
+		a.add(r);
 		a.add(bg=new Bordure(Direction.gauche,windowSizeX,windowSizeY));
 		a.add(bd=new Bordure(Direction.droite,windowSizeX,windowSizeY));
 		a.add(new Bordure(Direction.haut,windowSizeX,windowSizeY));
@@ -148,6 +148,7 @@ public class Game implements KeyListener{
 		mainLoop:
 		while(true)
 		{	
+			bs.process();
 			if(control.haveNewConnection()) // verifie si un joueur tente de se connecter
 			{
 				Player tmp=new Player(control.getNewConnection(b),bd); //ajoute le joueur sur la bordure droite
@@ -157,6 +158,11 @@ public class Game implements KeyListener{
 				score1=score2=0;			//reinitialise les scores
 			}
 			
+			if(gameOver){						//vérifie si il y a un game over
+				b.respawn();
+				bs.reinit();
+				gameOver=false;
+			}
 			
 			for (PongItem e :a)				// effectue les déplacements des items
 				e.animate();
@@ -181,12 +187,6 @@ public class Game implements KeyListener{
 				}
 			}
 			
-			if(gameOver){						//vérifie si le joueur 1 est en game over
-				b.respawn();
-				bs.reinit();
-				gameOver=false;
-			}
-			bs.process();
 			for (PongItem e :a){
 				if(e==b || e==r)
 				{

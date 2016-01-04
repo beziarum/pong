@@ -29,7 +29,7 @@ public class BonusSpeed extends PongItem{
 	/**
 	 * probabilité de faire apparaitre le bonus
 	 */
-	private static final int probAparition = 800;
+	private static final int probAparition = 1500;
 	
 	/**
 	 * probabilité que l'effet de l'item se désactive
