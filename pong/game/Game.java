@@ -142,7 +142,6 @@ public class Game implements KeyListener{
 				if(p.isInGameOver(b)){
 					gameOver=true;
 					score1++;
-					System.out.println("go!");
 				}
 			}
 			
