@@ -159,9 +159,11 @@ public class Game implements KeyListener{
 					p.sendNewPos(r);				//envoi et reception des nouvelles positions des raquettes
 					p.updatePos();
 				}catch(SocketException | EOFException | ProtocolException e){
-					a.remove(p.getRacket());		//cas en cas de déconexion
+					a.remove(p.getRacket());		//cas en cas de déconexion ou de tricherie
 					listPlayer.remove(p);			//enleve le joueur et reinitialise le score
 					score1=score2=0;
+					if(e instanceof ProtocolException)//si c'est une tricherie…
+						System.out.println("Une tricherie a été détecté chez le joueur adverse, déconnexion");
 					continue mainLoop;
 				}
 				
