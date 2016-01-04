@@ -48,7 +48,7 @@ public class Ball extends PongItem {
     }
 
     /**
-     * génére un rebond
+     * génére un rebond en fonction de la direction de la collision
      * @param d direction de la collision
      * @param window_width largeur de la fenetre
      * @param window_height hauteur de la fenetre
@@ -72,11 +72,11 @@ public class Ball extends PongItem {
      */
     public void respawn(){
     	Point speed=new Point(generationSpeed(),generationSpeed());
-    	Point position=RandomNumber.randomPoint((Window.WINDOW_SIZE.width/2)-100,(Window.WINDOW_SIZE.width/2)+100,
-    											(Window.WINDOW_SIZE.height/2)-100,(Window.WINDOW_SIZE.height/2)+100);
+    	Point position=RandomNumber.randomPoint((GamePanel.WINDOW_SIZE.width/2)-100,(GamePanel.WINDOW_SIZE.width/2)+100,
+    											(GamePanel.WINDOW_SIZE.height/2)-200,(GamePanel.WINDOW_SIZE.height/2)+200);
     	if(NetworkControler.invertAleaPoint)
     	{
-    		speed.x=-speed.x;
+    		speed.x=-speed.x;		//inverse le vecteur vitesse (pour le joueur en réseau.)
     		speed.y=-speed.y;
     	}
     	setSpeed(speed);
