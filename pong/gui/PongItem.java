@@ -56,7 +56,7 @@ abstract public class PongItem extends JPanel {
     protected Image im;
         
     /**
-     * Détermine les actions a éffectuer l'or d'un rebond.
+     * Détermine les actions a effectuer lors d'un rebond.
      * @param d direction de la collision
      * @param window_width largeur de la fenetre
      * @param window_height hauteur de la fenetre
@@ -80,7 +80,7 @@ abstract public class PongItem extends JPanel {
     protected PongItem(){}
     
     /**
-     * initialise positin speed et hitbox de l'objet tout en respectant l'encapsulation
+     * initialise position speed et hitbox de l'objet tout en respectant l'encapsulation
      * @param position position de l'item
      * @param speed vitesse de l'objet
      */

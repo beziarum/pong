@@ -11,11 +11,11 @@ import pong.util.Direction;
  * 
  * @author paul et antoine
  *Cette classe contient les différents tests que nous avons implémenté pour nos fonctions
- *Les tests ne sont pas complet certaine fonction ayant été testé visuellement
+ *Les tests ne sont pas complets, certaines fonctions ayant été testés visuellement
  */
 public class Main_test {
 	/**
-	 * Fonction de test qui test certaine fonction du programme.
+	 * Fonction de test qui teste certaines fonctions du programme.
 	 * @param args
 	 */
 	public static void main (String[] args){	
@@ -25,7 +25,7 @@ public class Main_test {
 		
 	boolean success=true;
 	
-	//test des fonction de base de ball et de PongItem
+	//test des fonctions de base de ball et de PongItem
 	Ball b = new Ball();
 	Point pos = (Point) b.getPosition().clone();
 	Point center = (Point) b.getCenter().clone();
@@ -51,7 +51,7 @@ public class Main_test {
 	if(spawn1 == spawn2)
 		success = false;
 	
-	//test des bordure et des collision
+	//test des bordures et des collisions
 	
 	Bordure bh = new Bordure(Direction.haut,windowSizeX,windowSizeY);
 	b.setPosition(new Point(100,-1));
@@ -75,9 +75,9 @@ public class Main_test {
 	
 	
 	if (success == true)
-		System.out.println("les tests sont tous passé avec succés");
+		System.out.println("les tests sont tous passés avec succés");
 	else
-		System.out.println("les tests n'ont pas réussie");
+		System.out.println("les tests n'ont pas réussis");
 		
 	
 	}

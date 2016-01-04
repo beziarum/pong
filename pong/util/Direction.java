@@ -1,7 +1,7 @@
 package pong.util;
 
 /**
- * enumération des différentes direction de collision des items
+ * enumération des différentes directions de collision des items
  * @author paul et antoine
  *
  */

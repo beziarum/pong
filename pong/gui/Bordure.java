@@ -8,7 +8,7 @@ import pong.util.Direction;
 
 /**
  * 
- * lasse de l'item bordure qui délimite le jeux
+ * classe de l'item bordure qui délimite le jeux
  * @author paul et antoine
  */
 public class Bordure extends PongItem {
@@ -19,9 +19,9 @@ public class Bordure extends PongItem {
 	/**
 	 * Créer une bordure en fonction d'une position
 	 * 
-	 * @param d direction a retourner en cas de collision
-	 * @param window_width largeur fenetre
-	 * @param window_height hauteur fenetre
+	 * @param d bord de l'écran où sera placé la bordure
+	 * @param window_width largeur fenêtre
+	 * @param window_height hauteur fenêtre
 	 */
 	public Bordure(Direction d,int window_width, int window_height)
 	{
@@ -52,12 +52,12 @@ public class Bordure extends PongItem {
 	}
 	
 	/**
-	 * fonction hérité de ponItem mais qui ne sera pas appelé
+	 * fonction héritée de pongItem mais qui ne sera pas appelée
 	 */
 	public void rebondir(Direction d, int window_width, int window_height) {}
 		
 	/**
-	 * fonction hérité de ponItem mais qui ne sera pas appelé
+	 * fonction héritée de pongItem mais qui ne sera pas appelée
 	 */
 	public void paint(Graphics GContext){};
 }

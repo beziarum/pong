@@ -4,7 +4,7 @@ import javax.swing.JOptionPane;
 
 /**
  * 
- * classe qui permet de rentrer une chaine de caractere dans une boite de dialogue en jeux pour la connexion
+ * classe qui permet de rentrer une chaine de caractère dans une boite de dialogue en jeux pour la connexion
  * @author paul et antoine
  *
  */

@@ -6,7 +6,7 @@ import java.awt.Rectangle;
 import pong.gui.PongItem;
 
 /**
- * la classe hitbox genere et gére les hitbox des items du jeux
+ * la classe hitbox génère et gère les hitbox des items du jeu
  * @author paul et antoine
  * 
  */
@@ -18,8 +18,8 @@ public class Hitbox {
 	private Rectangle hitbox;
 	
 	/**
-	 * constructeur qui crée une hitbox par rapport a un item
-	 * @param item item lié a la hitbox
+	 * constructeur qui crée une hitbox par rapport à un item
+	 * @param item item lié à la hitbox
 	 */
 	public Hitbox(PongItem item){
 		hitbox = new Rectangle(item.getPosition().x,item.getPosition().y,item.getWidth(),item.getHeight());
@@ -34,7 +34,7 @@ public class Hitbox {
 	}
 	
 	/**
-	 * 	vérifie si des hitbox rentre en contact
+	 * 	vérifie si des hitbox rentrent en contact
 	 * @param h
 	 * @return direction de la collision
 	 */
