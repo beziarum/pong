@@ -45,6 +45,8 @@ public class Player {
 	 */
 	private int score;
 	
+	private boolean isInit=false;
+	
 	/**
 	 * Constructeur de la classe Player
 	 * @param s Socket vers ce joueur
@@ -54,7 +56,7 @@ public class Player {
 	{
 		score=0;
 		bordure=b;
-		racket=null;
+		racket=new Racket();
 		try {
 			is=s.getInputStream();
 			os=s.getOutputStream();
@@ -79,14 +81,12 @@ public class Player {
 	 */
 	public void updatePos() throws EOFException, SocketException, ProtocolException
 	{
-		Point oldPos=null;
-		if(racket==null)
-			racket=new Racket();
-		else
-			oldPos=racket.getCenter();
+		Point oldPos=racket.getCenter();
 		racket.setCenter(NetworkControler.readPos(is));
-		if(racket!= null && Math.abs(oldPos.y-racket.getCenter().y)>4)
+		if(isInit && Math.abs(oldPos.y-racket.getCenter().y)>4)
 			throw new ProtocolException();
+		else
+			isInit=true;
 	}
 	
 	/**
