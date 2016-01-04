@@ -1,0 +1,18 @@
+
+====Instruction Pour le Projet Pong====
+
+I) lancement
+Pour lancer la partie, il suffit d'effectuer la commande «_make run_»
+Pour lancer les jeux de tests, c'est la commande «_make test_»
+
+II) Commandes
+Pour déplacer la raquette, il suffit d'utiliser les touches haut et bas du
+clavier.
+Pour se connecter à un autre joueur, il faut appuyer sur la touche «_j_» et
+entrer dans la fenêtre qui apparaitra l'adresse ip où le nom de domaine de
+l'ordinateur distant.
+
+III) Particularité
+La raquette est toujours située à gauche de l'écran, celle de l'adversaire
+sera donc à droite. Il est à noter que pour celà une symétrie centrale par
+rapport au centre de l'écran est effectuée.
