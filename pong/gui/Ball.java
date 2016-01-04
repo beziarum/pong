@@ -26,17 +26,27 @@ public class Ball extends PongItem {
 	/**
 	 * coordonée minimale, en x ou en y pour le spawn de la balle
 	 */
-	private static int zoneSpawnMin=(GamePanel.WINDOW_SIZE.width/2)-200;
+	private static int zoneSpawnMinX=(GamePanel.WINDOW_SIZE.width/2)-100;
 	
 	/**
 	 * coordonée maximale, en x ou en y pour le spawn de la balle
 	 */
-	private static int zoneSpawnMax=(GamePanel.WINDOW_SIZE.width/2)+200;
+	private static int zoneSpawnMaxX=(GamePanel.WINDOW_SIZE.width/2)+100;
+	
+	/**
+	 * coordonée maximale, en x ou en y pour le spawn de la balle
+	 */
+	private static int zoneSpawnMinY=(GamePanel.WINDOW_SIZE.height/2)-200;
+	
+	/**
+	 * coordonée maximale, en x ou en y pour le spawn de la balle
+	 */
+	private static int zoneSpawnMaxY=(GamePanel.WINDOW_SIZE.height/2)+200;
 	
 	/**
 	 * position initiale de la balle générée aléatoirement
 	 */
-	private static Point INIT_POSITION = RandomNumber.randomPoint(zoneSpawnMin,zoneSpawnMax,zoneSpawnMin,zoneSpawnMax);
+	private static Point INIT_POSITION = RandomNumber.randomPoint(zoneSpawnMinX,zoneSpawnMaxX,zoneSpawnMinY,zoneSpawnMaxY);
 	
 	/**
 	 * génératon d'une direction aléatoire de départ pour la balle
@@ -82,7 +92,7 @@ public class Ball extends PongItem {
      */
     public void respawn(){
     	Point speed=new Point(generationSpeed(),generationSpeed());
-    	Point position=RandomNumber.randomPoint(zoneSpawnMin,zoneSpawnMax,zoneSpawnMin,zoneSpawnMax);
+    	Point position=RandomNumber.randomPoint(zoneSpawnMinX,zoneSpawnMaxX,zoneSpawnMinY,zoneSpawnMaxY);
     	if(NetworkControler.invertAleaPoint)
     	{
     		speed.x=-speed.x;		//inverse le vecteur vitesse (pour le joueur en réseau.)

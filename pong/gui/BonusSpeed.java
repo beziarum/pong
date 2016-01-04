@@ -69,12 +69,12 @@ public class BonusSpeed extends PongItem{
 	/**
 	 * coordonée minimale, en x, pour le spawn du bonus
 	 */
-	private int yZoneSpawnMin=(GamePanel.WINDOW_SIZE.width/2)-250;
+	private int yZoneSpawnMin=(GamePanel.WINDOW_SIZE.height/2)-200;
 	
 	/**
 	 * coordonée maximale, en x, pour le spawn du bonus
 	 */
-	private int yZoneSpawnMax=(GamePanel.WINDOW_SIZE.width/2)+250;
+	private int yZoneSpawnMax=(GamePanel.WINDOW_SIZE.height/2)+200;
 	
 	/**
 	 * constructeur du bonusSpeed
