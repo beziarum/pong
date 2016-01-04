@@ -81,7 +81,7 @@ public class NetworkControler {
 			init.append("PONG");
 			init.append(0);
 			init.append(' ');
-			init.append(1);
+			init.append(2);
 			init.append('\n');
 			init.append(RandomNumber.getSeed());
 			init.append('\n');
@@ -102,7 +102,7 @@ public class NetworkControler {
 		try {
 			Socket sock=new Socket(str,37650);
 			String s=readLine(sock.getInputStream());
-			if (s.equals("PONG0 1"))
+			if (s.equals("PONG0 2"))
 				connectWait=sock;
 			else
 			{
@@ -114,7 +114,7 @@ public class NetworkControler {
 		}
 	}
 	
-	public static void sendPos(OutputStream os,Point pos) throws IOException{
+	private static void sendPos(OutputStream os,Point pos) throws IOException{
 			StringBuffer sb=new StringBuffer();
 			sb.append(pos.x);
 			sb.append(' ');
@@ -124,7 +124,7 @@ public class NetworkControler {
 			os.flush();
 	}
 	
-	public static String readLine(InputStream is) throws IOException{
+	private static String readLine(InputStream is) throws IOException{
 		StringBuffer s=new StringBuffer();
 		char c='\0';
 		while(c!='\n' && c!=-1)
@@ -139,12 +139,12 @@ public class NetworkControler {
 		return s.toString();
 	}
 	
-	public static Point readPos(InputStream is) throws IOException
+	private static Point readPos(InputStream is) throws IOException
 	{
 		return GamePanel.rotate(readPoint(is));
 	}
 	
-	public static Point readPoint(InputStream is) throws IOException
+	private static Point readPoint(InputStream is) throws IOException
 	{
 		String[] worlds=readLine(is).split(" ");
 		return new Point(Integer.valueOf(worlds[0]),Integer.valueOf(worlds[1]));

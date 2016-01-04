@@ -67,25 +67,6 @@ public class Player {
 			}
 		}
 	}
-	public void updatePos() throws EOFException, SocketException
-	{
-		try {
-			racket.setCenter(NetworkControler.readPos(is));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	
-	public void sendNewPos(Racket r) throws SocketException
-	{
-		try {
-			NetworkControler.sendPos(os, r.getCenter());
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 	
 	public boolean isInGameOver(Ball ball)
 	{

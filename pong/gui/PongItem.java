@@ -55,11 +55,7 @@ abstract public class PongItem extends JPanel {
      */
     protected Image im;
     
-    /**
-     * variable de temps pour syncroniser les joueurs
-     */
-    private long time;
-    
+       
     /**
      * Détermine les actions a éffectuer l'or d'un rebond.
      * @param d direction de la collision
@@ -77,15 +73,12 @@ abstract public class PongItem extends JPanel {
     protected PongItem(String s , Point position, Point speed){
     	load(s);
     	init(position, speed);
-    	time=System.currentTimeMillis();
     }
     
     /**
      * second constructeur pour la bordure du jeux
      */
-    protected PongItem(){
-    	time=System.currentTimeMillis();
-    }
+    protected PongItem(){}
     
     /**
      * initialise positin speed et hitbox de l'objet tout en respectant l'encapsulation
@@ -115,9 +108,6 @@ abstract public class PongItem extends JPanel {
      * Fonction gérant les déplacement des items en fonction du temps
      */
     public void animate(){
-    	long newtime=System.currentTimeMillis();
-    	int tick=(int)(newtime-time);
-    	time=newtime;
     	position.translate(speed.x,speed.y);
     	hitbox.setPos(position);
     }
