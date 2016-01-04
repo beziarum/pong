@@ -3,8 +3,10 @@ package pong.gui;
 import javax.swing.JOptionPane;
 
 /**
+ * 
+ * classe qui permet de rentrer une chaine de caractere dans une boite de dialogue en jeux pour la connexion
  * @author paul et antoine
- *	classe qui permet de rentrer une chaine de caractere dans une boite de dialogue en jeux pour la connexion
+ *
  */
 public class StringCapture {
 	

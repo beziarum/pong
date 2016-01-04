@@ -48,7 +48,7 @@ public class Game implements KeyListener{
 	private ArrayList<Player> listPlayer;
 	
 	/**
-	 * Constructeur il initialise toute les donné nescessaire au jeu
+	 * Constructeur il initialise toute les données nescessaire au jeu
 	 */
 	public Game()
 	{	
