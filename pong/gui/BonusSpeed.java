@@ -29,12 +29,12 @@ public class BonusSpeed extends PongItem{
 	/**
 	 * probabilité de faire apparaitre le bonus
 	 */
-	private static final int prob = 500;
+	private static final int probAparition = 800;
 	
 	/**
 	 * probabilité que l'effet de l'item se désactive
 	 */
-	private static final int probDesactivation = 500;
+	private static final int probDesactivation = 1000;
 	
 	/**
 	 * balle de la partie en cour
@@ -78,7 +78,7 @@ public class BonusSpeed extends PongItem{
 	 * détermine si il faut faire apparaitre l'objet
 	 */
 	public boolean spawn(){
-		int x = RandomNumber.randomValue(0, prob);
+		int x = RandomNumber.randomValue(0, probAparition);
 		return (x<=1);	
 	}
 	
