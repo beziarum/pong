@@ -116,7 +116,7 @@ public class Game implements KeyListener{
 		{	
 			if(control.haveNewConnection())
 			{
-				Player tmp=new Player(control.getNewConnection(b),bd,control.lastHasBeenAsked());
+				Player tmp=new Player(control.getNewConnection(b),bd);
 				listPlayer.add(tmp);
 				a.add(tmp.getRacket());
 				bs.reinit();
@@ -125,7 +125,8 @@ public class Game implements KeyListener{
 			for(Player p:listPlayer)
 			{
 				try{
-					p.update(r,b);
+					p.sendNewPos(r);
+					p.updatePos();
 				}catch(SocketException | EOFException  e){
 					a.remove(p.getRacket());
 					listPlayer.remove(p);

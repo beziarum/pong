@@ -13,7 +13,6 @@ import java.util.LinkedList;
 
 import pong.gui.Ball;
 import pong.gui.GamePanel;
-import pong.gui.Racket;
 import pong.util.RandomNumber;
 
 
@@ -22,7 +21,6 @@ public class NetworkControler {
 	private LinkedList<Socket> list;
 	private Socket connectWait=null;
 	private ServerSocket serv;
-	private boolean LHBA = false;
 	
 	/**
 	 * indique si il faut appliquer une symétrie à la balle quand on la réinitialise.
@@ -76,7 +74,6 @@ public class NetworkControler {
 			}
 			connectWait=null;
 			invertAleaPoint=true;
-			LHBA=true;
 			return s;
 		}
 		else
@@ -99,7 +96,6 @@ public class NetworkControler {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			LHBA = false;
 			return s;
 		}
 	}
@@ -170,63 +166,4 @@ public class NetworkControler {
 		return new Point(Integer.valueOf(worlds[0]),Integer.valueOf(worlds[1]));
 	}
 	
-	public static void readRacket(InputStream is,Racket r) throws EOFException, SocketException
-	{
-		r.setCenter(readPos(is));
-	}
-	
-	public static void sendRacket(OutputStream os, Racket r) throws SocketException
-	{
-		try{
-		os.write("RACK".getBytes());
-		sendPos(os, r.getCenter());
-		}catch (SocketException e){
-			throw e;
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public static void readBall(InputStream is, Ball b) throws EOFException, SocketException
-	{
-		b.setCenter(readPos(is));
-		Point speed=readPoint(is);
-		speed.x=-speed.x;
-		speed.y=-speed.y;
-		b.setSpeed(speed);
-	}
-	
-	public static void sendBall(OutputStream os, Ball b) throws SocketException
-	{
-		try{
-			os.write("BALL".getBytes());
-			sendPos(os, b.getCenter());
-			sendPos(os, b.getSpeed());
-			}catch (SocketException e){
-				throw e;
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-	}
-	
-	public static String nextData(InputStream is) throws EOFException, SocketException
-	{
-		StringBuffer ret=new StringBuffer();
-		try{
-		for(int i=0; i<4; i++)
-			ret.append(is.read());
-		} catch(SocketException e){
-			throw e;
-		} catch(IOException e){
-			e.printStackTrace();
-		}
-		if(ret.charAt(3)==-1)
-			throw new EOFException();
-		return ret.toString();
-	}
-	
-	public boolean lastHasBeenAsked()
-	{
-		return LHBA;
-	}
 }
