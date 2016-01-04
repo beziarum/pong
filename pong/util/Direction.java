@@ -1,9 +1,8 @@
 package pong.util;
 
 /**
- * 
- * @author paul et antoine
  * enumération des différentes direction de collision des items
+ * @author paul et antoine
  *
  */
 public enum Direction {
