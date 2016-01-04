@@ -114,8 +114,7 @@ public class NetworkControler {
 		}
 	}
 	
-	public static void sendPos(OutputStream os,Point pos) throws SocketException{
-		try {
+	public static void sendPos(OutputStream os,Point pos) throws IOException{
 			StringBuffer sb=new StringBuffer();
 			sb.append(pos.x);
 			sb.append(' ');
@@ -123,27 +122,14 @@ public class NetworkControler {
 			sb.append('\n');
 			os.write(sb.toString().getBytes());
 			os.flush();
-		} catch (SocketException e){
-			throw e;
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 	
-	public static String readLine(InputStream is) throws EOFException, SocketException{
+	public static String readLine(InputStream is) throws IOException{
 		StringBuffer s=new StringBuffer();
 		char c='\0';
 		while(c!='\n' && c!=-1)
 		{
-			try {
-				c=(char)is.read();
-			} catch(SocketException e){
-				throw e;
-			}catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			c=(char)is.read();
 			if(c!='\n')
 				s.append(c);
 		}
@@ -153,35 +139,30 @@ public class NetworkControler {
 		return s.toString();
 	}
 	
-	public static Point readPos(InputStream is) throws EOFException, SocketException
+	public static Point readPos(InputStream is) throws IOException
 	{
 		return GamePanel.rotate(readPoint(is));
 	}
 	
-	public static Point readPoint(InputStream is) throws EOFException, SocketException
+	public static Point readPoint(InputStream is) throws IOException
 	{
 		String[] worlds=readLine(is).split(" ");
 		return new Point(Integer.valueOf(worlds[0]),Integer.valueOf(worlds[1]));
 	}
 	
-	public static void readRacket(InputStream is,Racket r) throws EOFException, SocketException
+	public static void readRacket(InputStream is,Racket r) throws IOException
 	{
 		r.setCenter(readPos(is));
 	}
 	
-	public static void sendRacket(OutputStream os, Racket r) throws SocketException
+	public static void sendRacket(OutputStream os, Racket r) throws IOException
 	{
-		try{
 		os.write("RACK".getBytes());
 		sendPos(os, r.getCenter());
-		}catch (SocketException e){
-			throw e;
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		
 	}
 	
-	public static void readBall(InputStream is, Ball b) throws EOFException, SocketException
+	public static void readBall(InputStream is, Ball b) throws IOException
 	{
 		b.setCenter(readPos(is));
 		Point speed=readPoint(is);
@@ -203,17 +184,11 @@ public class NetworkControler {
 			}
 	}
 	
-	public static String nextData(InputStream is) throws EOFException, SocketException
+	public static String nextData(InputStream is) throws IOException
 	{
 		StringBuffer ret=new StringBuffer();
-		try{
 		for(int i=0; i<4; i++)
 			ret.append((char)is.read());
-		} catch(SocketException e){
-			throw e;
-		} catch(IOException e){
-			e.printStackTrace();
-		}
 		if(ret.charAt(3)==-1)
 			throw new EOFException();
 		return ret.toString();

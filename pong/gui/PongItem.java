@@ -118,7 +118,7 @@ abstract public class PongItem extends JPanel {
     	long newtime=System.currentTimeMillis();
     	int tick=(int)(newtime-time);
     	time=newtime;
-    	position.translate(speed.x*tick/10,speed.y*tick/10);
+    	position.translate(speed.x,speed.y);
     	hitbox.setPos(position);
     }
     

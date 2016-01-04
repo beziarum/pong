@@ -68,6 +68,7 @@ public class Window extends JFrame {
 			Thread.sleep(timestep-delay);
 			time=System.currentTimeMillis();
 			delay=time-newtime;
+			System.out.println(delay);
 		} catch (InterruptedException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

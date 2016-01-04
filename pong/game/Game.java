@@ -9,7 +9,7 @@ import java.net.SocketException;
 import java.util.ArrayList;
 
 import pong.gui.Ball;
-import pong.gui.BonusSpeed;
+//import pong.gui.BonusSpeed;
 import pong.gui.Bordure;
 import pong.gui.GamePanel;
 import pong.gui.PongItem;
@@ -30,7 +30,7 @@ public class Game implements KeyListener{
 	private Bordure bd;
 	private Racket r;
 	private Ball b;
-	private BonusSpeed bs;
+	//private BonusSpeed bs;
 	
 	private boolean gameOver=false;
 	
@@ -56,7 +56,7 @@ public class Game implements KeyListener{
 		a.add(bd=new Bordure(Direction.droite,windowSizeX,windowSizeY));
 		a.add(new Bordure(Direction.haut,windowSizeX,windowSizeY));
 		a.add(new Bordure(Direction.bas,windowSizeX,windowSizeY));
-		a.add(bs=new BonusSpeed(b));
+		//a.add(bs=new BonusSpeed(b));
 		
 		window.addKeyListener(this);
 		
@@ -119,8 +119,14 @@ public class Game implements KeyListener{
 				Player tmp=new Player(control.getNewConnection(b),bd,control.lastHasBeenAsked());
 				listPlayer.add(tmp);
 				a.add(tmp.getRacket());
-				bs.reinit();
+			//	bs.reinit();
 				score1=score2=0;
+			}
+			for(PongItem e:a)
+				e.animate();
+			if(!listPlayer.isEmpty()){
+				System.out.println(b.getCenter());
+				System.out.println(b.getSpeed());
 			}
 			for(Player p:listPlayer)
 			{
@@ -142,12 +148,11 @@ public class Game implements KeyListener{
 			
 			if(gameOver){
 				b.respawn();
-				bs.reinit();
+				//bs.reinit();
 				gameOver=false;
 			}
-			bs.process();
+			//bs.process();
 			for (PongItem e :a){
-				e.animate();
 				if(e==b || e==r)
 				{
 					for(PongItem e2 : a)
@@ -161,8 +166,8 @@ public class Game implements KeyListener{
 								gameOver=true;
 								score2++;
 							}
-							else if (e2 == bs)
-								;
+				//			else if (e2 == bs)
+					//			;
 							else
 								e.rebondir(d, window.getSize().width, window.getSize().height-50);
 						}

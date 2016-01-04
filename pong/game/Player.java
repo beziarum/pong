@@ -43,28 +43,48 @@ public class Player {
 		
 		if(controlBall)
 		{
-			NetworkControler.sendRacket(os, r);
-			NetworkControler.sendBall(os, b);
-			NetworkControler.nextData(is);
-			NetworkControler.readRacket(is, racket);
+			try {
+				NetworkControler.sendRacket(os, r);
+				NetworkControler.sendBall(os, b);
+				NetworkControler.nextData(is);
+				NetworkControler.readRacket(is, racket);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		else
 		{
-			NetworkControler.sendRacket(os, r);
-			NetworkControler.nextData(is);
-			NetworkControler.readRacket(is, racket);
-			NetworkControler.nextData(is);
-			NetworkControler.readBall(is, b);
+			try {
+				NetworkControler.sendRacket(os, r);
+				NetworkControler.nextData(is);
+				NetworkControler.readRacket(is, racket);
+				NetworkControler.nextData(is);
+				NetworkControler.readBall(is, b);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 	public void updatePos() throws EOFException, SocketException
 	{
-		racket.setCenter(NetworkControler.readPos(is));
+		try {
+			racket.setCenter(NetworkControler.readPos(is));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public void sendNewPos(Racket r) throws SocketException
 	{
-		NetworkControler.sendPos(os, r.getCenter());
+		try {
+			NetworkControler.sendPos(os, r.getCenter());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public boolean isInGameOver(Ball ball)
