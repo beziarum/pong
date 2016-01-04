@@ -15,11 +15,28 @@ import pong.gui.Ball;
 import pong.gui.GamePanel;
 import pong.util.RandomNumber;
 
-
+/**
+ * Classe gerant les primitives réseau du pong
+ * @author paul et antoine
+ *
+ */
 public class NetworkControler {
-	
+	/**
+	 * Liste des sockets en attente de connection
+	 */
 	private LinkedList<Socket> list;
+	
+	/**
+	 * si connectWait est différent de null alors il a pour valeur un
+	 * socket vers un jeu pong vers lequel la connection a été demandé
+	 * par le joueur
+	 */
 	private Socket connectWait=null;
+	
+	/**
+	 * ServerSocket vérifiant si une autre instance de jeu pong n'as pas
+	 * demandé une connection vers le joueur.
+	 */
 	private ServerSocket serv;
 	
 	/**
@@ -27,6 +44,9 @@ public class NetworkControler {
 	 */
 	public static boolean invertAleaPoint=false;
 	
+	/**
+	 * Constructeur de la classe NetworkControler
+	 */
 	public NetworkControler()
 	{
 		try {
@@ -39,6 +59,10 @@ public class NetworkControler {
 		list=new LinkedList<Socket>();
 	}
 	
+	/**
+	 * 
+	 * @return vrai si une nouvelle connection peut être récupérée
+	 */
 	public boolean haveNewConnection()
 	{
 		Socket tmp;
@@ -54,6 +78,12 @@ public class NetworkControler {
 		return connectWait!=null || !list.isEmpty();
 	}
 	
+	/**
+	 * Si {@link NetworkControler#haveNewConnection()} a renvoyé vrai, renvoi un socket initialisé
+	 * pour le réseau vers un autre jouer
+	 * @param b la balle du jeu pong
+	 * @return le socket vers le nouveau joueur
+	 */
 	public Socket getNewConnection(Ball b)
 	{
 		if(connectWait!=null)
@@ -100,6 +130,10 @@ public class NetworkControler {
 		}
 	}
 	
+	/**
+	 * Demande de créer une connection vers un nouveau joueur
+	 * @param str L'adresse du nouveau joueur
+	 */
 	public void connect(String str)
 	{
 		try {
@@ -117,6 +151,12 @@ public class NetworkControler {
 		}
 	}
 	
+	/**
+	 * Envoi une position vers un autre joueur
+	 * @param os OutputStream vers l'autre joueur
+	 * @param pos le point à envoyer
+	 * @throws SocketException
+	 */
 	public static void sendPos(OutputStream os,Point pos) throws SocketException{
 		try {
 			StringBuffer sb=new StringBuffer();
@@ -134,6 +174,13 @@ public class NetworkControler {
 		}
 	}
 	
+	/**
+	 * Lit une ligne envoyé depuis un autre joueur
+	 * @param is InputStream vers l'autre joueur
+	 * @return La ligne envoyé via is par l'autre joueur
+	 * @throws EOFException
+	 * @throws SocketException
+	 */
 	public static String readLine(InputStream is) throws EOFException, SocketException{
 		StringBuffer s=new StringBuffer();
 		char c='\0';
@@ -155,11 +202,26 @@ public class NetworkControler {
 		return s.toString();
 	}
 	
+	/**
+	 * Lit une position envoyée depuis le réseau
+	 * @param is InputStream vers l'autre joueur
+	 * @return le point envoyé par l'autre joueur, après lui avoir appliqué une rotation
+	 * autour du centre de l'écran
+	 * @throws EOFException
+	 * @throws SocketException
+	 */
 	public static Point readPos(InputStream is) throws EOFException, SocketException
 	{
 		return GamePanel.rotate(readPoint(is));
 	}
 	
+	/**
+	 * Lit un point envoyé depuis le réseau
+	 * @param is InputStream vers l'autre joueur
+	 * @return le point envoyé par l'autre joueur
+	 * @throws EOFException
+	 * @throws SocketException
+	 */
 	public static Point readPoint(InputStream is) throws EOFException, SocketException
 	{
 		String[] worlds=readLine(is).split(" ");
