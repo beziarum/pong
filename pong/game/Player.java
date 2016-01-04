@@ -48,7 +48,9 @@ public class Player {
 				NetworkControler.sendBall(os, b);
 				NetworkControler.nextData(is);
 				NetworkControler.readRacket(is, racket);
-			} catch (IOException e) {
+			}catch (SocketException e){ 
+				throw e;
+			}catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
@@ -61,6 +63,8 @@ public class Player {
 				NetworkControler.readRacket(is, racket);
 				NetworkControler.nextData(is);
 				NetworkControler.readBall(is, b);
+			} catch (SocketException e){
+				throw e;
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

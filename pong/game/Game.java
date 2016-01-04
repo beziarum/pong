@@ -124,10 +124,6 @@ public class Game implements KeyListener{
 			}
 			for(PongItem e:a)
 				e.animate();
-			if(!listPlayer.isEmpty()){
-				System.out.println(b.getCenter());
-				System.out.println(b.getSpeed());
-			}
 			for(Player p:listPlayer)
 			{
 				try{
