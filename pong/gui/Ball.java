@@ -19,17 +19,17 @@ public class Ball extends PongItem {
 	private static final long serialVersionUID = 1L;
 	
 	/**
-	 * vitesse initial de la ball
+	 * vitesse initialle de la balle
 	 */
 	public static final int INIT_SPEED= 4;
 	
 	/**
-	 * position initial de la ball généré aléatoirement
+	 * position initiale de la balle générée aléatoirement
 	 */
 	private static Point INIT_POSITION = RandomNumber.randomPoint((Window.WINDOW_SIZE.width/2)-100,(Window.WINDOW_SIZE.width/2)+100,(Window.WINDOW_SIZE.height/2)-100,(Window.WINDOW_SIZE.height/2)+100);
 	
 	/**
-	 * génératon d'une direction aléatoire de départ pour la ball
+	 * génératon d'une direction aléatoire de départ pour la balle
 	 * @return Point vitesse
 	 */
     private static int generationSpeed(){
@@ -40,7 +40,7 @@ public class Ball extends PongItem {
     }
 	
 	/**
-	 * constructeur appelant celui de la classe mere pongItem
+	 * constructeur appelant celui de la classe mère pongItem
 	 */
     public Ball()
     {	

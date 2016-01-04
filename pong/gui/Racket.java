@@ -15,12 +15,12 @@ public class Racket extends PongItem {
 	private static final long serialVersionUID = 1L;
 	
 	/**
-	 * vitesse initial
+	 * vitesse initiale
 	 */
 	private static final int INIT_SPEED = 0;
 	
 	/**
-	 * vitesse de la racket l'or d'un déplacement
+	 * vitesse de la racket lors d'un déplacement
 	 */
 	public static final int RACKET_SPEED = 4;
 	
@@ -37,7 +37,7 @@ public class Racket extends PongItem {
 	}
 	
 	/**
-	 * gére le rebond de la raquette avec les bordure en haut et en bas
+	 * gère le rebond de la raquette avec les bordures en haut et en bas
 	 * @param d direction de la collision
      * @param window_width largeur de la fenetre
      * @param window_height hauteur de la fenetre

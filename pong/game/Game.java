@@ -21,8 +21,8 @@ import pong.gui.Window;
 import pong.util.Direction;
 
 /**
- * Classe game. Cette classe constitue le centre du jeu c'est ici que tout
- * les items sont instancié et que la boucle principale est implémenté
+ * Classe game. Cette classe constitue le centre du jeu. C'est ici que tous
+ * les items sont instanciés et que la boucle principale est implémentée
  * 
  * @author paul et antoine
  *
@@ -48,7 +48,7 @@ public class Game implements KeyListener{
 	private ArrayList<Player> listPlayer;
 	
 	/**
-	 * Constructeur il initialise toute les données nescessaire au jeu
+	 * Constructeur il initialise toutes les données necessaire au jeu
 	 */
 	public Game()
 	{	
@@ -117,8 +117,8 @@ public class Game implements KeyListener{
 	}
 	
 	/**
-	 * Fonction qui fait appelle la classe StringCapture si on appuie sur la touche "j"
-	 * Ceci sert a rentré l'adresse de connexion
+	 * Fonction qui fait appel à la classe StringCapture si on appuie sur la touche "j"
+	 * Ceci sert a rentrer l'adresse de connexion
 	 * @param KeyEvent e
 	 */
 	public void keyTyped(KeyEvent e) {
@@ -153,7 +153,7 @@ public class Game implements KeyListener{
 				Player tmp=new Player(control.getNewConnection(b),bd); //ajoute le joueur sur la bordure droite
 				listPlayer.add(tmp);
 				a.add(tmp.getRacket());
-				bs.reinit();					//reinitialise le bonus pour évité des bug
+				bs.reinit();					//reinitialise le bonus pour éviter des bug
 				score1=score2=0;			//reinitialise les scores
 			}
 			
@@ -167,7 +167,7 @@ public class Game implements KeyListener{
 					p.sendNewPos(r);				//envoi et reception des nouvelles positions des raquettes
 					p.updatePos();
 				}catch(SocketException | EOFException | ProtocolException e){
-					a.remove(p.getRacket());		//cas en cas de déconexion ou de tricherie
+					a.remove(p.getRacket());		//cas en cas de déconnexion ou de tricherie
 					listPlayer.remove(p);			//enleve le joueur et reinitialise le score
 					score1=score2=0;
 					if(e instanceof ProtocolException)//si c'est une tricherie…

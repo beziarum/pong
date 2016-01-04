@@ -22,7 +22,7 @@ public class BonusSpeed extends PongItem{
 	private static final int INIT_SPEED= 0;
 	
 	/**
-	 * valeur du multiplicative de l'augmentation de la vitesse
+	 * valeur de l'augmentation de la vitesse
 	 */
 	private static final int boost= Ball.INIT_SPEED/2;
 	
@@ -52,13 +52,13 @@ public class BonusSpeed extends PongItem{
 	private boolean spawner;
 	
 	/**
-	 * position initial hors de l'écrans
+	 * position initialle, hors de l'écran
 	 */
 	private static Point INIT_POSITION = new Point(-100,-100);
 	
 	/**
 	 * constructeur du bonusSpeed
-	 * @param Ball du jeux en cours
+	 * @param Balle du jeu en cours
 	 */
 	public BonusSpeed(Ball b)
     {	
@@ -69,7 +69,7 @@ public class BonusSpeed extends PongItem{
     }
 
 	/**
-	 * fonction hérité de ponItem mais qui ne sera pas appelé
+	 * fonction héritée de pongItem mais qui ne sera pas appelée
 	 */
 	public void rebondir(Direction d, int window_width, int window_height) {
 	}
@@ -91,7 +91,7 @@ public class BonusSpeed extends PongItem{
 	}
 	
 	/**
-	 * Fonction qui gére l'arret de l'effet du bonus sur la balle
+	 * Fonction qui gère l'arret de l'effet du bonus sur la balle
 	 * 
 	 * @return true si l'effet doit prendre fin
 	 */
@@ -101,7 +101,7 @@ public class BonusSpeed extends PongItem{
 	}
 	
 	/**
-	 * réinitialise les valeur de la classe en cas de point marqué
+	 * réinitialise les valeurs de la classe en cas de point marqué
 	 */
 	public void reinit(){
     	efficient = false;
@@ -110,7 +110,7 @@ public class BonusSpeed extends PongItem{
 	}
 	
 	/**
-	 * fonction principale de la classe qui gére son comportement en fonction de ou en est le jeux
+	 * fonction principale de la classe qui gère son comportement en fonction de où en est le jeu
 	 */
 	public void process(){
 		if (efficient)
