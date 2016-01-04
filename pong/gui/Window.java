@@ -19,12 +19,6 @@ public class Window extends JFrame {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * Si printFps vaut vrai alors les fps serons affichés sur la
-	 * sortie standard
-	 */
-	private static boolean printFps=false;
-	
-	/**
 	 * définit la hauteur de la zone dédiée à l'affichage des fps
 	 */
 	private static final int SCORE_HEIGHT = 50;
@@ -51,8 +45,6 @@ public class Window extends JFrame {
 	 */
 	private JLabel scorePanel;
 	
-	private long time;
-	private long delay=0;
 	
 	/**
 	 * Constructeur de la classe Window
@@ -63,8 +55,6 @@ public class Window extends JFrame {
 		setTitle("Pong");
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		time=System.currentTimeMillis();
 		
 		pan=new GamePanel(a);
 		scorePanel=new JLabel("Score = 0/0",SwingConstants.CENTER);
@@ -87,15 +77,6 @@ public class Window extends JFrame {
 	 * Cette fonction commande le réaffichage des composantes de Window
 	 */
 	public void paint(){
-		if(printFps)
-		{
-			long fps;
-			if(delay!=0)
-				fps=1000/delay;
-			else
-				fps=-1;
-			System.out.println(fps);
-		}
 		repaint();
 	}
 	
@@ -104,11 +85,7 @@ public class Window extends JFrame {
 	 */
 	public void sleep(){
 		try {
-			long newtime=System.currentTimeMillis();
-			delay=0;
-			Thread.sleep(timestep-delay);
-			time=System.currentTimeMillis();
-			delay=time-newtime;
+			Thread.sleep(timestep);
 		} catch (InterruptedException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

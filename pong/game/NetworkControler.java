@@ -9,6 +9,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
 import java.net.SocketTimeoutException;
+import java.net.UnknownHostException;
 import java.util.LinkedList;
 
 import pong.gui.Ball;
@@ -133,8 +134,9 @@ public class NetworkControler {
 	/**
 	 * Demande de créer une connection vers un nouveau joueur
 	 * @param str L'adresse du nouveau joueur
+	 * @throws SocketException, UnknownHostException 
 	 */
-	public void connect(String str)
+	public void connect(String str) throws SocketException, UnknownHostException
 	{
 		try {
 			Socket sock=new Socket(str,37650);
@@ -146,6 +148,8 @@ public class NetworkControler {
 				sock.close();
 				throw new RuntimeException("Unsuported Protocol"+s);
 			}
+		} catch (SocketException | UnknownHostException e){
+			throw e;
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

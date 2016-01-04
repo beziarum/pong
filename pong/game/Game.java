@@ -7,6 +7,7 @@ import java.awt.event.KeyListener;
 import java.io.EOFException;
 import java.net.ProtocolException;
 import java.net.SocketException;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 
 import pong.gui.Ball;
@@ -123,7 +124,14 @@ public class Game implements KeyListener{
 	public void keyTyped(KeyEvent e) {
 		switch(e.getKeyChar()){
 			case 'j':
-				control.connect(StringCapture.getString());
+				String addr=StringCapture.getString();
+				if(addr==null)
+					return;
+			try {
+				control.connect(addr);
+			} catch (SocketException | UnknownHostException e1) {
+				return;//si la connection n'as pas pu être effectué, alors on ne continue pas
+			}  
 				for(Player p:listPlayer)
 					a.remove(p.getRacket());
 				listPlayer.clear();
