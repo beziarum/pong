@@ -43,16 +43,16 @@ public class Player {
 		
 		if(controlBall)
 		{
-			NetworkControler.sendRacket(os, r);
+			NetworkControler.sendRacket(os, racket);
 			NetworkControler.sendBall(os, b);
 			System.out.println("  --  "+NetworkControler.nextData(is));
 			NetworkControler.readRacket(is, racket);
 		}
 		else
 		{
-			NetworkControler.sendRacket(os, r);
+			NetworkControler.sendRacket(os, racket);
 			System.out.println("  --  "+NetworkControler.nextData(is));
-			NetworkControler.readRacket(is, racket);
+			NetworkControler.readRacket(is, r);
 			System.out.println("  --  "+NetworkControler.nextData(is));
 			NetworkControler.readBall(is, b);
 		}
