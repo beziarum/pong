@@ -13,8 +13,8 @@ import pong.util.Direction;
 import pong.util.Hitbox;
 
 /**
- * @author paul et antoine
  * PongItem est la classe mère de tous les item présent dans le jeux
+ * @author paul et antoine
  */
 abstract public class PongItem extends JPanel {
 	
@@ -104,7 +104,7 @@ abstract public class PongItem extends JPanel {
     }
 
     /**
-     * Fonction gérant les déplacement des items en fonction du temps
+     * Fonction gérant les déplacements des items
      */
     public void animate(){
     	position.translate(speed.x,speed.y);
