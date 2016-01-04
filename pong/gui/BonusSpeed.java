@@ -6,10 +6,11 @@ import pong.util.Direction;
 import pong.util.RandomNumber;
 
 /**
- * 
- * @author paul et antoine
  * classe de l'item bonus speed
  * c'est un item qui apparait de maniére aléatoire et augmente la vitesse de la balle si cette derniere le touche
+ * 
+ * @author paul et antoine
+ * 
  */
 public class BonusSpeed extends PongItem{
 	
@@ -26,24 +27,19 @@ public class BonusSpeed extends PongItem{
 	private static final int boost= Ball.INIT_SPEED/2;
 	
 	/**
-	 * delai en miliseconde de l'application du boost
-	 */
-	//private static final int delay = 10000;
-	
-	/**
 	 * probabilité de faire apparaitre le bonus
 	 */
 	private static final int prob = 500;
 	
 	/**
+	 * probabilité que l'effet de l'item se désactive
+	 */
+	private static final int probDesactivation = 500;
+	
+	/**
 	 * balle de la partie en cour
 	 */
 	private Ball ball;
-	
-	/**
-	 * chrono pour gérer le temps d'activation de l'effet
-	 */
-	//private long timer;
 	
 	/**
 	 * boolean qui indique si l'effet est actif
@@ -68,7 +64,6 @@ public class BonusSpeed extends PongItem{
     {	
     	super("image/boostSpeed.png", INIT_POSITION,new Point(INIT_SPEED ,INIT_SPEED));
     	ball = b;
-    	//timer = 0;
     	efficient = false;
     	spawner = false;
     }
@@ -96,10 +91,19 @@ public class BonusSpeed extends PongItem{
 	}
 	
 	/**
+	 * Fonction qui gére l'arret de l'effet du bonus sur la balle
+	 * 
+	 * @return true si l'effet doit prendre fin
+	 */
+	public boolean removeEffect(){
+		int x = RandomNumber.randomValue(0, probDesactivation);
+		return (x<=1);	
+	}
+	
+	/**
 	 * réinitialise les valeur de la classe en cas de point marqué
 	 */
 	public void reinit(){
-		//timer = 0;
     	efficient = false;
     	spawner = false;
     	this.position = INIT_POSITION;
@@ -111,7 +115,7 @@ public class BonusSpeed extends PongItem{
 	public void process(){
 		if (efficient)
 		{
-			if (despawn())
+			if (removeEffect())
 			{
 				desactivation();
 			}
@@ -129,10 +133,7 @@ public class BonusSpeed extends PongItem{
 		}
 	}
 	
-	public boolean despawn(){
-		int x = RandomNumber.randomValue(0, prob);//a amélioré
-		return (x<=1);	
-	}
+
 	
 	/**
 	 * augmente la vitesse de la balle
@@ -142,7 +143,6 @@ public class BonusSpeed extends PongItem{
 		pnew.setLocation(boostAxis(pnew.x), boostAxis(pnew.y));
 		ball.setSpeed(pnew);
 		efficient = true;
-	//	timer = System.currentTimeMillis();
 		this.position= INIT_POSITION;
 		spawner = false;
 	}
@@ -155,9 +155,14 @@ public class BonusSpeed extends PongItem{
 		pold.setLocation(unboostAxis(pold.x), unboostAxis(pold.y));
 		ball.setSpeed(pold);
 		efficient = false;
-		//timer=0;
 	}
 	
+	/**
+	 * Cette fonction retourne les valeurs d'accélération
+	 * de la vitesse de la balle
+	 * @param value
+	 * @return	la valeur de l'accélération
+	 */
 	private int boostAxis(int value){
 		boolean isNegative=value<0;
 		if (isNegative)
@@ -167,6 +172,12 @@ public class BonusSpeed extends PongItem{
 		return value;
 	}
 	
+	/**
+	 * Cette fonction retourne les valeurs de decélération
+	 * de la vitesse de la balle
+	 * @param value
+	 * @return	la valeur de la décélération
+	 */
 	private int unboostAxis(int value)
 	{
 		boolean isPositive=value>0;
