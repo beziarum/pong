@@ -149,13 +149,13 @@ public class Game implements KeyListener{
 			}
 			
 			
-			for (PongItem e :a)				// effectue les déplacement des items
+			for (PongItem e :a)				// effectue les déplacements des items
 				e.animate();
 				
 			for(Player p:listPlayer)
 			{
 				try{
-					p.sendNewPos(r);				//envoi et reception nouvelle position des raquette
+					p.sendNewPos(r);				//envoi et reception des nouvelles positions des raquettes
 					p.updatePos();
 				}catch(SocketException | EOFException  e){
 					a.remove(p.getRacket());		//cas en cas de déconexion
