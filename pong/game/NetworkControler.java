@@ -65,6 +65,11 @@ public class NetworkControler {
 				InputStream is=s.getInputStream();
 				RandomNumber.setSeed(Long.valueOf(readLine(is)));
 				RandomNumber.consumeNDouble(Long.valueOf(readLine(is)));
+				b.setCenter(readPos(is));
+				Point speed=readPoint(is);
+				speed.x=-speed.x;
+				speed.y=-speed.y;
+				b.setSpeed(speed);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -89,6 +94,8 @@ public class NetworkControler {
 			init.append('\n');
 			try {
 				s.getOutputStream().write(init.toString().getBytes());
+				sendPos(s.getOutputStream(), b.getCenter());
+				sendPos(s.getOutputStream(), b.getSpeed());
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -149,7 +156,6 @@ public class NetworkControler {
 		}
 		if(c==-1)
 			throw new EOFException();
-		System.out.println(s.toString());
 		return s.toString();
 	}
 	
