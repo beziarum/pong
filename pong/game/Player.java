@@ -1,11 +1,14 @@
 package pong.game;
 
+import java.awt.Point;
 import java.io.EOFException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 import java.net.SocketException;
+
+import javax.xml.ws.ProtocolException;
 
 import pong.gui.Ball;
 import pong.gui.Bordure;
@@ -76,7 +79,10 @@ public class Player {
 	 */
 	public void updatePos() throws EOFException, SocketException
 	{
+		Point oldPos=racket.getCenter();
 		racket.setCenter(NetworkControler.readPos(is));
+		if(Math.abs(oldPos.y-racket.getCenter().y)>4)
+			throw new ProtocolException();
 	}
 	
 	/**

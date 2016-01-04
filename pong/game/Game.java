@@ -8,6 +8,8 @@ import java.io.EOFException;
 import java.net.SocketException;
 import java.util.ArrayList;
 
+import javax.xml.ws.ProtocolException;
+
 import pong.gui.Ball;
 import pong.gui.BonusSpeed;
 import pong.gui.Bordure;
@@ -157,7 +159,7 @@ public class Game implements KeyListener{
 				try{
 					p.sendNewPos(r);				//envoi et reception des nouvelles positions des raquettes
 					p.updatePos();
-				}catch(SocketException | EOFException  e){
+				}catch(SocketException | EOFException | ProtocolException  e){
 					a.remove(p.getRacket());		//cas en cas de déconexion
 					listPlayer.remove(p);			//enleve le joueur et reinitialise le score
 					score1=score2=0;
