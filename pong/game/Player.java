@@ -5,10 +5,9 @@ import java.io.EOFException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.ProtocolException;
 import java.net.Socket;
 import java.net.SocketException;
-
-import javax.xml.ws.ProtocolException;
 
 import pong.gui.Ball;
 import pong.gui.Bordure;
@@ -55,7 +54,7 @@ public class Player {
 	{
 		score=0;
 		bordure=b;
-		racket=new Racket();
+		racket=null;
 		try {
 			is=s.getInputStream();
 			os=s.getOutputStream();
@@ -76,12 +75,17 @@ public class Player {
 	 * met à jour la position de la raquette de ce joueur
 	 * @throws EOFException
 	 * @throws SocketException
+	 * @throws ProtocolException 
 	 */
-	public void updatePos() throws EOFException, SocketException
+	public void updatePos() throws EOFException, SocketException, ProtocolException
 	{
-		Point oldPos=racket.getCenter();
+		Point oldPos=null;
+		if(racket==null)
+			racket=new Racket();
+		else
+			oldPos=racket.getCenter();
 		racket.setCenter(NetworkControler.readPos(is));
-		if(Math.abs(oldPos.y-racket.getCenter().y)>4)
+		if(racket!= null && Math.abs(oldPos.y-racket.getCenter().y)>4)
 			throw new ProtocolException();
 	}
 	
